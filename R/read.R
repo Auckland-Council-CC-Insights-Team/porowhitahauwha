@@ -22,10 +22,10 @@ connect_to_database <- function() {
 get_facilities_names <- function() {
   con <- connect_to_database()
 
-  names <- DBI::tbl(con, "names") |>
+  names <- tbl(con, "names") |>
     left_join(tbl(con, "facilities_attributes"), by = c("facilities_attributes_id" = "id")) |>
     select(value, role, facilities_attributes_id, facility_type) |>
-    DBI::collect()
+    collect()
 
   DBI::dbDisconnect(con, shutdown=TRUE)
 
