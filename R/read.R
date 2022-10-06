@@ -5,8 +5,6 @@
 #'
 #' @return Returns an S4 object. This object is used to communicate with the database engine.
 #' @export
-#'
-#' @examples
 connect_to_database <- function() {
   dbConnect(duckdb::duckdb(), paste0(get_file_storage_path(), "/porowhita_hauwha.duckdb"))
 }
@@ -18,8 +16,6 @@ connect_to_database <- function() {
 #'
 #' @return A tibble with four columns.
 #' @export
-#'
-#' @examples
 get_facilities_names <- function() {
   con <- connect_to_database()
 
