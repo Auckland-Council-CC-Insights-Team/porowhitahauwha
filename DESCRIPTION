@@ -1,9 +1,14 @@
 Package: porowhitahauwha
-Title: What the Package Does (One Line, Title Case)
+Title: Interact With Data About Facilities and Partners Within the Connected Communities Portfolio
 Version: 0.0.0.9000
-Authors@R: 
-    person("Lee", "Durbin", , "lee.durbin@aucklandcouncil.govt.nz", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: c(
+    person("Lee", "Durbin", , "lee.durbin@aucklandcouncil.govt.nz", role = c("aut", "cre")),
+    person("Auckland Council", role = c("cph")))
+)
+Description: This package allows authorised staff at Auckland Council to read
+    from and write to Porowhita Hauwhā, a database that stores information about
+    facilities, partners, and related data that falls within the Connected Communities
+    portfolio.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
