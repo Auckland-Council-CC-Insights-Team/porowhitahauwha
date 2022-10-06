@@ -3,7 +3,7 @@ Title: Interact With Data About Facilities and Partners Within the Connected Com
 Version: 0.0.0.9000
 Authors@R: c(
     person("Lee", "Durbin", , "lee.durbin@aucklandcouncil.govt.nz", role = c("aut", "cre")),
-    person("Auckland Council", role = c("cph")))
+    person("Auckland Council", role = c("cph"))
     )
 Description: This package allows authorised staff at Auckland Council to read
     from and write to Porowhita Hauwhā, a database that stores information about
