@@ -1,0 +1,94 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.2.3
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "porowhitahauwha" in publications use:'
+type: software
+license: MIT
+title: 'porowhitahauwha: Interact With Data About Facilities and Partners Within the
+  Connected Communities Portfolio'
+version: 0.0.0.9000
+abstract: This package allows authorised staff at Auckland Council to read from and
+  write to Porowhita Hauwhā, a database that stores information about facilities,
+  partners, and related data that falls within the Connected Communities portfolio.
+authors:
+- family-names: Durbin
+  given-names: Lee
+  email: lee.durbin@aucklandcouncil.govt.nz
+preferred-citation:
+  type: manual
+  title: 'porowhitahauwha: Interact With Data About Facilities and Partners Within
+    the Connected Communities Portfolio'
+  authors:
+  - family-names: Durbin
+    given-names: Lee
+    email: lee.durbin@aucklandcouncil.govt.nz
+  version: 0.0.0.9000
+  abstract: This package allows authorised staff at Auckland Council to read from
+    and write to Porowhita Hauwhā, a database that stores information about facilities,
+    partners, and related data that falls within the Connected Communities portfolio.
+  repository-code: https://github.com/lddurbinAC/porowhitahauwha
+  url: https://github.com/lddurbinAC/porowhitahauwha
+  contact:
+  - family-names: Durbin
+    given-names: Lee
+    email: lee.durbin@aucklandcouncil.govt.nz
+  license: MIT
+  year: '2022'
+repository-code: https://github.com/lddurbinAC/porowhitahauwha
+url: https://github.com/lddurbinAC/porowhitahauwha
+contact:
+- family-names: Durbin
+  given-names: Lee
+  email: lee.durbin@aucklandcouncil.govt.nz
+references:
+- type: software
+  title: DBI
+  abstract: 'DBI: R Database Interface'
+  notes: Imports
+  authors:
+  - name: R Special Interest Group on Databases (R-SIG-DB)
+  - family-names: Wickham
+    given-names: Hadley
+  - family-names: Müller
+    given-names: Kirill
+    email: krlmlr+r@mailbox.org
+    orcid: https://orcid.org/0000-0002-1416-3412
+  year: '2022'
+  url: https://CRAN.R-project.org/package=DBI
+- type: software
+  title: dplyr
+  abstract: 'dplyr: A Grammar of Data Manipulation'
+  notes: Imports
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: François
+    given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Müller
+    given-names: Kirill
+    orcid: https://orcid.org/0000-0002-1416-3412
+  year: '2022'
+  url: https://CRAN.R-project.org/package=dplyr
+- type: software
+  title: duckdb
+  abstract: 'duckdb: DBI Package for the DuckDB Database Management System'
+  notes: Imports
+  authors:
+  - family-names: Mühleisen
+    given-names: Hannes
+    email: hannes@cwi.nl
+    orcid: https://orcid.org/0000-0001-8552-0029
+  - family-names: Raasveldt
+    given-names: Mark
+    email: mark.raasveldt@cwi.nl
+    orcid: https://orcid.org/0000-0001-5005-6844
+  year: '2022'
+  url: https://CRAN.R-project.org/package=duckdb
