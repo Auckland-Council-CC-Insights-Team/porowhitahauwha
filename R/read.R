@@ -38,7 +38,7 @@ connect_to_database <- function(db_file = get_db_file_path(), read_only = TRUE) 
 #' con <- connect_to_database(":memory:")
 #' disconnect_from_database(con)
 disconnect_from_database <- function(con) {
-  dbDisconnect(con, shutdown=TRUE)
+  DBI::dbDisconnect(con, shutdown=TRUE)
 
   print("Disconnected from the database.")
 }
