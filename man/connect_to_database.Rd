@@ -4,12 +4,22 @@
 \alias{connect_to_database}
 \title{Create a connection to the database}
 \usage{
-connect_to_database()
+connect_to_database(db_file = get_db_file_path(), read_only = TRUE)
+}
+\arguments{
+\item{db_file}{the full path to the .duckdb file. By default assumes this is stored
+in the Insights Team's SharePoint, sync'd to your local machine.}
+
+\item{read_only}{choose whether the connection is read-only or not. Read-only by default.}
 }
 \value{
-Returns an S4 object. This object is used to communicate with the database engine.
+Returns an S4 object. This object is used to communicate with the
+database engine.
 }
 \description{
-Creates a connection to the database that can be called later if this function
-call is stored in an object.
+Creates a read-only connection to the DuckDB database that can be called later if
+this function call is stored in an object.
+}
+\examples{
+connect_to_database(db_file = ":memory:")
 }
