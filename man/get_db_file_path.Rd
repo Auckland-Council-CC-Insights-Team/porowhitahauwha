@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.R
 \name{get_db_file_path}
 \alias{get_db_file_path}
-\title{Retrieve the full path to the Porowhita Hauwhā .duckdb file}
+\title{Retrieve the full path to Porowhita Hauwhā}
 \usage{
 get_db_file_path()
 }
@@ -12,6 +12,6 @@ A character string containing a file path
 \description{
 Reads your .Renviron file to get the path to the team's SharePoint Document Library,
 as sync'd to your local machine. Appends to this the name of the .duckdb file,
-thus returning the full path to the database file to use in the connect_to_database()
+thus returning the full path to the database file to use in the \code{connect_to_database()}
 function.
 }

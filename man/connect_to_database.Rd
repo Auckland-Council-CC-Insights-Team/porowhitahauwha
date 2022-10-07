@@ -7,17 +7,19 @@
 connect_to_database(db_file = get_db_file_path(), read_only = TRUE)
 }
 \arguments{
-\item{db_file}{the full path to the .duckdb file. By default assumes this is stored
+\item{db_file}{The full path to the .duckdb file. By default assumes this is stored
 in the Insights Team's SharePoint, sync'd to your local machine.}
 
-\item{read_only}{choose whether the connection is read-only or not. Read-only by default.}
+\item{read_only}{Declares  if the connection to the database is read-only.
+If \code{read_only = TRUE} (the default), the connection is read-only and multiple
+R processes can access the same database file at the same time.}
 }
 \value{
-Returns an S4 object. This object is used to communicate with the
+An S4 object. This object is used to communicate with the
 database engine.
 }
 \description{
-Creates a read-only connection to the DuckDB database that can be called later if
+Creates a read-only connection to the DuckDB database that can be used later if
 this function call is stored in an object.
 }
 \examples{
