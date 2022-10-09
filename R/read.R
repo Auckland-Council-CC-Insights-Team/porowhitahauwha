@@ -1,6 +1,6 @@
 #' Create a connection to the database
 #'
-#' Creates a read-only connection to the DuckDB database that can be used later if
+#' Creates a read-only connection to a DuckDB database that can be used later if
 #' this function call is stored in an object.
 #'
 #' @param db_file The name of the .duckdb file. By default assumes this is called
@@ -35,7 +35,7 @@ connect_to_database <- function(db_file = "porowhita_hauwha.duckdb", read_only =
 #'
 #' Explicitly shuts down the database instance associated with the connection, \code{con}.
 #'
-#' @param con The database instance that was called using \code{connect_to_database}
+#' @param con The database instance that was called using \code{connect_to_database()}
 #'
 #' @return A confirmation statement printed to the console.
 #' @export
