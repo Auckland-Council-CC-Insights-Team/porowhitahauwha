@@ -35,7 +35,7 @@ connect_to_database <- function(db_file = "porowhita_hauwha.duckdb", read_only =
 #'
 #' Explicitly shuts down the database instance associated with the connection, \code{con}.
 #'
-#' @param con The database instance that was called using \code{connect_to_database()}
+#' @param con The database instance that was called using \code{connect_to_database}
 #'
 #' @return A confirmation statement printed to the console.
 #' @export
