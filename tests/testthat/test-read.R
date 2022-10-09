@@ -6,7 +6,7 @@ test_that("it's possible to connect to DuckDB in-memory", {
 
 test_that("we can construct a file path to the .duckdb file", {
   expect_equal(
-    sub('.*(?=.{84}$)', '', get_db_file_path(), perl=T),
+    sub('.*(?=.{84}$)', '', get_file_path("porowhita_hauwha.duckdb"), perl=T),
     "/Auckland Council/CC Insights & Analysis Team - File Storage/porowhita_hauwha.duckdb"
     )
 })
