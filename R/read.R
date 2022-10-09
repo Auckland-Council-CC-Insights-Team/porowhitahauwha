@@ -3,9 +3,9 @@
 #' Creates a read-only connection to the DuckDB database that can be used later if
 #' this function call is stored in an object.
 #'
-#' @param db_file The full path to the .duckdb file. By default assumes this is stored
-#' in the Insights Team's SharePoint, sync'd to your local machine.
-#' @param read_only Declares  if the connection to the database is read-only.
+#' @param db_file The name of the .duckdb file. By default assumes this is called
+#' "Porowhita Hauwhā".
+#' @param read_only Declares if the connection to the database is read-only.
 #' If \code{read_only = TRUE} (the default), the connection is read-only and multiple
 #' R processes can access the same database file at the same time.
 #'
@@ -15,10 +15,16 @@
 #'
 #' @examples
 #' connect_to_database(db_file = ":memory:")
-connect_to_database <- function(db_file = get_db_file_path(), read_only = TRUE) {
+connect_to_database <- function(db_file = "porowhita_hauwha.duckdb", read_only = TRUE) {
+  if(db_file == ":memory:") {
+    dbdir = db_file
+  } else {
+    dbdir <- get_file_path(db_file)
+  }
+
   con <- DBI::dbConnect(
     duckdb::duckdb(),
-    dbdir = db_file,
+    dbdir = dbdir,
     read_only = read_only
     )
 
@@ -43,20 +49,22 @@ disconnect_from_database <- function(con) {
   print("Disconnected from the database.")
 }
 
-#' Retrieve the full path to Porowhita Hauwhā
+#' Retrieve the full path to a file in File Storage.
 #'
 #' Reads your .Renviron file to get the path to the team's SharePoint Document Library,
-#' as sync'd to your local machine. Appends to this the name of the .duckdb file,
-#' thus returning the full path to the database file to use in the \code{connect_to_database()}
-#' function.
+#' as sync'd to your local machine. Appends to this the name of the file,
+#' thus returning the full path to the file to be used elsewhere.
 #'
-#' @return A character string containing a file path
+#' @param file_name The name of the file for which you're retrieving the full path.
 #'
-get_db_file_path <- function() {
-  db_file <- paste0(
+#' @return A character string containing a file path.
+#'
+get_file_path <- function(file_name) {
+  file_path <- paste0(
     get_file_storage_path(),
-    "/porowhita_hauwha.duckdb"
+    "/",
+    file_name
     )
 
-  return(db_file)
+  return(file_path)
 }
