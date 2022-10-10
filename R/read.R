@@ -60,19 +60,6 @@ disconnect_from_database <- function(con) {
 #' @return A tibble with six variables.
 #' @export
 #'
-#' @examples
-#' con <- connect_to_database(":memory:")
-#'
-#' assets <- porowhitahauwha:::assets
-#' facilities_attributes <- porowhitahauwha:::facilities_attributes
-#'
-#' DBI::dbWriteTable(con, "assets", assets)
-#' DBI::dbWriteTable(con, "facilities_attributes", facilities_attributes)
-#'
-#' DBI::dbDisconnect(con, shutdown=TRUE)
-#'
-#' assets <- get_assets(":memory:")
-#'
 get_assets <- function(con = connect_to_database()) {
   assets <- tbl(con, "assets") |>
     left_join(
