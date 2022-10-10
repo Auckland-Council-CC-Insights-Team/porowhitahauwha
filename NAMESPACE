@@ -2,6 +2,7 @@
 
 export(connect_to_database)
 export(disconnect_from_database)
+export(get_assets)
 importFrom(dplyr,anti_join)
 importFrom(dplyr,collect)
 importFrom(dplyr,filter)
@@ -10,3 +11,4 @@ importFrom(dplyr,mutate)
 importFrom(dplyr,select)
 importFrom(dplyr,tbl)
 importFrom(here,here)
+importFrom(rlang,.data)

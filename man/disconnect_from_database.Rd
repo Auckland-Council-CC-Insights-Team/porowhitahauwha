@@ -7,7 +7,7 @@
 disconnect_from_database(con)
 }
 \arguments{
-\item{con}{The database instance that was called using \code{connect_to_database}}
+\item{con}{The database instance that was called using \code{connect_to_database()}}
 }
 \value{
 A confirmation statement printed to the console.

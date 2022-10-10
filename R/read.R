@@ -35,7 +35,7 @@ connect_to_database <- function(db_file = "porowhita_hauwha.duckdb", read_only =
 #'
 #' Explicitly shuts down the database instance associated with the connection, \code{con}.
 #'
-#' @param con The database instance that was called using \code{connect_to_database}
+#' @param con The database instance that was called using \code{connect_to_database()}
 #'
 #' @return A confirmation statement printed to the console.
 #' @export
@@ -48,6 +48,44 @@ disconnect_from_database <- function(con) {
 
   print("Disconnected from the database.")
 }
+
+#' Retrieve a list of all assets
+#'
+#' Retrieve a list of assets from Porowhitā Hauwha. An asset is a structure that
+#' provides shelter for the public.
+#'
+#' @param con The database instance. Defaults to what is returned from calling
+#' \code{connect_to_database()}
+#'
+#' @return A tibble with six variables.
+#' @export
+#'
+#' @examples
+#' con <- connect_to_database(":memory:")
+#'
+#' assets <- porowhitahauwha:::assets
+#' facilities_attributes <- porowhitahauwha:::facilities_attributes
+#'
+#' DBI::dbWriteTable(con, "assets", assets)
+#' DBI::dbWriteTable(con, "facilities_attributes", facilities_attributes)
+#'
+#' DBI::dbDisconnect(con, shutdown=TRUE)
+#'
+#' assets <- get_assets(":memory:")
+#'
+get_assets <- function(con = connect_to_database()) {
+  assets <- tbl(con, "assets") |>
+    left_join(
+      tbl(con, "facilities_attributes"),
+      by = c("id" = "facility_id"),
+      suffix = c(".assets", "facilities_attributes")
+      ) |>
+    select(facility_id = .data$id.assets, .data$facility_type, .data$name, .data$local_board, .data$designation, .data$delivery_model) |>
+    collect()
+
+  return(assets)
+}
+
 
 #' Retrieve the full path to a file in File Storage.
 #'

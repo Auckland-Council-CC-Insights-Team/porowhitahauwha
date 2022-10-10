@@ -10,5 +10,6 @@
 #' @importFrom dplyr select
 #' @importFrom dplyr tbl
 #' @importFrom here here
+#' @importFrom rlang .data
 ## usethis namespace: end
 NULL
