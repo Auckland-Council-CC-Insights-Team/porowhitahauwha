@@ -18,7 +18,11 @@ BugReports: https://github.com/lddurbinAC/porowhitahauwha/issues
 Imports: 
     DBI,
     dplyr,
-    duckdb
+    duckdb,
+    here,
+    tere (>= 0.0.0.9000)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Remotes: 
+    Auckland-Council-CC-Insights-Team/tere

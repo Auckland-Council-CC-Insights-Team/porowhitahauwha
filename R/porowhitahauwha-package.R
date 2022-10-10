@@ -9,5 +9,6 @@
 #' @importFrom dplyr mutate
 #' @importFrom dplyr select
 #' @importFrom dplyr tbl
+#' @importFrom here here
 ## usethis namespace: end
 NULL

@@ -4,9 +4,13 @@ test_that("it's possible to connect to DuckDB in-memory", {
   DBI::dbDisconnect(con, shutdown=TRUE)
 })
 
-test_that("we can construct a file path to the .duckdb file", {
-  expect_equal(
-    sub('.*(?=.{84}$)', '', get_file_path("porowhita_hauwha.duckdb"), perl=T),
-    "/Auckland Council/CC Insights & Analysis Team - File Storage/porowhita_hauwha.duckdb"
+readRenviron(here(".Renviron"))
+if(identical(sub('.*(?=.{7}$)', '', Sys.getenv("MY_SHAREPOINT_FILES"), perl = T), "Storage")) {
+  test_that("we can construct a file path to the .duckdb file", {
+    expect_equal(
+      sub('.*(?=.{84}$)', '', get_file_path("porowhita_hauwha.duckdb"), perl=T),
+      "\\Auckland Council\\CC Insights & Analysis Team - File Storage\\porowhita_hauwha.duckdb"
     )
-})
+  })
+}
+Sys.unsetenv("MY_SHAREPOINT_FILES")

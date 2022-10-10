@@ -61,8 +61,8 @@ disconnect_from_database <- function(con) {
 #'
 get_file_path <- function(file_name) {
   file_path <- paste0(
-    get_file_storage_path(),
-    "/",
+    tere::get_file_storage_path(),
+    "\\",
     file_name
     )
 

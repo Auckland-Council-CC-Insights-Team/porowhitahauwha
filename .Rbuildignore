@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^CITATION\.cff$
+^Renviron\.site$
+^\.Renviron
