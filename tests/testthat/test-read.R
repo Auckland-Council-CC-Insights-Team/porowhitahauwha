@@ -21,7 +21,7 @@ test_that("we can retrieve a list of assets", {
   DBI::dbWriteTable(con, "assets", assets)
   DBI::dbWriteTable(con, "facilities_attributes", facilities_attributes)
   asset_sample <- c("Albany House", "Acacia Court Hall", "Buckland Community Centre")
-  all_assets <- get_assets(con) |> dplyr::pull(name)
+  all_assets <- get_assets(con = con) |> dplyr::pull(name)
   DBI::dbDisconnect(con, shutdown=TRUE)
 
   expect_true(

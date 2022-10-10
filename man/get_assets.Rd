@@ -4,11 +4,14 @@
 \alias{get_assets}
 \title{Retrieve a list of all assets}
 \usage{
-get_assets(con = connect_to_database())
+get_assets(..., con = connect_to_database())
 }
 \arguments{
+\item{...}{Optional expressions to filter the asset list, defied in terms of the
+variables in the returned tibble.}
+
 \item{con}{The database instance. Defaults to what is returned from calling
-\code{connect_to_database()}}
+\code{connect_to_database()}.}
 }
 \value{
 A tibble with six variables.
@@ -18,16 +21,6 @@ Retrieve a list of assets from Porowhitā Hauwha. An asset is a structure that
 provides shelter for the public.
 }
 \examples{
-con <- connect_to_database(":memory:")
-
-assets <- porowhitahauwha:::assets
-facilities_attributes <- porowhitahauwha:::facilities_attributes
-
-DBI::dbWriteTable(con, "assets", assets)
-DBI::dbWriteTable(con, "facilities_attributes", facilities_attributes)
-
-DBI::dbDisconnect(con, shutdown=TRUE)
-
-assets <- get_assets(":memory:")
-
+# Retrieve a list of assets that are rural halls in the Rodney Local Board (code not run)
+# get_assets(designation == "Rural Hall" & local_board == "Rodney")
 }

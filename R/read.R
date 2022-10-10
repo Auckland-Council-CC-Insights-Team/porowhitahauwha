@@ -54,20 +54,26 @@ disconnect_from_database <- function(con) {
 #' Retrieve a list of assets from Porowhitā Hauwha. An asset is a structure that
 #' provides shelter for the public.
 #'
+#' @param ... Optional expressions to filter the asset list, defied in terms of the
+#' variables in the returned tibble.
 #' @param con The database instance. Defaults to what is returned from calling
-#' \code{connect_to_database()}
+#' \code{connect_to_database()}.
 #'
 #' @return A tibble with six variables.
 #' @export
 #'
-get_assets <- function(con = connect_to_database()) {
+#' @examples
+#' # Retrieve a list of assets that are rural halls in the Rodney Local Board (code not run)
+#' # get_assets(designation == "Rural Hall" & local_board == "Rodney")
+get_assets <- function(..., con = connect_to_database()) {
   assets <- tbl(con, "assets") |>
     left_join(
       tbl(con, "facilities_attributes"),
       by = c("id" = "facility_id"),
       suffix = c(".assets", "facilities_attributes")
       ) |>
-    select(facility_id = .data$id.assets, .data$facility_type, .data$name, .data$local_board, .data$designation, .data$delivery_model) |>
+    filter(...) |>
+    select(facility_id = .data$id.assets, .data$name, .data$local_board, .data$designation, .data$delivery_model) |>
     collect()
 
   return(assets)
