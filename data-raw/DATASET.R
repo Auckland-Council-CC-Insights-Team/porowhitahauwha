@@ -2,14 +2,14 @@
 dt_fmt <- "%Y-%m-%d"
 
 # an asset is a physical structure within which the public can take shelter; typically these are buildings
-assets <- tibble::tribble(
+test_assets <- tibble::tribble(
   ~id,      ~name,                        ~local_board,    ~asset_type,            ~physical_address,                ~latitude, ~longitude, ~land_ownership, ~image,
   "A26",    "Buckland Community Centre",  "Franklin",     "Standalone Building",  "Cnr Logan and Buckville Road",     NA,        NA,         NA,              NA,
   "A58",    "Franklin The Centre",        "Franklin",     "Standalone Building",  "12 Massey Avenue",                 NA,        NA,         NA,              NA
 )
 
 # a space is an area that fulfills a public need, houses within an asset; typically these are rooms
-spaces <- tibble::tribble(
+test_spaces <- tibble::tribble(
   ~id,    ~name,                        ~asset_id,  ~bookable,  ~booking_method,  ~image,
   "S1",    "Main Hall",                  "A26",      "Y",         NA,               NA,
   "S374",  "Community Gallery",          "A58",       NA,         NA,               NA,
@@ -18,13 +18,13 @@ spaces <- tibble::tribble(
 )
 
 # an entity is a construct, assigned by Auckland Council, that groups together assets, spaces, or services
-entities <- tibble::tribble(
+test_entities <- tibble::tribble(
   ~id,    ~name,
   "E01",   "Franklin Arts Centre"
 )
 
 # entity_bridge_table connects assets, spaces, and/or services to an entity
-entity_bridge_table <- tibble::tribble(
+test_entity_bridge_table <- tibble::tribble(
   ~id,    ~facility_type,    ~facility_id,   ~entity_id,    ~valid_from,                        ~valid_to,            ~notes,
   "EB01",  "asset",           "A58",          "E01",         as.Date("2022-07-01", dt_fmt),      NA,                   "",
   "EB32",  "space",           "S374",         "E01",         as.Date("2022-07-01", dt_fmt),      NA,                   "",
@@ -33,7 +33,7 @@ entity_bridge_table <- tibble::tribble(
 )
 
 # attributes describe facilities
-facilities_attributes <- tibble::tribble(
+test_facilities_attributes <- tibble::tribble(
   ~id,    ~facility_type,    ~facility_id,    ~designation,    ~delivery_model,            ~facility_ownership,    ~staffed,    ~closed,    ~leased,
   "FA174", "Asset",           "A26",            "Rural Hall",   "Community-led facility",   "Privately-owned",      FALSE,        FALSE,      FALSE,
   "FA251", "Asset",           "A58",            "Hybrid",       "Council-led facility",     NA,                     NA,           NA,         NA,
@@ -43,7 +43,7 @@ facilities_attributes <- tibble::tribble(
 )
 
 # primary and alternate names for facilities
-names <- tibble::tribble(
+test_names <- tibble::tribble(
   ~id,    ~value,                        ~role,        ~facilities_attributes_id,
   "1",     "Buckland Hall",              "alternate",   "FA174",
   "91",    "Buckland Community Centre",  "primary",     "FA174",
@@ -55,11 +55,11 @@ names <- tibble::tribble(
 )
 
 usethis::use_data(
-  assets,
-  spaces,
-  entities,
-  entity_bridge_table,
-  facilities_attributes,
-  names,
+  test_assets,
+  test_spaces,
+  test_entities,
+  test_entity_bridge_table,
+  test_facilities_attributes,
+  test_names,
   overwrite = TRUE
   )
