@@ -4,6 +4,7 @@ test_that("it's possible to connect to DuckDB in-memory", {
   DBI::dbDisconnect(con, shutdown=TRUE)
 })
 
+Sys.unsetenv("MY_SHAREPOINT_FILES")
 readRenviron(here(".Renviron"))
 if(identical(sub('.*(?=.{7}$)', '', Sys.getenv("MY_SHAREPOINT_FILES"), perl = T), "Storage")) {
   test_that("we can construct a file path to the .duckdb file", {

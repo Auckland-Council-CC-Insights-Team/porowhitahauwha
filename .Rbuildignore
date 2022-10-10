@@ -4,3 +4,4 @@
 ^CITATION\.cff$
 ^Renviron\.site$
 ^\.Renviron
+^data-raw$
