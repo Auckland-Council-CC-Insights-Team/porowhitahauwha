@@ -19,6 +19,13 @@
 #'  }
 "test_assets"
 
+#' Porowhita Hauwhā test data
+#'
+#' @description
+#' A subset of the data stored in Porowhitā Hauwha. This has been made available
+#' for use in package documentation examples, and for the user to explore the
+#' kind of information stored in the live Porowhitā Hauwhā database.
+#'
 #' @format ## 'test_spaces'
 #' A data frame with 4 rows and 6 columns:
 #'  \describe{
