@@ -2,26 +2,23 @@
 % Please edit documentation in R/read.R
 \name{connect_to_database}
 \alias{connect_to_database}
-\title{Create a connection to the database}
+\title{Create a connection to Porowhita Hauwhā.}
 \usage{
-connect_to_database(db_file = "porowhita_hauwha.duckdb", read_only = TRUE)
+connect_to_database(test_db = FALSE)
 }
 \arguments{
-\item{db_file}{The name of the .duckdb file. By default assumes this is called
-"Porowhita Hauwhā".}
-
-\item{read_only}{Declares if the connection to the database is read-only.
-If \code{read_only = TRUE} (the default), the connection is read-only and multiple
-R processes can access the same database file at the same time.}
+\item{test_db}{Is this a connection to the test database? Defaults to FALSE.}
 }
 \value{
 An S4 object. This object is used to communicate with the
-database engine.
+database engine, either live or test.
 }
 \description{
-Creates a read-only connection to a DuckDB database that can be used later if
-this function call is stored in an object.
+Creates a connection to either the live version or the test version
+of the Porowhita Hauwhā database. This can be used later if this function call
+is stored in an object. The connection to the live database is read-only.
 }
 \examples{
-connect_to_database(db_file = ":memory:")
+test_conn <- connect_to_database(test_db = TRUE)
+tbl(test_conn, "assets")
 }

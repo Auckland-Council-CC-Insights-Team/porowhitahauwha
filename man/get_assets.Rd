@@ -4,14 +4,13 @@
 \alias{get_assets}
 \title{Retrieve a list of all assets}
 \usage{
-get_assets(..., con = connect_to_database())
+get_assets(..., test = FALSE)
 }
 \arguments{
 \item{...}{Optional expressions to filter the asset list, defied in terms of the
 variables in the returned tibble.}
 
-\item{con}{The database instance. Defaults to what is returned from calling
-\code{connect_to_database()}.}
+\item{test_db}{Retrieve this data from the test database? Defaults to FALSE.}
 }
 \value{
 A tibble with six variables.
@@ -21,6 +20,6 @@ Retrieve a list of assets from Porowhitā Hauwha. An asset is a structure that
 provides shelter for the public.
 }
 \examples{
-# Retrieve a list of assets that are rural halls in the Rodney Local Board (code not run)
-# get_assets(designation == "Rural Hall" & local_board == "Rodney")
+# Retrieve a list of assets that are classed as rural halls from the test database
+get_assets(designation == "Rural Hall", test = TRUE)
 }
