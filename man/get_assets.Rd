@@ -4,7 +4,7 @@
 \alias{get_assets}
 \title{Retrieve a list of all assets}
 \usage{
-get_assets(..., test = FALSE)
+get_assets(..., test_db = FALSE)
 }
 \arguments{
 \item{...}{Optional expressions to filter the asset list, defied in terms of the
@@ -21,5 +21,5 @@ provides shelter for the public.
 }
 \examples{
 # Retrieve a list of assets that are classed as rural halls from the test database
-get_assets(designation == "Rural Hall", test = TRUE)
+get_assets(designation == "Rural Hall", test_db = TRUE)
 }

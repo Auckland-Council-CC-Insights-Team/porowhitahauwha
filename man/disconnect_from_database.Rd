@@ -4,12 +4,12 @@
 \alias{disconnect_from_database}
 \title{Disconnect from the database}
 \usage{
-disconnect_from_database(conn, test = FALSE, confirm = TRUE)
+disconnect_from_database(conn, test_db = FALSE, confirm = TRUE)
 }
 \arguments{
 \item{conn}{The database instance that was called using \code{connect_to_database()}}
 
-\item{test}{Are you attempting to disconnect from the test database? Defaults to FALSE.}
+\item{test_db}{Are you attempting to disconnect from the test database? Defaults to FALSE.}
 
 \item{confirm}{Should the function print a confirmation message to the console? Defaults to TRUE.}
 }
@@ -20,6 +20,6 @@ An optional confirmation statement printed to the console.
 Explicitly shuts down the database instance associated with the connection, \code{conn}.
 }
 \examples{
-con <- connect_to_database(":memory:")
-disconnect_from_database(con)
+con <- connect_to_database(test_db = TRUE)
+disconnect_from_database(con, test_db = TRUE)
 }

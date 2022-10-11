@@ -20,5 +20,5 @@ is stored in an object. The connection to the live database is read-only.
 }
 \examples{
 test_conn <- connect_to_database(test_db = TRUE)
-tbl(test_conn, "assets")
+dplyr::tbl(test_conn, "assets")
 }

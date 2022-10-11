@@ -1,9 +1,10 @@
 #' Porowhita Hauwhā test data
 #'
 #' @description
-#' A subset of the data stored in Porowhitā Hauwha. This has been made available
-#' for use in package documentation examples, and for the user to explore the
-#' kind of information stored in the live Porowhitā Hauwhā database.
+#' A subset of the data stored in Porowhitā Hauwha table called \code{assets}.
+#' This has been made available for use in package documentation examples,
+#' and for the user to explore the kind of information stored in the live
+#' Porowhitā Hauwhā database.
 #'
 #' @format ## 'test_assets'
 #' A data frame with 2 rows and 9 columns:

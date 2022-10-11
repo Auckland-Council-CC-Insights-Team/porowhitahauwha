@@ -1,0 +1,10 @@
+utils::globalVariables(
+  c(
+    "test_assets",
+    "test_spaces",
+    "test_entities",
+    "test_entity_bridge_table",
+    "test_facilities_attributes",
+    "test_names"
+    )
+  )

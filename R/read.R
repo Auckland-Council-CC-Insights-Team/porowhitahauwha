@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' test_conn <- connect_to_database(test_db = TRUE)
-#' tbl(test_conn, "assets")
+#' dplyr::tbl(test_conn, "assets")
 connect_to_database <- function(test_db = FALSE) {
   if(test_db == TRUE) {
     conn <- connect_to_test_database()
@@ -50,8 +50,9 @@ connect_to_test_database <- function() {
   test_conn <- DBI::dbConnect(
     duckdb::duckdb(),
     dbdir = ":memory:",
-  ) |>
-    create_test_database()
+  )
+
+  create_test_database(test_conn)
 
   return(test_conn)
 }
@@ -66,12 +67,12 @@ connect_to_test_database <- function() {
 #' @return An S4 object. This object is used to communicate with the
 #' test database engine.
 create_test_database <- function(test_conn) {
- DBI::dbWriteTable(test_conn, "assets", test_assets, overwrite = TRUE)
- DBI::dbWriteTable(test_conn, "spaces", test_spaces, overwrite = TRUE)
- DBI::dbWriteTable(test_conn, "entities", test_entities, overwrite = TRUE)
- DBI::dbWriteTable(test_conn, "facilities_attributes", test_facilities_attributes, overwrite = TRUE)
- DBI::dbWriteTable(test_conn, "entity_bridge_table", test_entity_bridge_table, overwrite = TRUE)
- DBI::dbWriteTable(test_conn, "names", test_names, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "assets", test_assets, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "spaces", test_spaces, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "entities", test_entities, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "facilities_attributes", test_facilities_attributes, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "entity_bridge_table", test_entity_bridge_table, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "names", test_names, overwrite = TRUE)
 
  return(test_conn)
 }
@@ -81,20 +82,20 @@ create_test_database <- function(test_conn) {
 #' Explicitly shuts down the database instance associated with the connection, \code{conn}.
 #'
 #' @param conn The database instance that was called using \code{connect_to_database()}
-#' @param test Are you attempting to disconnect from the test database? Defaults to FALSE.
+#' @param test_db Are you attempting to disconnect from the test database? Defaults to FALSE.
 #' @param confirm Should the function print a confirmation message to the console? Defaults to TRUE.
 #'
 #' @return An optional confirmation statement printed to the console.
 #' @export
 #'
 #' @examples
-#' con <- connect_to_database(":memory:")
-#' disconnect_from_database(con)
-disconnect_from_database <- function(conn, test = FALSE, confirm = TRUE) {
+#' con <- connect_to_database(test_db = TRUE)
+#' disconnect_from_database(con, test_db = TRUE)
+disconnect_from_database <- function(conn, test_db = FALSE, confirm = TRUE) {
   DBI::dbDisconnect(conn, shutdown=TRUE)
 
   if(confirm == TRUE) {
-    db_type <- dplyr::if_else(test == TRUE, "test", "live")
+    db_type <- dplyr::if_else(test_db == TRUE, "test", "live")
     print(paste0("Disconnected from the ", db_type, " database."))
   }
 }
@@ -113,9 +114,9 @@ disconnect_from_database <- function(conn, test = FALSE, confirm = TRUE) {
 #'
 #' @examples
 #' # Retrieve a list of assets that are classed as rural halls from the test database
-#' get_assets(designation == "Rural Hall", test = TRUE)
-get_assets <- function(..., test = FALSE) {
-  conn <- connect_to_database(test_db = test)
+#' get_assets(designation == "Rural Hall", test_db = TRUE)
+get_assets <- function(..., test_db = FALSE) {
+  conn <- connect_to_database(test_db = test_db)
 
   assets <- tbl(conn, "assets") |>
     left_join(
@@ -127,7 +128,7 @@ get_assets <- function(..., test = FALSE) {
     select(facility_id = .data$id.assets, .data$name, .data$local_board, .data$designation, .data$delivery_model) |>
     collect()
 
-  disconnect_from_database(conn, test = test, confirm = FALSE)
+  disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
   return(assets)
 }
