@@ -16,7 +16,7 @@ variables in the returned tibble.}
 A tibble with six variables.
 }
 \description{
-Retrieve a list of assets from Porowhitā Hauwha. An asset is a structure that
+Retrieve a list of assets from Porowhita Hauwhā. An asset is a structure that
 provides shelter for the public.
 }
 \examples{
