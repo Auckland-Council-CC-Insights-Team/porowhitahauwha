@@ -101,7 +101,7 @@ disconnect_from_database <- function(conn, test = FALSE, confirm = TRUE) {
 
 #' Retrieve a list of all assets
 #'
-#' Retrieve a list of assets from Porowhitā Hauwha. An asset is a structure that
+#' Retrieve a list of assets from Porowhita Hauwhā. An asset is a structure that
 #' provides shelter for the public.
 #'
 #' @param ... Optional expressions to filter the asset list, defied in terms of the
