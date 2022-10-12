@@ -20,7 +20,7 @@ Imports:
     dplyr,
     duckdb,
     here,
-    rlang,
+    rlang (>= 1.0.4),
     stringr,
     tere (>= 0.0.0.9000)
 Suggests: 
