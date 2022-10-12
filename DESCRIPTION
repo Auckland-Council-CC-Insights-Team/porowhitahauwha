@@ -21,6 +21,7 @@ Imports:
     duckdb,
     here,
     rlang,
+    stringr,
     tere (>= 0.0.0.9000)
 Suggests: 
     testthat (>= 3.0.0)
