@@ -23,12 +23,11 @@ test_spaces
 }
 \description{
 A subset of the data stored in the Porowhitā Hauwha table called \code{spaces}.
-
 A space is a an area in which services are delivered to the public; a space
 is typically a room.
 
 This data has been made available for use in package documentation examples,
 and for the user to explore the kind of information stored in the live
-Porowhitā Hauwhā database.
+Porowhita Hauwhā database.
 }
 \keyword{datasets}

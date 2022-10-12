@@ -25,12 +25,11 @@ test_assets
 }
 \description{
 A subset of the data stored in the Porowhitā Hauwha table called \code{assets}.
-
 An asset is a physical structure that provides shelter for the public, typically
 a building.
 
 This data has been made available for use in package documentation examples,
 and for the user to explore the kind of information stored in the live
-Porowhitā Hauwhā database.
+Porowhita Hauwhā database.
 }
 \keyword{datasets}

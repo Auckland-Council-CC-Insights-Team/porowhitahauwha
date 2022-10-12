@@ -19,12 +19,11 @@ test_entities
 }
 \description{
 A subset of the data stored in the Porowhitā Hauwha table called \code{entities}.
-
 An entity is a construct, assigned by Auckland Council, that groups together
 assets, spaces, or services.
 
 This data has been made available for use in package documentation examples,
 and for the user to explore the kind of information stored in the live
-Porowhitā Hauwhā database.
+Porowhita Hauwhā database.
 }
 \keyword{datasets}

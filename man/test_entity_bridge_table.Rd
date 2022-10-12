@@ -31,6 +31,6 @@ it is formed.
 
 This data has been made available for use in package documentation examples,
 and for the user to explore the kind of information stored in the live
-Porowhitā Hauwhā database.
+Porowhita Hauwhā database.
 }
 \keyword{datasets}

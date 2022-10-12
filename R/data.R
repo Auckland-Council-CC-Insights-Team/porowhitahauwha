@@ -2,13 +2,12 @@
 #'
 #' @description
 #' A subset of the data stored in the Porowhitā Hauwha table called \code{assets}.
-#'
 #' An asset is a physical structure that provides shelter for the public, typically
 #' a building.
 #'
 #' This data has been made available for use in package documentation examples,
 #' and for the user to explore the kind of information stored in the live
-#' Porowhitā Hauwhā database.
+#' Porowhita Hauwhā database.
 #'
 #' @format ## 'test_assets'
 #' A data frame with 2 rows and 9 columns:
@@ -28,13 +27,12 @@
 #'
 #' @description
 #' A subset of the data stored in the Porowhitā Hauwha table called \code{spaces}.
-#'
 #' A space is a an area in which services are delivered to the public; a space
 #' is typically a room.
 #'
 #' This data has been made available for use in package documentation examples,
 #' and for the user to explore the kind of information stored in the live
-#' Porowhitā Hauwhā database.
+#' Porowhita Hauwhā database.
 #'
 #' @format ## 'test_spaces'
 #' A data frame with 4 rows and 6 columns:
@@ -52,13 +50,12 @@
 #'
 #' @description
 #' A subset of the data stored in the Porowhitā Hauwha table called \code{entities}.
-#'
 #' An entity is a construct, assigned by Auckland Council, that groups together
 #' assets, spaces, or services.
 #'
 #' This data has been made available for use in package documentation examples,
 #' and for the user to explore the kind of information stored in the live
-#' Porowhitā Hauwhā database.
+#' Porowhita Hauwhā database.
 #'
 #' @format ## 'test_entities'
 #' A data frame with 1 row and 2 columns:
@@ -79,7 +76,7 @@
 #'
 #' This data has been made available for use in package documentation examples,
 #' and for the user to explore the kind of information stored in the live
-#' Porowhitā Hauwhā database.
+#' Porowhita Hauwhā database.
 #'
 #' @format ## 'test_facilities_attributes'
 #' A data frame with 5 rows and 9 columns:
@@ -109,7 +106,7 @@
 #'
 #' This data has been made available for use in package documentation examples,
 #' and for the user to explore the kind of information stored in the live
-#' Porowhitā Hauwhā database.
+#' Porowhita Hauwhā database.
 #'
 #' @format ## 'test_names'
 #' A data frame with 7 rows and 4 columns:
@@ -132,7 +129,7 @@
 #'
 #' This data has been made available for use in package documentation examples,
 #' and for the user to explore the kind of information stored in the live
-#' Porowhitā Hauwhā database.
+#' Porowhita Hauwhā database.
 #'
 #' @format ## 'test_entity_bridge_table'
 #' A data frame with 4 rows and 7 columns:
