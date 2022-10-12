@@ -27,9 +27,9 @@ connect_to_writable_database <- function(test_db = FALSE) {
 #' @param id The ID of the record that was just added to the table.
 #'
 #' @return A data frame with one row.
-get_new_entry <- function(conn, tbl_name, id) {
+get_new_entry <- function(conn, tbl_name, new_id) {
   new_entry <- tbl(conn, tbl_name) |>
-    filter(id == .data$id)
+    filter(id == new_id)
 
   return(new_entry)
 }
@@ -73,23 +73,24 @@ get_new_id <- function(conn, tbl_name) {
 #' @export
 #'
 #' @examples
-#' insert_partner(
-#'   name = "Hobbiton Community Trust",
-#'   facility_owner = FALSE,
-#'   test_db = TRUE,
-#' (
+#' insert_partner(name = "Hobbiton Charitable Trust", facility_owner = FALSE, test_db = TRUE)
 #'
-insert_partner <- function(name = NULL, type = c("Charitable Trust", "Incorporated Society", "Other"), facility_owner = TRUE, service_provider = TRUE, legal_status_number = NULL, test_db = FALSE) {
-  conn <- connect_to_writable_database(test_db)
-  partner_id <- paste0("P", get_new_id(conn, tbl_name = "partners"))
+insert_partner <- function(name = NA, type = c("Charitable Trust", "Incorporated Society", "Other"), facility_owner = TRUE, service_provider = TRUE, legal_status_number = NA, test_db = FALSE) {
+  if(!is.na(name)) {
+    conn <- connect_to_writable_database(test_db)
+    partner_id <- paste0("P", get_new_id(conn, tbl_name = "partners"))
 
-  DBI::dbExecute(
-    conn,
-    "INSERT INTO partners VALUES (?, ?, ?, ?, ?, ?)",
-    list(partner_id, name, type, facility_owner, service_provider, legal_status_number)
+    DBI::dbExecute(
+      conn,
+      "INSERT INTO partners VALUES (?, ?, ?, ?, ?, ?)",
+      list(partner_id, name, match.arg(type), facility_owner, service_provider, legal_status_number)
     )
 
-  new_entry <- get_new_entry(conn, tbl_name = "partners", id = partner_id)
+    new_entry <- get_new_entry(conn, tbl_name = "partners", new_id = partner_id)
 
-  return(new_entry)
+    return(new_entry)
+  } else {
+    print("You need to supply a name for this partner before adding it to the database.")
+  }
+
 }

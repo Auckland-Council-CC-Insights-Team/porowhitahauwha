@@ -5,7 +5,7 @@
 \title{Add a new partner into the database}
 \usage{
 insert_partner(
-  name = NULL,
+  name = NA,
   type = c("Charitable Trust", "Incorporated Society", "Other"),
   facility_owner = TRUE,
   service_provider = TRUE,
@@ -34,10 +34,6 @@ If supplied with at least a name, create a new record for a partner in
 the database.
 }
 \examples{
-insert_partner(
-  name = "Hobbiton Community Trust",
-  facility_owner = FALSE,
-  test_db = TRUE,
-(
+insert_partner(name = "Hobbiton Charitable Trust", facility_owner = FALSE, test_db = TRUE)
 
 }
