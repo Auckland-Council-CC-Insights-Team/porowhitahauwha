@@ -24,12 +24,12 @@ connect_to_writable_database <- function(test_db = FALSE) {
 #'
 #' @param conn The database instance used to connect to the database.
 #' @param tbl_name The name of the table to which a record was just added.
-#' @param id The ID of the record that was just added to the table.
+#' @param new_id The ID of the record that was just added to the table.
 #'
 #' @return A data frame with one row.
 get_new_entry <- function(conn, tbl_name, new_id) {
   new_entry <- tbl(conn, tbl_name) |>
-    filter(id == new_id)
+    filter(.data$id == new_id)
 
   return(new_entry)
 }
