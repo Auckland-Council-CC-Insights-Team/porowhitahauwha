@@ -143,3 +143,46 @@
 #'    \item{notes}{An explanation for why this relationship was disestablished.}
 #'  }
 "test_entity_bridge_table"
+
+#' Porowhita Hauwhā test data: partners
+#'
+#' @description
+#' A subset of the data stored in the Porowhitā Hauwha table called \code{partners}.
+#'
+#' Partners are supported by Auckland Council to deliver services in the community.
+#' This support is typically codified in an agreement, which is described in the \code{agreements}
+#' table.
+#'
+#' Often some sort of funding is provided to the partner by Auckland Council as
+#' part of this agreement, which is described in the \code{funding} table.
+#'
+#' Partners usually operate out of a facility, which they may or may not own
+#' themselves. The relationship between the partner and any such facility or
+#' facilities is described in the \code{partners_bridge_table}.
+#'
+#' The relationship between Auckland Council and the partner is managed by a Place
+#' and Partner Specialist. The Place and Partner Specialist is described in the \code{staff}
+#' table, and they are attached to a facility operated by a partner with whom they hold
+#' the relationship via the \code{staff_bridge_table}.
+#'
+#' Finally, any individuals associated with this partner are described in the \code{contacts}
+#' table; this include the Chairperson, the site manager (if applicable), and the person
+#' respnsible for reporting Key Performance Indicators to Auckland Council as defined
+#' in the agreement. It is possible, although unlikely, that the Chairperson, the
+#' site manager, and the reporting contact are all the same individual.
+#'
+#' This data has been made available for use in package documentation examples,
+#' and for the user to explore the kind of information stored in the live
+#' Porowhita Hauwhā database.
+#'
+#' @format ## 'test_partners'
+#' A data frame with 1 rows and 6 columns:
+#'  \describe{
+#'    \item{id}{Unique identifier. This is the primary key for the table.}
+#'    \item{name}{The name of the partner.}
+#'    \item{type}{Is this partner a Charitable Trust, an Incorporated Society, or Other?}
+#'    \item{facility_owner}{Does this partner own the facility in which they operate (\code{TRUE}) or not (\code{FALSE})?}
+#'    \item{service_provider}{Does this partner provide services (\code{TRUE}) or not (\code{FALSE})?}
+#'    \item{legal_status_number}{The Legal Status Number for this partner, if available.}
+#'  }
+"test_partners"

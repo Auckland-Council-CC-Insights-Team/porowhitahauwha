@@ -54,6 +54,12 @@ test_names <- tibble::tribble(
   "681",   "Workshop",                   "primary",     "FA603"
 )
 
+# partners are supported by Auckland Council to deliver services in the community
+test_partners <- tibble::tribble(
+  ~id,    ~name,                                         ~type,                   ~facility_owner,    ~service_provider,    ~legal_status_number,
+  "P1",    "Birkdale Beach Haven Community Project Inc",  "Incorporated Society",  NA,                  NA,                   NA
+)
+
 usethis::use_data(
   test_assets,
   test_spaces,
@@ -61,5 +67,6 @@ usethis::use_data(
   test_entity_bridge_table,
   test_facilities_attributes,
   test_names,
+  test_partners,
   overwrite = TRUE
   )
