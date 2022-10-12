@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.R
 \name{get_file_path}
 \alias{get_file_path}
-\title{Retrieve the full path to a file in File Storage.}
+\title{Retrieve the full path to a file in File Storage}
 \usage{
 get_file_path(file_name)
 }

@@ -1,8 +1,8 @@
-#' Create a connection to Porowhita Hauwhā.
+#' Create a connection to Porowhita Hauwhā
 #'
 #' Creates a connection to either the live version or the test version
 #' of the Porowhita Hauwhā database. This can be used later if this function call
-#' is stored in an object. The connection to the live database is read-only.
+#' is stored in an object. The connection to the database is read-only.
 #'
 #' @param test_db Is this a connection to the test database? Defaults to FALSE.
 #'
@@ -23,20 +23,23 @@ connect_to_database <- function(test_db = FALSE) {
   return(conn)
 }
 
-#' Create a connection to Porowhita Hauwhā.
+#' Create a connection to Porowhita Hauwhā
 #'
 #' Creates a read-only connection to the live version of the Porowhita Hauwhā
 #' database.
 #'
+#' @param read_only Is the connection to the database read-only (\code{TRUE}) or
+#' not (\code{FALSE})? Default is \code{TRUE}.
+#'
 #' @return An S4 object. This object is used to communicate with the
 #' database engine.
-connect_to_production_database <- function() {
+connect_to_production_database <- function(read_only = TRUE) {
   dbdir <- get_file_path("porowhita_hauwha.duckdb")
 
   conn <- DBI::dbConnect(
     duckdb::duckdb(),
     dbdir = dbdir,
-    read_only = TRUE
+    read_only = read_only
     )
 
   return(conn)
@@ -133,7 +136,7 @@ get_assets <- function(..., test_db = FALSE) {
   return(assets)
 }
 
-#' Retrieve the full path to a file in File Storage.
+#' Retrieve the full path to a file in File Storage
 #'
 #' Reads your .Renviron file to get the path to the team's SharePoint Document Library,
 #' as sync'd to your local machine. Appends to this the name of the file,

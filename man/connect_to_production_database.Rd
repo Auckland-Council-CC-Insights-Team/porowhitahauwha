@@ -2,9 +2,13 @@
 % Please edit documentation in R/read.R
 \name{connect_to_production_database}
 \alias{connect_to_production_database}
-\title{Create a connection to Porowhita Hauwhā.}
+\title{Create a connection to Porowhita Hauwhā}
 \usage{
-connect_to_production_database()
+connect_to_production_database(read_only = TRUE)
+}
+\arguments{
+\item{read_only}{Is the connection to the database read-only (\code{TRUE}) or
+not (\code{FALSE})? Default is \code{TRUE}.}
 }
 \value{
 An S4 object. This object is used to communicate with the
