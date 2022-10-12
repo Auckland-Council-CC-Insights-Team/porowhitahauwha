@@ -2,7 +2,7 @@
 #'
 #' Creates a connection to either the live version or the test version
 #' of the Porowhita Hauwhā database. This can be used later if this function call
-#' is stored in an object. The connection to the database is read-only.
+#' is stored in an object. The connection to the live database is read-only.
 #'
 #' @param test_db Is this a connection to the test database? Defaults to FALSE.
 #'
