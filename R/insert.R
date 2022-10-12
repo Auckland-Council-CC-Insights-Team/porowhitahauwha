@@ -20,6 +20,20 @@ connect_to_writable_database <- function(test_db = FALSE) {
   return(conn)
 }
 
+#' Return the record that was just added to a database table
+#'
+#' @param conn The database instance used to connect to the database.
+#' @param tbl_name The name of the table to which a record was just added.
+#' @param id The ID of the record that was just added to the table.
+#'
+#' @return A data frame with one row.
+get_new_entry <- function(conn, tbl_name, id) {
+  new_entry <- tbl(conn, tbl_name) |>
+    filter(id == .data$id)
+
+  return(new_entry)
+}
+
 #' Create a new ID for a table in the database
 #'
 #' Removes any letters from the values in the field called \code{id}, converts the
@@ -43,13 +57,39 @@ get_new_id <- function(conn, tbl_name) {
   return(new_id)
 }
 
-# insert_partners <- function(name = NULL, type = NULL, facility_owner = TRUE, service_provider = TRUE, legal_status_number = NULL, test_db = FALSE) {
-#   conn <- connect_to_writable_database(test_db)
-#   partner_id <- paste0("P", get_new_id(conn, "partners"))
-#
-#   query <- DBI::dbExecute(
-#     conn,
-#     "INSERT INTO partners VALUES (?, ?, ?, ?, ?, ?)",
-#     list(partner_id, name, type, facility_owner, service_provider, legal_status_number)
-#     )
-# }
+#' Add a new partner into the database
+#'
+#' If supplied with at least a name, create a new record for a partner in
+#' the database.
+#'
+#' @param name The name of the partner that is being added to the database. This is the minimum information that should be supplied.
+#' @param type Is this partner a Charitable Trust, an Incorporated Society, or Other? Default to Charitable Trust.
+#' @param facility_owner Does this partner own the facility in which they operate (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.
+#' @param service_provider Does this partner provide services (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.
+#' @param legal_status_number The Legal Status Number for this partner, if available.
+#' @param test_db Is this connection to the test database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
+#'
+#' @return A data frame with one row containing the newly-added entry.
+#' @export
+#'
+#' @examples
+#' insert_partner(
+#'   name = "Hobbiton Community Trust",
+#'   facility_owner = FALSE,
+#'   test_db = TRUE,
+#' (
+#'
+insert_partner <- function(name = NULL, type = c("Charitable Trust", "Incorporated Society", "Other"), facility_owner = TRUE, service_provider = TRUE, legal_status_number = NULL, test_db = FALSE) {
+  conn <- connect_to_writable_database(test_db)
+  partner_id <- paste0("P", get_new_id(conn, tbl_name = "partners"))
+
+  DBI::dbExecute(
+    conn,
+    "INSERT INTO partners VALUES (?, ?, ?, ?, ?, ?)",
+    list(partner_id, name, type, facility_owner, service_provider, legal_status_number)
+    )
+
+  new_entry <- get_new_entry(conn, tbl_name = "partners", id = partner_id)
+
+  return(new_entry)
+}
