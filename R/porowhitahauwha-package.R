@@ -7,6 +7,7 @@
 #' @importFrom dplyr filter
 #' @importFrom dplyr left_join
 #' @importFrom dplyr mutate
+#' @importFrom dplyr pull
 #' @importFrom dplyr select
 #' @importFrom dplyr tbl
 #' @importFrom here here
