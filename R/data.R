@@ -2,6 +2,7 @@
 #'
 #' @description
 #' A subset of the data stored in the Porowhitā Hauwha table called \code{assets}.
+#'
 #' An asset is a physical structure that provides shelter for the public, typically
 #' a building.
 #'
@@ -27,6 +28,7 @@
 #'
 #' @description
 #' A subset of the data stored in the Porowhitā Hauwha table called \code{spaces}.
+#'
 #' A space is a an area in which services are delivered to the public; a space
 #' is typically a room.
 #'
@@ -50,6 +52,7 @@
 #'
 #' @description
 #' A subset of the data stored in the Porowhitā Hauwha table called \code{entities}.
+#'
 #' An entity is a construct, assigned by Auckland Council, that groups together
 #' assets, spaces, or services.
 #'
@@ -69,6 +72,7 @@
 #'
 #' @description
 #' A subset of the data stored in the Porowhitā Hauwha table called \code{facilities_attributes}.
+#'
 #' The need for a separate table to store information (or attributes) about
 #' facilities is because assets, spaces, and entities have common fields; managing
 #' those fields here simplifies the process of managing the data.
@@ -91,3 +95,54 @@
 #'    \item{leased}{Is there a community lease agreement in place for this facility (\code{TRUE}) or not (\code{FALSE})?}
 #'  }
 "test_facilities_attributes"
+
+#' Porowhita Hauwhā test data: names
+#'
+#' @description
+#' A subset of the data stored in the Porowhitā Hauwha table called \code{names}.
+#'
+#' Each facility, whether an asset, a space, or an entity, should have at least
+#' one record in this table: a name of role "primary". Some facilities also have
+#' at least one name of role "alternate" where we're aware of any alternate names.
+#' The primary name is also the name used in the relevant table, whether an asset,
+#' a space, or an entity.
+#'
+#' This data has been made available for use in package documentation examples,
+#' and for the user to explore the kind of information stored in the live
+#' Porowhitā Hauwhā database.
+#'
+#' @format ## 'test_names'
+#' A data frame with 7 rows and 4 columns:
+#'  \describe{
+#'    \item{id}{Unique identifier. This is the primary key for the table.}
+#'    \item{value}{The name of the facility, categorised by the \code{role} field.}
+#'    \item{role}{Categorises the name stored in \code{value} as either the primary or alternate name used for this facility. A facility can have multiple alternate names.}
+#'    \item{facilities_attributes_id}{A foreign key for joining to the \code{facilities_attributes} table, where more information about this facility is found.}
+#'  }
+"test_names"
+
+#' Porowhita Hauwhā test data: entity_bridge_table
+#'
+#' @description
+#' A subset of the data stored in the Porowhitā Hauwha table called \code{entity_bridge_table}.
+#'
+#' An entity is composed of at least two records in either the assets, spaces, or services
+#' tables. This table joins the entity to the assets, spaces, or service from which
+#' it is formed.
+#'
+#' This data has been made available for use in package documentation examples,
+#' and for the user to explore the kind of information stored in the live
+#' Porowhitā Hauwhā database.
+#'
+#' @format ## 'test_entity_bridge_table'
+#' A data frame with 4 rows and 7 columns:
+#'  \describe{
+#'    \item{id}{Unique identifier. This is the primary key for the table.}
+#'    \item{facility_type}{Describes whether this facility is an asset, a space, or an entity.}
+#'    \item{facility_id}{A foreign key for joining to the relevant facilities table, as defined by \code{facility_type}.}
+#'    \item{entity_id}{A foreign key for joining to the \code{entities} table.}
+#'    \item{valid_from}{A date defining a point in time from which this relationship was established.}
+#'    \item{valid_to}{A date defining a point in time from which this relationship was disestablished.}
+#'    \item{notes}{An explanation for why this relationship was disestablished.}
+#'  }
+"test_entity_bridge_table"

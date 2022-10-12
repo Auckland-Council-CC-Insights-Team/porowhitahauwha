@@ -26,6 +26,7 @@ test_facilities_attributes
 }
 \description{
 A subset of the data stored in the Porowhitā Hauwha table called \code{facilities_attributes}.
+
 The need for a separate table to store information (or attributes) about
 facilities is because assets, spaces, and entities have common fields; managing
 those fields here simplifies the process of managing the data.
