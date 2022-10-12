@@ -1,3 +1,5 @@
-test_that("new partners can be added to the partners table and all associated tables", {
-  expect_equal(2 * 2, 4)
+test_that("it's possible to connect to the test database", {
+  test_conn <- connect_to_writable_database(test_db = TRUE)
+  expect_s4_class(test_conn, "DBIConnection")
+  disconnect_from_database(test_conn, test = TRUE, confirm = FALSE)
 })

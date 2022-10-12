@@ -128,7 +128,7 @@ get_assets <- function(..., test_db = FALSE) {
       suffix = c(".assets", "facilities_attributes")
       ) |>
     filter(...) |>
-    select(facility_id = .data$id.assets, .data$name, .data$local_board, .data$designation, .data$delivery_model) |>
+    select(facility_id = "id.assets", "name", "local_board", "designation", "delivery_model") |>
     collect()
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
