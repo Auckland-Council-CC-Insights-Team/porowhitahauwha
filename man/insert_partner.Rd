@@ -9,7 +9,7 @@ insert_partner(
   type = c("Charitable Trust", "Incorporated Society", "Other"),
   facility_owner = TRUE,
   service_provider = TRUE,
-  legal_status_number = NULL,
+  legal_status_number = NA,
   test_db = FALSE
 )
 }

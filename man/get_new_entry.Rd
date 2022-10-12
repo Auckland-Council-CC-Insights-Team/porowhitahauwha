@@ -4,14 +4,14 @@
 \alias{get_new_entry}
 \title{Return the record that was just added to a database table}
 \usage{
-get_new_entry(conn, tbl_name, id)
+get_new_entry(conn, tbl_name, new_id)
 }
 \arguments{
 \item{conn}{The database instance used to connect to the database.}
 
 \item{tbl_name}{The name of the table to which a record was just added.}
 
-\item{id}{The ID of the record that was just added to the table.}
+\item{new_id}{The ID of the record that was just added to the table.}
 }
 \value{
 A data frame with one row.
