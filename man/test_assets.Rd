@@ -3,7 +3,7 @@
 \docType{data}
 \name{test_assets}
 \alias{test_assets}
-\title{Porowhita Hauwhā test data}
+\title{Porowhita Hauwhā test data: assets}
 \format{
 \subsection{'test_assets'}{
 
@@ -24,8 +24,11 @@ A data frame with 2 rows and 9 columns:
 test_assets
 }
 \description{
-A subset of the data stored in Porowhitā Hauwha table called \code{assets}.
-This has been made available for use in package documentation examples,
+A subset of the data stored in the Porowhitā Hauwha table called \code{assets}.
+An asset is a physical structure that provides shelter for the public, typically
+a building.
+
+This data has been made available for use in package documentation examples,
 and for the user to explore the kind of information stored in the live
 Porowhitā Hauwhā database.
 }

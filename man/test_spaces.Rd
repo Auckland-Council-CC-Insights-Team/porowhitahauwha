@@ -3,7 +3,7 @@
 \docType{data}
 \name{test_spaces}
 \alias{test_spaces}
-\title{Porowhita Hauwhā test data}
+\title{Porowhita Hauwhā test data: spaces}
 \format{
 \subsection{'test_spaces'}{
 
@@ -22,8 +22,12 @@ A data frame with 4 rows and 6 columns:
 test_spaces
 }
 \description{
-A subset of the data stored in Porowhitā Hauwha. This has been made available
-for use in package documentation examples, and for the user to explore the
-kind of information stored in the live Porowhitā Hauwhā database.
+A subset of the data stored in the Porowhitā Hauwha table called \code{spaces}.
+A space is a an area in which services are delivered to the public; a space
+is typically a room.
+
+This data has been made available for use in package documentation examples,
+and for the user to explore the kind of information stored in the live
+Porowhitā Hauwhā database.
 }
 \keyword{datasets}

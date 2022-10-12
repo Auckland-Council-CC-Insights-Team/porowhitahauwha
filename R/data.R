@@ -1,8 +1,11 @@
-#' Porowhita Hauwhā test data
+#' Porowhita Hauwhā test data: assets
 #'
 #' @description
-#' A subset of the data stored in Porowhitā Hauwha table called \code{assets}.
-#' This has been made available for use in package documentation examples,
+#' A subset of the data stored in the Porowhitā Hauwha table called \code{assets}.
+#' An asset is a physical structure that provides shelter for the public, typically
+#' a building.
+#'
+#' This data has been made available for use in package documentation examples,
 #' and for the user to explore the kind of information stored in the live
 #' Porowhitā Hauwhā database.
 #'
@@ -20,12 +23,16 @@
 #'  }
 "test_assets"
 
-#' Porowhita Hauwhā test data
+#' Porowhita Hauwhā test data: spaces
 #'
 #' @description
-#' A subset of the data stored in Porowhitā Hauwha. This has been made available
-#' for use in package documentation examples, and for the user to explore the
-#' kind of information stored in the live Porowhitā Hauwhā database.
+#' A subset of the data stored in the Porowhitā Hauwha table called \code{spaces}.
+#' A space is a an area in which services are delivered to the public; a space
+#' is typically a room.
+#'
+#' This data has been made available for use in package documentation examples,
+#' and for the user to explore the kind of information stored in the live
+#' Porowhitā Hauwhā database.
 #'
 #' @format ## 'test_spaces'
 #' A data frame with 4 rows and 6 columns:
@@ -38,3 +45,49 @@
 #'    \item{image}{A url to an image of this asset, if available.}
 #'  }
 "test_spaces"
+
+#' Porowhita Hauwhā test data: entities
+#'
+#' @description
+#' A subset of the data stored in the Porowhitā Hauwha table called \code{entities}.
+#' An entity is a construct, assigned by Auckland Council, that groups together
+#' assets, spaces, or services.
+#'
+#' This data has been made available for use in package documentation examples,
+#' and for the user to explore the kind of information stored in the live
+#' Porowhitā Hauwhā database.
+#'
+#' @format ## 'test_entities'
+#' A data frame with 1 row and 2 columns:
+#'  \describe{
+#'    \item{id}{Unique identifier. This is the primary key for the table.}
+#'    \item{name}{The primary name of the entity.}
+#'  }
+"test_entities"
+
+#' Porowhita Hauwhā test data: facilities_attributes
+#'
+#' @description
+#' A subset of the data stored in the Porowhitā Hauwha table called \code{facilities_attributes}.
+#' The need for a separate table to store information (or attributes) about
+#' facilities is because assets, spaces, and entities have common fields; managing
+#' those fields here simplifies the process of managing the data.
+#'
+#' This data has been made available for use in package documentation examples,
+#' and for the user to explore the kind of information stored in the live
+#' Porowhitā Hauwhā database.
+#'
+#' @format ## 'test_facilities_attributes'
+#' A data frame with 5 rows and 9 columns:
+#'  \describe{
+#'    \item{id}{Unique identifier. This is the primary key for the table.}
+#'    \item{facility_type}{Describes whether this facility is an asset, a space, or an entity.}
+#'    \item{facility_id}{A foreign key for joining to the relevant facilities table, as defined by \code{facility_type}.}
+#'    \item{designation}{Describes the function of this facility, for example "Rural Hall", "Community Library", "Room" etc.}
+#'    \item{delivery_model}{Categorises the facility as either community-led or Council-led. A community-led facility is operated by community partners.}
+#'    \item{facility_ownership}{Describes whether the facility is owned by Council, by Kainga Ora, or is privately owned.}
+#'    \item{staffed}{Is the facility staffed during opening hours (\code{TRUE}) or not (\code{FALSE})?}
+#'    \item{closed}{Is the facility currently closed to the public (\code{TRUE}) or not (\code{FALSE})?}
+#'    \item{leased}{Is there a community lease agreement in place for this facility (\code{TRUE}) or not (\code{FALSE})?}
+#'  }
+"test_facilities_attributes"
