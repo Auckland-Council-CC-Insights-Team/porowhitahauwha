@@ -92,5 +92,4 @@ insert_partner <- function(name = NA, type = c("Charitable Trust", "Incorporated
   } else {
     print("You need to supply a name for this partner before adding it to the database.")
   }
-
 }
