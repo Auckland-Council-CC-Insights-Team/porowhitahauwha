@@ -17,11 +17,11 @@ URL: https://github.com/lddurbinAC/porowhitahauwha
 BugReports: https://github.com/lddurbinAC/porowhitahauwha/issues
 Imports: 
     DBI,
-    dplyr,
-    duckdb,
-    here,
+    dplyr (>= 1.0.9),
+    duckdb (>= 0.3.4),
+    here (>= 1.0.1),
     rlang (>= 1.0.4),
-    stringr,
+    stringr (>= 1.4.0),
     tere (>= 0.0.0.9000)
 Suggests: 
     testthat (>= 3.0.0)
