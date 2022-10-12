@@ -76,6 +76,7 @@ create_test_database <- function(test_conn) {
   DBI::dbWriteTable(test_conn, "facilities_attributes", test_facilities_attributes, overwrite = TRUE)
   DBI::dbWriteTable(test_conn, "entity_bridge_table", test_entity_bridge_table, overwrite = TRUE)
   DBI::dbWriteTable(test_conn, "names", test_names, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "partners", test_partners, overwrite = TRUE)
 
  return(test_conn)
 }

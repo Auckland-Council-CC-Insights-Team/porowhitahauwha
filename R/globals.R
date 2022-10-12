@@ -5,6 +5,7 @@ utils::globalVariables(
     "test_entities",
     "test_entity_bridge_table",
     "test_facilities_attributes",
-    "test_names"
+    "test_names",
+    "test_partners"
     )
   )
