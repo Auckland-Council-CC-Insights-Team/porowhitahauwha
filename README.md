@@ -6,13 +6,14 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of porowhitahauwha is to provide a code-based interface for the
-Porowhita Hauwhā database.
+The goal of porowhitahauwha is to provide a code-based interface for
+staff at Auckland Council to work with the Porowhita Hauwhā database.
 
 The Porowhita Hauwhā database can be thought of as a quadrant of
 information: it contains data about kaimahi (staff), hoa (partners),
 hangatanga (buildings), and ratonga (services) that fall within the
-remit of the Connected Communities department.
+remit of the Connected Communities department at Te Kunihera o Tāmaki
+Makaurau (Auckland Council).
 
 Porowhita hauwhā is a kupu (word) in te Reo Māori which means
 “quadrant”.
@@ -42,6 +43,11 @@ get_assets(test_db = TRUE)
 #> 1 A26         Buckland Community Centre Franklin    Rural Hall  Community-led f…
 #> 2 A58         Franklin The Centre       Franklin    Hybrid      Council-led fac…
 ```
+
+A vignette is being written that will explain the conceptual framework
+that was designed to inform how the data was modeled. This will define,
+in technical parlance, what is an asset, a space, an entity, and how the
+three are related.
 
 ## Terms of use
 
