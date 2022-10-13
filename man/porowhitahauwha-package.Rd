@@ -4,15 +4,15 @@
 \name{porowhitahauwha-package}
 \alias{porowhitahauwha}
 \alias{porowhitahauwha-package}
-\title{porowhitahauwha: Interact With Data About Facilities and Partners Within the Connected Communities Portfolio}
+\title{porowhitahauwha: Interact With Data About Facilities And Partners Within The Connected Communities Portfolio}
 \description{
-This package allows authorised staff at Auckland Council to read from and write to Porowhita Hauwhā, a database that stores information about facilities, partners, and related data that falls within the Connected Communities portfolio.
+This package allows authorised staff at Auckland Council to read from and write to Porowhita Hauwhā, a database that stores information about facilities, partners and related data that falls within the Connected Communities portfolio.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/lddurbinAC/porowhitahauwha}
-  \item Report bugs at \url{https://github.com/lddurbinAC/porowhitahauwha/issues}
+  \item \url{https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha}
+  \item Report bugs at \url{https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/issues}
 }
 
 }
