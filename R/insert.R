@@ -16,8 +16,16 @@
 #' @examples
 #' insert_partner(name = "Hobbiton Charitable Trust", facility_owner = FALSE, test_db = TRUE)
 #'
-insert_partner <- function(name = NA, type = c("Charitable Trust", "Incorporated Society", "Other"), facility_owner = TRUE, service_provider = TRUE, legal_status_number = NA, test_db = FALSE) {
+insert_partner <- function(
+    name = NA,
+    type = c("Charitable Trust", "Incorporated Society", "Other"),
+    facility_owner = TRUE,
+    service_provider = TRUE,
+    legal_status_number = NA,
+    test_db = FALSE
+    ) {
   if(!is.na(name)) {
+
     conn <- connect_to_writable_database(test_db)
     partner_id <- paste0("P", get_new_id(conn, tbl_name = "partners"))
 
@@ -28,6 +36,7 @@ insert_partner <- function(name = NA, type = c("Charitable Trust", "Incorporated
     )
 
     new_entry <- get_new_entry(conn, tbl_name = "partners", new_id = partner_id)
+    disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
     return(new_entry)
   } else {
