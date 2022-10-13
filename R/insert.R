@@ -35,7 +35,9 @@ insert_partner <- function(
       list(partner_id, name, match.arg(type), facility_owner, service_provider, legal_status_number)
     )
 
-    new_entry <- get_new_entry(conn, tbl_name = "partners", new_id = partner_id)
+    new_entry <- get_new_entry(conn, tbl_name = "partners", new_id = partner_id) |>
+      collect()
+
     disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
     return(new_entry)
