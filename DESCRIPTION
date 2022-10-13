@@ -1,5 +1,5 @@
 Package: porowhitahauwha
-Title: Interact With Data About Facilities and Partners Within the Connected Communities Portfolio
+Title: Interact With Data About Facilities And Partners Within The Connected Communities Portfolio
 Version: 0.0.0.9000
 Authors@R: c(
     person("Lee", "Durbin", , "lee.durbin@aucklandcouncil.govt.nz", role = c("aut", "cre")),
