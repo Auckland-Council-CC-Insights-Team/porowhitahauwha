@@ -5,3 +5,4 @@
 ^Renviron\.site$
 ^\.Renviron
 ^data-raw$
+^README\.Rmd$

@@ -1,0 +1,41 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# porowhitahauwha
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of porowhitahauwha is to provide a code-based interface for the Porowhita
+Hauwhā database.
+
+## Installation
+
+You can install the development version of porowhitahauwha from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("Auckland-Council-CC-Insights-Team/porowhitahauwha")
+```
+
+## Example
+
+This is a basic example which shows you how to retrieve a list of all asset-type
+facilities from the test database that is provided with the package:
+
+```{r example}
+library(porowhitahauwha)
+get_assets(test_db = TRUE)
+```
