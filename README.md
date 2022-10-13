@@ -9,6 +9,14 @@
 The goal of porowhitahauwha is to provide a code-based interface for the
 Porowhita Hauwhā database.
 
+The Porowhita Hauwhā database can be thought of as a quadrant of
+information: it contains data about kaimahi (staff), hoa (partners),
+hangatanga (buildings), and ratonga (services) that fall within the
+remit of the Connected Communities department.
+
+Porowhita hauwhā is a kupu (word) in te Reo Māori which means
+“quadrant”.
+
 ## Installation
 
 You can install the development version of porowhitahauwha from
@@ -34,3 +42,17 @@ get_assets(test_db = TRUE)
 #> 1 A26         Buckland Community Centre Franklin    Rural Hall  Community-led f…
 #> 2 A58         Franklin The Centre       Franklin    Hybrid      Council-led fac…
 ```
+
+## Terms of use
+
+Only authorised kaimahi at Auckland Council are able to access the
+production database for which this package provides a code-based
+interface, but anyone can freely use and adapt the code contained in
+this package for their own purposes.
+
+This package comes bundled with test data, which anyone can access and
+use as they see fit. The test data only features data that is already
+publicly available elsewhere, and any information about real individuals
+has been replaced with fake data. You may find the help files for test
+data tables useful if you are tasked with modelling similar data, for
+example in local government.
