@@ -7,7 +7,7 @@ Authors@R: c(
     )
 Description: This package allows authorised staff at Auckland Council to read
     from and write to Porowhita Hauwhā, a database that stores information about
-    facilities, partners, and related data that falls within the Connected Communities
+    facilities, partners and related data that falls within the Connected Communities
     portfolio.
 License: MIT + file LICENSE
 Encoding: UTF-8
