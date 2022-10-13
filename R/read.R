@@ -70,13 +70,13 @@ connect_to_test_database <- function() {
 #' @return An S4 object. This object is used to communicate with the
 #' test database engine.
 create_test_database <- function(test_conn) {
-  DBI::dbWriteTable(test_conn, "assets", test_assets, overwrite = TRUE)
-  DBI::dbWriteTable(test_conn, "spaces", test_spaces, overwrite = TRUE)
-  DBI::dbWriteTable(test_conn, "entities", test_entities, overwrite = TRUE)
-  DBI::dbWriteTable(test_conn, "facilities_attributes", test_facilities_attributes, overwrite = TRUE)
-  DBI::dbWriteTable(test_conn, "entity_bridge_table", test_entity_bridge_table, overwrite = TRUE)
-  DBI::dbWriteTable(test_conn, "names", test_names, overwrite = TRUE)
-  DBI::dbWriteTable(test_conn, "partners", test_partners, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "assets", porowhitahauwha::test_assets, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "spaces", porowhitahauwha::test_spaces, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "entities", porowhitahauwha::test_entities, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "facilities_attributes", porowhitahauwha::test_facilities_attributes, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "entity_bridge_table", porowhitahauwha::test_entity_bridge_table, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "names", porowhitahauwha::test_names, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, "partners", porowhitahauwha::test_partners, overwrite = TRUE)
 
  return(test_conn)
 }
