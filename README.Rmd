@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # porowhitahauwha
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of porowhitahauwha is to provide a code-based interface for staff at
