@@ -8,6 +8,9 @@
 [![R-CMD-check](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
+porowhitahauwha
+<img src="man/figures/logo.png" align="right" height="139" />
+
 The goal of porowhitahauwha is to provide a code-based interface for
 staff at Auckland Council to work with the Porowhita Hauwhā database.
 
