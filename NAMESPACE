@@ -3,6 +3,7 @@
 export(connect_to_database)
 export(disconnect_from_database)
 export(get_assets)
+export(insert_name)
 export(insert_partner)
 importFrom(dplyr,anti_join)
 importFrom(dplyr,collect)

@@ -51,6 +51,24 @@ get_file_path <- function(file_name) {
   return(file_path)
 }
 
+#' Find a facility name in the database
+#'
+#' @param names The facility name(s) that you're looking for in the database
+#' @param test_db Retrieve this data from the test database (\code{TRUE}) or not(\code{FALSE}). Defaults to \code{FALSE}.
+#'
+#' @return A tibble.
+get_names <- function(names, test_db = FALSE) {
+  conn <- connect_to_database(test_db)
+
+  names <- tbl(conn, "names") |>
+    filter(.data$value == names) |>
+    collect()
+
+  disconnect_from_database(conn, test_db, confirm = FALSE)
+
+  return(names)
+}
+
 #' Return the record that was just added to a database table
 #'
 #' @param conn The database instance used to connect to the database.

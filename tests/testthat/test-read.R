@@ -7,3 +7,9 @@ test_that("we can retrieve a list of assets from the test database", {
       length() == 0
   )
 })
+
+test_that("we can retrieve a name from the names table", {
+  retrieved_names <- get_names(names = "Buckland Hall", test_db = TRUE)
+
+  expect_equal(retrieved_names |> pull(value), "Buckland Hall")
+})

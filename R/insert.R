@@ -16,32 +16,93 @@
 #' @examples
 #' insert_partner(name = "Hobbiton Charitable Trust", facility_owner = FALSE, test_db = TRUE)
 #'
-insert_partner <- function(
-    name = NA,
-    type = c("Charitable Trust", "Incorporated Society", "Other"),
-    facility_owner = TRUE,
-    service_provider = TRUE,
-    legal_status_number = NA,
-    test_db = FALSE
-    ) {
+insert_partner <- function(name = NA, type = c("Charitable Trust", "Incorporated Society", "Other"), facility_owner = TRUE, service_provider = TRUE, legal_status_number = NA, test_db = FALSE) {
   if(!is.na(name)) {
-
-    conn <- connect_to_writable_database(test_db)
-    partner_id <- paste0("P", get_new_id(conn, tbl_name = "partners"))
-
-    DBI::dbExecute(
-      conn,
-      "INSERT INTO partners VALUES (?, ?, ?, ?, ?, ?)",
-      list(partner_id, name, match.arg(type), facility_owner, service_provider, legal_status_number)
-    )
-
-    new_entry <- get_new_entry(conn, tbl_name = "partners", new_id = partner_id) |>
-      collect()
-
-    disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
+    new_entry <- insert_record(
+      name = name,
+      type = match.arg(type),
+      facility_owner = facility_owner,
+      service_provider = service_provider,
+      legal_status_number = legal_status_number,
+      test_db = test_db,
+      new_id_prefix = "P",
+      tbl_name = "partners"
+      )
 
     return(new_entry)
   } else {
     print("You need to supply a name for this partner before adding it to the database.")
   }
+}
+
+#' Add a new facility name to the database
+#'
+#' Given a name and an ID for that facility in the \code{facilities_attributes}
+#' table, insert a new record into the \code{names} table.
+#'
+#' @param new_name The name of the facility that is being added.
+#' @param role Is this an alternate name for the facility, or its primary name? Defaults to alternate.
+#' @param facilities_attributes_id The matching ID in the \code{facilities_attributes} table for the facility whose name is being supplied.
+#' @param test_db Is this connection to the test database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
+#'
+#' @return A tibble with one row containing the newly-added record.
+#' @export
+#'
+#' @examples
+#' insert_name(
+#'     new_name = "Hobbiton Hall",
+#'     facilities_attributes_id = "FA174",
+#'     test_db = TRUE
+#' )
+insert_name <- function(new_name = NULL, role = c("alternate", "primary"), facilities_attributes_id = NULL, test_db = FALSE) {
+  if(is.null(new_name) | is.null(facilities_attributes_id)) {
+    print("You need to provide a name for the facility, as well as its ID in the facilities_attributes table.")
+  } else {
+    if(nrow(get_names(names = new_name, test_db = test_db)) > 0) {
+      print("That name  has already been added to the database.")
+    } else {
+      new_entry <- insert_record(
+        value = new_name,
+        role = match.arg(role),
+        facilities_attributes_id = facilities_attributes_id,
+        test_db = test_db,
+        tbl_name = "names"
+      )
+
+      return(new_entry)
+    }
+  }
+}
+
+#' Add a new record into a database table
+#'
+#' This is a generic function for inserting a new record into one of the tables
+#' in the database.
+#'
+#' @param ... List of values to add include in the new record.
+#' @param test_db Is this connection to the test database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
+#' @param new_id_prefix An optional ID prefix for the new record (e.g. "A" in the assets table).
+#' @param tbl_name The name of the table into which this record is being inserted.
+#'
+#' @return a tibble with one row containing the newly-inserted record.
+insert_record <- function(..., test_db = FALSE, new_id_prefix = NULL, tbl_name = NULL) {
+  conn <- connect_to_writable_database(test_db)
+  new_id <- paste0(new_id_prefix, get_new_id(conn, tbl_name = tbl_name))
+  columns <- list(...)
+  question_marks <- paste(replicate(length(columns), "?, "), collapse = "")
+  sql_statement <- paste0("INSERT INTO ", tbl_name, " VALUES (", paste0(question_marks, "?"), ")")
+  values <- append(list(id = new_id), columns)
+
+  DBI::dbExecute(
+    conn,
+    sql_statement,
+    unname(values)
+    )
+
+  new_entry <- get_new_entry(conn, tbl_name = tbl_name, new_id = new_id) |>
+  collect()
+
+  disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
+
+  return(new_entry)
 }

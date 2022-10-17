@@ -20,6 +20,18 @@ test_that("we can create a new ID for the facilities_attributes table", {
   disconnect_from_database(test_conn, test = TRUE, confirm = FALSE)
 })
 
+test_that("we can add a new record to the test database, using names as an example", {
+  new_record <- insert_record(
+    value = "Buckland Community Hall",
+    role = "alternate",
+    facilities_attributes_id = "FA174",
+    tbl_name = "names",
+    test_db = TRUE
+    )
+
+  expect_equal(new_record |> pull(value), "Buckland Community Hall")
+})
+
 test_that("we can add a new partner to the test database", {
   new_partner <- insert_partner(
     name = "Hobbiton Charitable Trust",
@@ -28,4 +40,14 @@ test_that("we can add a new partner to the test database", {
     )
 
   expect_equal(new_partner |> pull(name), "Hobbiton Charitable Trust")
+})
+
+test_that("we can add a new name to the names table", {
+  new_record <- insert_name(
+    new_name = "Hobbiton Hall",
+    facilities_attributes_id = "FA174",
+    test_db = TRUE
+  )
+
+  expect_equal(new_record |> pull(value), "Hobbiton Hall")
 })
