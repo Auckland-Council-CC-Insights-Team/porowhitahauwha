@@ -22,7 +22,8 @@ Imports:
     here (>= 1.0.1),
     rlang (>= 1.0.4),
     stringr (>= 1.4.0),
-    tere (>= 0.0.0.9000)
+    tere (>= 0.0.0.9000),
+    tibble
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

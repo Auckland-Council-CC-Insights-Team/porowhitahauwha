@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' test_conn <- connect_to_database(test_db = TRUE)
-#' DBI::dbGetQuery(test_conn, "SELECT * FROM assets)
+#' DBI::dbGetQuery(test_conn, "SELECT * FROM assets")
 connect_to_database <- function(test_db = FALSE) {
   if(test_db == TRUE) {
     conn <- connect_to_test_database()

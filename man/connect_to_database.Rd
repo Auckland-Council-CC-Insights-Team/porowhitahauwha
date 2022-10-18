@@ -18,3 +18,7 @@ Creates a connection to either the live version or the test version
 of the Porowhita Hauwhā database. This can be used later if this function call
 is stored in an object. The connection to the live database is read-only.
 }
+\examples{
+test_conn <- connect_to_database(test_db = TRUE)
+DBI::dbGetQuery(test_conn, "SELECT * FROM assets")
+}

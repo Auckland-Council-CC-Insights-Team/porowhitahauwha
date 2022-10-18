@@ -24,6 +24,7 @@ get_assets <- function(..., test_db = FALSE) {
       ) |>
     filter(...) |>
     select(facility_id = "id", "name", "local_board", "designation", "delivery_model") |>
+    tibble::as_tibble() |>
     collect()
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
