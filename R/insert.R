@@ -15,7 +15,6 @@
 #'
 #' @examples
 #' insert_partner(name = "Hobbiton Charitable Trust", facility_owner = FALSE, test_db = TRUE)
-#'
 insert_partner <- function(name = NA, type = c("Charitable Trust", "Incorporated Society", "Other"), facility_owner = TRUE, service_provider = TRUE, legal_status_number = NA, test_db = FALSE) {
   if(!is.na(name)) {
     new_entry <- insert_record(
@@ -26,7 +25,7 @@ insert_partner <- function(name = NA, type = c("Charitable Trust", "Incorporated
       legal_status_number = legal_status_number,
       test_db = test_db,
       new_id_prefix = "P",
-      tbl_name = "partners"
+      tbl_name = 'partners'
       )
 
     return(new_entry)
@@ -66,7 +65,7 @@ insert_name <- function(new_name = NULL, role = c("alternate", "primary"), facil
         role = match.arg(role),
         facilities_attributes_id = facilities_attributes_id,
         test_db = test_db,
-        tbl_name = "names"
+        tbl_name = 'names'
       )
 
       return(new_entry)

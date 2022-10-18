@@ -1,8 +1,8 @@
 test_that("we can create a new ID for the assets table", {
   test_conn <- connect_to_writable_database(test_db = TRUE)
-  current_ids <- tbl(test_conn, "assets") |> pull(id)
-  new_id_num <- get_new_id(test_conn, "assets")
-  new_id <- paste0("A", new_id_num)
+  current_ids <- tbl(test_conn, 'assets') |> pull(id)
+  new_id_num <- get_new_id(test_conn, 'assets')
+  new_id <- paste0('A', new_id_num)
 
   expect_false(new_id %in% current_ids)
 
@@ -11,9 +11,9 @@ test_that("we can create a new ID for the assets table", {
 
 test_that("we can create a new ID for the facilities_attributes table", {
   test_conn <- connect_to_writable_database(test_db = TRUE)
-  current_ids <- tbl(test_conn, "facilities_attributes") |> pull(id)
-  new_id_num <- get_new_id(test_conn, "facilities_attributes")
-  new_id <- paste0("FA", new_id_num)
+  current_ids <- tbl(test_conn, 'facilities_attributes') |> pull(id)
+  new_id_num <- get_new_id(test_conn, 'facilities_attributes')
+  new_id <- paste0('FA', new_id_num)
 
   expect_false(new_id %in% current_ids)
 
@@ -22,10 +22,10 @@ test_that("we can create a new ID for the facilities_attributes table", {
 
 test_that("we can add a new record to the test database, using names as an example", {
   new_record <- insert_record(
-    value = "Buckland Community Hall",
-    role = "alternate",
-    facilities_attributes_id = "FA174",
-    tbl_name = "names",
+    value = 'Buckland Community Hall',
+    role = 'alternate',
+    facilities_attributes_id = 'FA174',
+    tbl_name = 'names',
     test_db = TRUE
     )
 
@@ -34,7 +34,7 @@ test_that("we can add a new record to the test database, using names as an examp
 
 test_that("we can add a new partner to the test database", {
   new_partner <- insert_partner(
-    name = "Hobbiton Charitable Trust",
+    name = 'Hobbiton Charitable Trust',
     facility_owner = FALSE,
     test_db = TRUE
     )
@@ -44,8 +44,8 @@ test_that("we can add a new partner to the test database", {
 
 test_that("we can add a new name to the names table", {
   new_record <- insert_name(
-    new_name = "Hobbiton Hall",
-    facilities_attributes_id = "FA174",
+    new_name = 'Hobbiton Hall',
+    facilities_attributes_id = 'FA174',
     test_db = TRUE
   )
 

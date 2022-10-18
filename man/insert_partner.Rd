@@ -35,5 +35,4 @@ the database.
 }
 \examples{
 insert_partner(name = "Hobbiton Charitable Trust", facility_owner = FALSE, test_db = TRUE)
-
 }

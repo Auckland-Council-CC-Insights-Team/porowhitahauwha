@@ -16,9 +16,9 @@
 get_assets <- function(..., test_db = FALSE) {
   conn <- connect_to_database(test_db = test_db)
 
-  assets <- tbl(conn, "assets") |>
+  assets <- tbl(conn, 'assets') |>
     left_join(
-      tbl(conn, "facilities_attributes"),
+      tbl(conn, 'facilities_attributes'),
       by = c("id" = "facility_id"),
       suffix = c(".assets", "facilities_attributes")
       ) |>
@@ -60,7 +60,7 @@ get_file_path <- function(file_name) {
 get_names <- function(names, test_db = FALSE) {
   conn <- connect_to_database(test_db)
 
-  names <- tbl(conn, "names") |>
+  names <- tbl(conn, 'names') |>
     filter(.data$value == names) |>
     collect()
 
