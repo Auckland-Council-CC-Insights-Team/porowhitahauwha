@@ -16,14 +16,14 @@
 get_assets <- function(..., test_db = FALSE) {
   conn <- connect_to_database(test_db = test_db)
 
-  assets <- tbl(conn, 'assets') |>
+  assets <- DBI::dbGetQuery(conn, "SELECT * FROM assets") |>
     left_join(
-      tbl(conn, 'facilities_attributes'),
+      DBI::dbGetQuery(conn, "SELECT * FROM facilities_attributes"),
       by = c("id" = "facility_id"),
-      suffix = c(".assets", "facilities_attributes")
+      suffix = c(".assets", ".facilities_attributes")
       ) |>
     filter(...) |>
-    select(facility_id = "id.assets", "name", "local_board", "designation", "delivery_model") |>
+    select(facility_id = "id", "name", "local_board", "designation", "delivery_model") |>
     collect()
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
@@ -60,7 +60,7 @@ get_file_path <- function(file_name) {
 get_names <- function(names, test_db = FALSE) {
   conn <- connect_to_database(test_db)
 
-  names <- tbl(conn, 'names') |>
+  names <- DBI::dbGetQuery(conn, "SELECT * FROM names") |>
     filter(.data$value == names) |>
     collect()
 
@@ -77,7 +77,7 @@ get_names <- function(names, test_db = FALSE) {
 #'
 #' @return A data frame with one row.
 get_new_entry <- function(conn, tbl_name, new_id) {
-  new_entry <- tbl(conn, tbl_name) |>
+  new_entry <- DBI::dbGetQuery(conn, paste0("SELECT * FROM ", tbl_name)) |>
     filter(.data$id == new_id)
 
   return(new_entry)
@@ -93,7 +93,7 @@ get_new_entry <- function(conn, tbl_name, new_id) {
 #'
 #' @return A character string
 get_new_id <- function(conn, tbl_name) {
-  max_id <- tbl(conn, tbl_name) |>
+  max_id <- DBI::dbGetQuery(conn, paste0("SELECT * FROM ", tbl_name)) |>
     mutate(
       id_nums = stringr::str_remove_all(.data$id, "[A-Z]+"),
       id_numeric = as.numeric(.data$id_nums)

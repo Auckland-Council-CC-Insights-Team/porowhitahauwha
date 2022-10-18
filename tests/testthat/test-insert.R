@@ -1,6 +1,6 @@
 test_that("we can create a new ID for the assets table", {
   test_conn <- connect_to_writable_database(test_db = TRUE)
-  current_ids <- tbl(test_conn, 'assets') |> pull(id)
+  current_ids <- DBI::dbGetQuery(test_conn, "SELECT * FROM assets") |> pull(id)
   new_id_num <- get_new_id(test_conn, 'assets')
   new_id <- paste0('A', new_id_num)
 
@@ -11,7 +11,7 @@ test_that("we can create a new ID for the assets table", {
 
 test_that("we can create a new ID for the facilities_attributes table", {
   test_conn <- connect_to_writable_database(test_db = TRUE)
-  current_ids <- tbl(test_conn, 'facilities_attributes') |> pull(id)
+  current_ids <- DBI::dbGetQuery(test_conn, "SELECT * FROM facilities_attributes") |> pull(id)
   new_id_num <- get_new_id(test_conn, 'facilities_attributes')
   new_id <- paste0('FA', new_id_num)
 
