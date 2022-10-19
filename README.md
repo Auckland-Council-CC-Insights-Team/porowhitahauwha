@@ -15,10 +15,9 @@ The goal of porowhitahauwha is to provide a code-based interface for
 staff at Auckland Council to work with the Porowhita Hauwhā database.
 
 The Porowhita Hauwhā database can be thought of as a quadrant of
-information: it contains data about kaimahi (staff), hoa (partners),
-hangatanga (buildings), and ratonga (services) that fall within the
-remit of the Connected Communities department at Te Kunihera o Tāmaki
-Makaurau (Auckland Council).
+information: it contains data about staff, partners, buildings,
+andservices that fall within the remit of the Connected Communities
+department at Te Kunihera o Tāmaki Makaurau (Auckland Council).
 
 Porowhita hauwhā is a kupu (word) in te Reo Māori which means
 “quadrant”.
