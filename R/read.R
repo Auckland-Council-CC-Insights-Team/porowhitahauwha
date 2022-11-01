@@ -7,7 +7,7 @@
 #' variables in the returned tibble.
 #' @param test_db Retrieve this data from the test database? Defaults to FALSE.
 #'
-#' @return A tibble with six variables.
+#' @return A tibble with eight variables.
 #' @export
 #'
 #' @examples
@@ -23,13 +23,48 @@ get_assets <- function(..., test_db = FALSE) {
       suffix = c(".assets", ".facilities_attributes")
       ) |>
     filter(...) |>
-    select(facility_id = "id", "name", "local_board", "designation", "delivery_model") |>
+    select(facility_id = "id", "name", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
     tibble::as_tibble() |>
     collect()
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
   return(assets)
+}
+
+#' Retrieve a list of all entities
+#'
+#' Retrieve a list of entities from Porowhita Hauwhā. An entity is a construct,
+#' assigned by Auckland Council, that groups together assets, spaces, or
+#' services.
+#'
+#' @param ... Optional expressions to filter the entities list, defied in terms of
+#'   the variables in the returned tibble.
+#' @param test_db Retrieve this data from the test database? Defaults to FALSE.
+#'
+#' @return A tibble with eight variables.
+#' @export
+#'
+#' @examples
+#' # Retrieve a list of entities that are classed as Community Hubs from the test database
+#' get_entities(designation == "Community Hub", test_db = TRUE)
+get_entities <- function(..., test_db = FALSE) {
+  conn <- connect_to_database(test_db = test_db)
+
+  entities <- DBI::dbGetQuery(conn, "SELECT * FROM entities") |>
+    left_join(
+      DBI::dbGetQuery(conn, "SELECT * FROM facilities_attributes"),
+      by = c("id" = "facility_id"),
+      suffix = c(".entities", ".facilities_attributes")
+    ) |>
+    filter(...) |>
+    select(facility_id = "id", "name", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
+    tibble::as_tibble() |>
+    collect()
+
+  disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
+
+  return(entities)
 }
 
 #' Retrieve the full path to a file in File Storage
@@ -105,4 +140,45 @@ get_new_id <- function(conn, tbl_name) {
   new_id <- as.character(max_id + 1)
 
   return(new_id)
+}
+
+#' Retrieve a list of all spaces
+#'
+#' Retrieve a list of spaces from Porowhita Hauwhā. A space is an area in which
+#' services are delivered to the public, located within an asset
+#'
+#' @param ... Optional expressions to filter the space list, defied in terms of
+#'   the variables in the returned tibble.
+#' @param test_db Retrieve this data from the test database? Defaults to FALSE.
+#'
+#' @return A tibble with eight variables.
+#' @export
+#'
+#' @examples
+#' # Retrieve a list of spaces that are classed as community libraries from the test database
+#' get_spaces(designation == "Community Library", test_db = TRUE)
+get_spaces <- function(..., test_db = FALSE) {
+  conn <- connect_to_database(test_db = test_db)
+
+  assets_minimal <- DBI::dbGetQuery(conn, "SELECT * FROM assets") |>
+    select(asset_id = "id", "local_board")
+
+  spaces <- DBI::dbGetQuery(conn, "SELECT * FROM spaces") |>
+    left_join(
+      DBI::dbGetQuery(conn, "SELECT * FROM facilities_attributes"),
+      by = c("id" = "facility_id"),
+      suffix = c(".spaces", ".facilities_attributes")
+    ) |>
+    left_join(
+      assets_minimal,
+      by = "asset_id"
+    ) |>
+    filter(...) |>
+    select(facility_id = "id", "name", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
+    tibble::as_tibble() |>
+    collect()
+
+  disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
+
+  return(spaces)
 }

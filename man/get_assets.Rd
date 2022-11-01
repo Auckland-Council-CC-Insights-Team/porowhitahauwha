@@ -13,11 +13,11 @@ variables in the returned tibble.}
 \item{test_db}{Retrieve this data from the test database? Defaults to FALSE.}
 }
 \value{
-A tibble with six variables.
+A tibble with eight variables.
 }
 \description{
 Retrieve a list of assets from Porowhita Hauwhā. An asset is a structure that
-provides shelter for the public.
+provides shelter for the public...
 }
 \examples{
 # Retrieve a list of assets that are classed as rural halls from the test database
