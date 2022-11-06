@@ -19,8 +19,7 @@ get_assets <- function(..., test_db = FALSE) {
   assets <- DBI::dbGetQuery(conn, "SELECT * FROM assets") |>
     left_join(
       DBI::dbGetQuery(conn, "SELECT * FROM facilities_attributes"),
-      by = c("id" = "facility_id"),
-      suffix = c(".assets", ".facilities_attributes")
+      by = c("id" = "facility_id")
       ) |>
     filter(...) |>
     select(facility_id = "id", "name", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
@@ -54,8 +53,7 @@ get_entities <- function(..., test_db = FALSE) {
   entities <- DBI::dbGetQuery(conn, "SELECT * FROM entities") |>
     left_join(
       DBI::dbGetQuery(conn, "SELECT * FROM facilities_attributes"),
-      by = c("id" = "facility_id"),
-      suffix = c(".entities", ".facilities_attributes")
+      by = c("id" = "facility_id")
     ) |>
     filter(...) |>
     select(facility_id = "id", "name", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
@@ -166,8 +164,7 @@ get_spaces <- function(..., test_db = FALSE) {
   spaces <- DBI::dbGetQuery(conn, "SELECT * FROM spaces") |>
     left_join(
       DBI::dbGetQuery(conn, "SELECT * FROM facilities_attributes"),
-      by = c("id" = "facility_id"),
-      suffix = c(".spaces", ".facilities_attributes")
+      by = c("id" = "facility_id")
     ) |>
     left_join(
       assets_minimal,
