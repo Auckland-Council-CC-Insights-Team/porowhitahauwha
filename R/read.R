@@ -131,15 +131,31 @@ get_entities_location <- function(test_db) {
 #' # Return a list of all community-led facilities in the database
 #' get_facilities(delivery_model == "Community-led facility", test_db = TRUE)
 get_facilities <- function(..., test_db = FALSE) {
-  assets <- get_assets(test_db = test_db)
-  spaces <- get_spaces(test_db = test_db)
-  entities <- get_entities(test_db = test_db)
+  facility_tables <- get_facility_tables(test_db = test_db)
 
-  facilities <- dplyr::bind_rows(assets, spaces, entities) |>
+  facilities <- dplyr::bind_rows(facility_tables) |>
     filter(!designation %in% c("Room", "Hybrid")) |>
     filter(...)
 
   return(facilities)
+}
+
+#' Create a List of the Three Facility Tables
+#'
+#' @param test_db Retrieve this data from the test database?
+#'
+#' @return A list of three tibbles: a tibble of assets, a tibble of spaces, and
+#'   a table of entities.
+#'
+#' @noRd
+get_facility_tables <- function(test_db) {
+  assets <- get_assets(test_db = test_db)
+  spaces <- get_spaces(test_db = test_db)
+  entities <- get_entities(test_db = test_db)
+
+  facility_tables <- list(assets, spaces, entities)
+
+  return(facility_tables)
 }
 
 #' Retrieve the full path to a file in File Storage
