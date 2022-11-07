@@ -14,21 +14,38 @@
 #' # Retrieve a list of assets that are classed as rural halls from the test database
 #' get_assets(designation == "Rural Hall", test_db = TRUE)
 get_assets <- function(..., test_db = FALSE) {
+  assets <- get_attributes("assets", test_db = test_db) |>
+    prepare_facilities_data(...)
+
+  return(assets)
+}
+
+#' Join Facilities With Their Attributes
+#'
+#' Given a facility type (assets, spaces, or entities), join them with the
+#' facilities_attributes table.
+#'
+#' @param facility_type Is this query for the \code{assets}, \code{spaces}, or \code{entities} table?
+#' @param test_db Retrieve this data from the test database? Defaults to \code{FALSE}.
+#'
+#' @return A data frame with same number of rows as the table declared in \code{facility_type}.
+#'
+#' @noRd
+get_attributes <- function(facility_type = c("assets", "spaces", "entities"), test_db) {
   conn <- connect_to_database(test_db = test_db)
 
-  assets <- DBI::dbGetQuery(conn, "SELECT * FROM assets") |>
+  table_with_attributes <- DBI::dbGetQuery(
+    conn,
+    paste("SELECT * FROM ", match.arg(facility_type))
+    ) |>
     left_join(
       DBI::dbGetQuery(conn, "SELECT * FROM facilities_attributes"),
       by = c("id" = "facility_id")
-      ) |>
-    filter(...) |>
-    select(facility_id = "id", "name", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
-    tibble::as_tibble() |>
-    collect()
+    )
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
-  return(assets)
+  return(table_with_attributes)
 }
 
 #' Retrieve a list of all entities
@@ -48,21 +65,81 @@ get_assets <- function(..., test_db = FALSE) {
 #' # Retrieve a list of entities that are classed as Community Hubs from the test database
 #' get_entities(designation == "Community Hub", test_db = TRUE)
 get_entities <- function(..., test_db = FALSE) {
+  entities <- get_attributes(facility_type = "entities", test_db = test_db) |>
+    left_join(get_entities_location(test_db = test_db), by = c("id" = "entity_id")) |>
+    prepare_facilities_data(...)
+
+  return(entities)
+}
+
+#' Get each entity's Local Board
+#'
+#' Join entities to their components and retrieve the Local Board, which is
+#' usually (not not always) a one-to-one relationship
+#'
+#' @param test_db Retrieve this data from the test database? Defaults to FALSE.
+#'
+#' @return A \code{tibble} with as many rows as there are entity-location
+#'   combinations
+#'
+#' @noRd
+get_entities_location <- function(test_db) {
   conn <- connect_to_database(test_db = test_db)
 
-  entities <- DBI::dbGetQuery(conn, "SELECT * FROM entities") |>
-    left_join(
-      DBI::dbGetQuery(conn, "SELECT * FROM facilities_attributes"),
-      by = c("id" = "facility_id")
-    ) |>
-    filter(...) |>
-    select(facility_id = "id", "name", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
-    tibble::as_tibble() |>
-    collect()
+  bridge_table <- DBI::dbGetQuery(conn, "SELECT * FROM entity_bridge_table") |>
+    select("facility_type", "facility_id", "entity_id")
+
+  assets_minimal <- DBI::dbGetQuery(conn, "SELECT * FROM assets") |>
+    select(asset_id = "id", "local_board")
+
+  asset_entities <- bridge_table |>
+    filter(facility_type == "asset") |>
+    left_join(assets_minimal, by = c("facility_id" = "asset_id"))
+
+  spaces_with_local_board <- DBI::dbGetQuery(conn, "SELECT * FROM spaces") |>
+    left_join(assets_minimal, by = "asset_id") |>
+    select(space_id = "id", local_board)
+
+  space_entities <- bridge_table |>
+    filter(facility_type == "space") |>
+    left_join(spaces_with_local_board, by = c("facility_id" = "space_id"))
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
-  return(entities)
+  entities_with_local_board <- dplyr::bind_rows(asset_entities, space_entities) |>
+    dplyr::distinct(entity_id, local_board)
+
+  return(entities_with_local_board)
+}
+
+#' Retrieve a list of all facilities
+#'
+#' Returns a list of all facilities in the database, with key information about
+#' each. For more information about how facilities are classified in the
+#' database, please consult the documentation that accompanies the test data.
+#'
+#' @param ... List of attribute-value pairs with which to filter the list of
+#'   returned facilities.
+#' @param test_db Retrieve this data from the test database? Defaults to
+#'   \code{FALSE}.
+#'
+#' @return A tibble with one facility per row, and one column per attribute for
+#'   each facility.
+#' @export
+#'
+#' @examples
+#' # Return a list of all community-led facilities in the database
+#' get_facilities(delivery_model == "Community-led facility", test_db = TRUE)
+get_facilities <- function(..., test_db = FALSE) {
+  assets <- get_assets(test_db = test_db)
+  spaces <- get_spaces(test_db = test_db)
+  entities <- get_entities(test_db = test_db)
+
+  facilities <- dplyr::bind_rows(assets, spaces, entities) |>
+    filter(!designation %in% c("Room", "Hybrid")) |>
+    filter(...)
+
+  return(facilities)
 }
 
 #' Retrieve the full path to a file in File Storage
@@ -161,21 +238,36 @@ get_spaces <- function(..., test_db = FALSE) {
   assets_minimal <- DBI::dbGetQuery(conn, "SELECT * FROM assets") |>
     select(asset_id = "id", "local_board")
 
-  spaces <- DBI::dbGetQuery(conn, "SELECT * FROM spaces") |>
-    left_join(
-      DBI::dbGetQuery(conn, "SELECT * FROM facilities_attributes"),
-      by = c("id" = "facility_id")
-    ) |>
+  disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
+
+  spaces <- get_attributes("spaces", test_db = test_db) |>
     left_join(
       assets_minimal,
       by = "asset_id"
     ) |>
+    prepare_facilities_data(...)
+
+  return(spaces)
+}
+
+#' Prepare the facilities data for binding
+#'
+#' Given a facilities-with-attributes dataset, choose the user-specified rows
+#' and select standard columns
+#'
+#' @param df A facilities-with-attributes dataset
+#' @param ... Optional expressions to filter the asset list, defied in terms of the
+#' variables in the returned tibble.
+#'
+#' @return A tibble
+#'
+#' @noRd
+prepare_facilities_data <- function(df, ...) {
+  facilities_data <- df |>
     filter(...) |>
     select(facility_id = "id", "name", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
     tibble::as_tibble() |>
     collect()
 
-  disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
-
-  return(spaces)
+  return(facilities_data)
 }
