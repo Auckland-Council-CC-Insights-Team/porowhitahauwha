@@ -90,24 +90,24 @@ get_entities_location <- function(test_db) {
     select("facility_type", "facility_id", "entity_id")
 
   assets_minimal <- DBI::dbGetQuery(conn, "SELECT * FROM assets") |>
-    select(asset_id = "id", "local_board")
+    select(asset_id = "id", "physical_address", "local_board")
 
   asset_entities <- bridge_table |>
     filter(facility_type == "asset") |>
     left_join(assets_minimal, by = c("facility_id" = "asset_id"))
 
-  spaces_with_local_board <- DBI::dbGetQuery(conn, "SELECT * FROM spaces") |>
+  spaces_with_location <- DBI::dbGetQuery(conn, "SELECT * FROM spaces") |>
     left_join(assets_minimal, by = "asset_id") |>
-    select(space_id = "id", local_board)
+    select(space_id = "id", "local_board", "physical_address")
 
   space_entities <- bridge_table |>
     filter(facility_type == "space") |>
-    left_join(spaces_with_local_board, by = c("facility_id" = "space_id"))
+    left_join(spaces_with_location, by = c("facility_id" = "space_id"))
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
   entities_with_local_board <- dplyr::bind_rows(asset_entities, space_entities) |>
-    dplyr::distinct(entity_id, local_board)
+    dplyr::distinct(entity_id, physical_address, local_board)
 
   return(entities_with_local_board)
 }
@@ -252,7 +252,7 @@ get_spaces <- function(..., test_db = FALSE) {
   conn <- connect_to_database(test_db = test_db)
 
   assets_minimal <- DBI::dbGetQuery(conn, "SELECT * FROM assets") |>
-    select(asset_id = "id", "local_board")
+    select(asset_id = "id", "physical_address", "local_board")
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
@@ -281,7 +281,7 @@ get_spaces <- function(..., test_db = FALSE) {
 prepare_facilities_data <- function(df, ...) {
   facilities_data <- df |>
     filter(...) |>
-    select(facility_id = "id", "name", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
+    select(facility_id = "id", "name", "physical_address", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
     tibble::as_tibble() |>
     collect()
 
