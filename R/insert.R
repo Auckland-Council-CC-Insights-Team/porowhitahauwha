@@ -58,7 +58,7 @@ insert_name <- function(new_name = NULL, role = c("alternate", "primary"), facil
     print("You need to provide a name for the facility, as well as its ID in the facilities_attributes table.")
   } else {
     if(nrow(get_names(names = new_name, test_db = test_db)) > 0) {
-      print("That name  has already been added to the database.")
+      print("That name has already been added to the database.")
     } else {
       new_entry <- insert_record(
         value = new_name,
