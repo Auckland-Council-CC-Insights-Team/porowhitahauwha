@@ -134,7 +134,7 @@ get_facilities <- function(..., test_db = FALSE) {
   facility_tables <- get_facility_tables(test_db = test_db)
 
   facilities <- dplyr::bind_rows(facility_tables) |>
-    filter(!designation %in% c("Room", "Hybrid")) |>
+    filter(!designation %in% c("Room", "Hybrid", "Building")) |>
     filter(...)
 
   return(facilities)
