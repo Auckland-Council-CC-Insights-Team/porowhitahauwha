@@ -97,8 +97,7 @@ update_facilities_attributes <- function(facility_name, field, value, test_db = 
   facility_id <- verify_facility_update(facility_name, field, value, test_db) |>
     pull(facility_id)
 
-    updates <- purrr::map2_chr(field, value, ~paste0(.x, "='", .y, "'")) |>
-      paste(collapse = ",")
+    updates <- paste0(field, "='", value, "'") |> paste(collapse = ",")
     record_to_update <- paste0("facility_id = '", facility_id, "'")
 
     updated_attributes <- update_record(
@@ -135,18 +134,11 @@ update_facilities_attributes <- function(facility_name, field, value, test_db = 
 #'   test_db = TRUE
 #'   )
 update_facility <- function(facility_name = NULL, field, value, test_db = FALSE) {
-  new_local_board <- find_field("local_board", field)
-  if(new_local_board != FALSE) {
-    update_local_board(facility_name, value[[new_local_board]], test_db = test_db)
-    field <- field[-new_local_board]
-    value <- value[-new_local_board]
-  }
+  location_update <- update_location(facility_name, field, value, test_db = test_db)
 
-  new_address <- find_field("physical_address", field)
-  if(new_address != FALSE) {
-    update_address(facility_name, value[[new_address]], test_db = test_db)
-    field <- field[-new_address]
-    value <- value[-new_address]
+  if(length(location_update) > 0) {
+    field <- field[-location_update]
+    value <- value[-location_update]
   }
 
   if(length(field) > 0) {
@@ -177,6 +169,38 @@ update_local_board <- function(facility_name, new_local_board, test_db = FALSE) 
   )
 
   return(updated_local_board)
+}
+
+#' Update Postal Address and Local Board Information
+#'
+#' @param facility_name The name of the facility. Must be the primary name.
+#' @param field A list of field names whose values you wish to change. Should
+#'   align with \code{value}.
+#' @param value A list of values you wish to change. Should align with
+#'   \code{field}.
+#' @param test_db Is this a connection to the test database? Defaults to
+#'   \code{FALSE}.
+#'
+#' @return A numeric vector identifying the indices of the location fields in
+#'   \code{field}, which could be of length zero if no location fields were
+#'   updated. This is used in \code{update_facility}.
+#'
+#' @noRd
+#'
+update_location <- function(facility_name, field, value, test_db = test_db) {
+  new_local_board <- find_field("local_board", field)
+  if(new_local_board != FALSE) {
+    update_local_board(facility_name, value[[new_local_board]], test_db = test_db)
+  }
+
+  new_address <- find_field("physical_address", field)
+  if(new_address != FALSE) {
+    update_address(facility_name, value[[new_address]], test_db = test_db)
+  }
+
+  positions <- setdiff(c(new_local_board, new_address), 0)
+
+  return(positions)
 
 }
 
