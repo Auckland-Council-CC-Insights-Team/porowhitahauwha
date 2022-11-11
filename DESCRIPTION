@@ -20,6 +20,7 @@ Imports:
     dplyr (>= 1.0.9),
     duckdb (>= 0.3.4),
     here (>= 1.0.1),
+    purrr (>= 0.3.5),
     rlang (>= 1.0.4),
     stringr (>= 1.4.0),
     tere (>= 0.0.0.9000),

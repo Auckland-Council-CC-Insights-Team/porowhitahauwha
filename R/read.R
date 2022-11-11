@@ -93,7 +93,7 @@ get_entities_location <- function(test_db) {
     select(asset_id = "id", "physical_address", "local_board")
 
   asset_entities <- bridge_table |>
-    filter(facility_type == "asset") |>
+    filter(.data$facility_type == "asset") |>
     left_join(assets_minimal, by = c("facility_id" = "asset_id"))
 
   spaces_with_location <- DBI::dbGetQuery(conn, "SELECT * FROM spaces") |>
@@ -101,13 +101,13 @@ get_entities_location <- function(test_db) {
     select(space_id = "id", "local_board", "physical_address")
 
   space_entities <- bridge_table |>
-    filter(facility_type == "space") |>
+    filter(.data$facility_type == "space") |>
     left_join(spaces_with_location, by = c("facility_id" = "space_id"))
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
   entities_with_local_board <- dplyr::bind_rows(asset_entities, space_entities) |>
-    dplyr::distinct(entity_id, physical_address, local_board)
+    dplyr::distinct(.data$entity_id, .data$physical_address, .data$local_board)
 
   return(entities_with_local_board)
 }
@@ -134,7 +134,7 @@ get_facilities <- function(..., test_db = FALSE) {
   facility_tables <- get_facility_tables(test_db = test_db)
 
   facilities <- dplyr::bind_rows(facility_tables) |>
-    filter(!designation %in% c("Room", "Hybrid", "Building")) |>
+    filter(!.data$designation %in% c("Room", "Hybrid", "Building")) |>
     filter(...)
 
   return(facilities)

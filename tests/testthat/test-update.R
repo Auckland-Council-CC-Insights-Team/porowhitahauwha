@@ -4,8 +4,8 @@ test_that("we receive an error message when we pass a field called 'name'", {
 })
 
 test_that("the fields we want to update do exist in the facilities_attributes table", {
-  expect_error(verify_field(field = "made_up_field"))
-  expect_true(verify_field(field = "delivery_model"))
+  expect_error(verify_field(field = "made_up_field", test_db = TRUE))
+  expect_true(verify_field(field = "delivery_model", test_db = TRUE))
 })
 
 test_that("we're only able to update one record at a time", {
@@ -73,8 +73,8 @@ test_that("we can update the facilities_attributes table", {
 
   updated_attributes <- update_facilities_attributes(facility_name, field, value, test_db = TRUE)
 
-  expect_equal(updated_attributes |> pull(designation), c("Rural Hall", "Community Centre"))
-  expect_equal(updated_attributes |> pull(closed), c(TRUE, FALSE))
+  expect_equal(updated_attributes |> pull(designation), "Community Centre")
+  expect_equal(updated_attributes |> pull(closed), TRUE)
 })
 
 test_that("we can update information about a facility", {
