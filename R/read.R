@@ -142,6 +142,9 @@ get_facilities <- function(..., test_db = FALSE) {
 
 #' Create a List of the Three Facility Tables
 #'
+#' Facilities can be found in either the assets, spaces, or entities tables. This
+#' function returns each of these tables as items in a list.
+#'
 #' @param test_db Retrieve this data from the test database?
 #'
 #' @return A list of three tibbles: a tibble of assets, a tibble of spaces, and
