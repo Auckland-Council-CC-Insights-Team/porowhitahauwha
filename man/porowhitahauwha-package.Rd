@@ -14,6 +14,7 @@ This package allows authorised staff at Auckland Council to read from and write 
 Useful links:
 \itemize{
   \item \url{https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha}
+  \item \url{https://auckland-council-cc-insights-team.github.io/porowhitahauwha/}
   \item Report bugs at \url{https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/issues}
 }
 

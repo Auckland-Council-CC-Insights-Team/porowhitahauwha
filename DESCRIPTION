@@ -13,7 +13,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
-URL: https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha
+URL: https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha,
+    https://auckland-council-cc-insights-team.github.io/porowhitahauwha/
 BugReports: https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/issues
 Imports: 
     DBI,
