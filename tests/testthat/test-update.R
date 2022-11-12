@@ -86,3 +86,5 @@ test_that("we can update information about a facility", {
 
   expect_equal(updated_facility |> nrow(), 1)
 })
+
+# TEST UPDATE_LOCATION
