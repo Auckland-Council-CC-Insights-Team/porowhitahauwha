@@ -6,6 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/test-coverage.yaml)
 <!-- badges: end -->
 
 porowhitahauwha
@@ -41,11 +42,13 @@ package:
 ``` r
 library(porowhitahauwha)
 get_assets(test_db = TRUE)
-#> # A tibble: 2 × 5
-#>   facility_id name                      local_board designation delivery_model  
-#>   <chr>       <chr>                     <chr>       <chr>       <chr>           
-#> 1 A26         Buckland Community Centre Franklin    Rural Hall  Community-led f…
-#> 2 A58         Franklin The Centre       Franklin    Hybrid      Council-led fac…
+#> # A tibble: 2 × 9
+#>   facility_id name         physi…¹ local…² desig…³ deliv…⁴ facil…⁵ closed leased
+#>   <chr>       <chr>        <chr>   <chr>   <chr>   <chr>   <chr>   <lgl>  <lgl> 
+#> 1 A26         Buckland Co… Cnr Lo… Frankl… Rural … Commun… Privat… FALSE  FALSE 
+#> 2 A58         Franklin Th… 12 Mas… Frankl… Hybrid  Counci… <NA>    NA     NA    
+#> # … with abbreviated variable names ¹​physical_address, ²​local_board,
+#> #   ³​designation, ⁴​delivery_model, ⁵​facility_ownership
 ```
 
 A vignette is being written that will explain the conceptual framework

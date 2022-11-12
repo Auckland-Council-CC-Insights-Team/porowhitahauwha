@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/Auckland-Council-CC-Insights-Team/porowhitahauwha/actions/workflows/test-coverage.yaml)
 <!-- badges: end -->
 
 porowhitahauwha <img src="man/figures/logo.png" align="right" height="139" />
