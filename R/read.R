@@ -181,7 +181,7 @@ get_file_path <- function(file_name) {
   return(file_path)
 }
 
-#' Find a Facility Names and Aliases in the Database
+#' Find Facility Names and Aliases in the Database
 #'
 #' Call this function without passing any arguments to return the entire content
 #' of the names table, otherwise filter the table by any of its variables for a
@@ -198,7 +198,7 @@ get_file_path <- function(file_name) {
 #'
 #' @examples
 #' # Search for a facility and return any aliases
-#' get_names(value == "Buckland Community Centre)
+#' get_names(value == "Buckland Community Centre")
 get_names <- function(..., test_db = FALSE) {
   conn <- connect_to_database(test_db)
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.R
 \name{get_names}
 \alias{get_names}
-\title{Find a Facility Names and Aliases in the Database}
+\title{Find Facility Names and Aliases in the Database}
 \usage{
 get_names(..., test_db = FALSE)
 }
@@ -20,4 +20,8 @@ A tibble.
 Call this function without passing any arguments to return the entire content
 of the names table, otherwise filter the table by any of its variables for a
 more specific response.
+}
+\examples{
+# Search for a facility and return any aliases
+get_names(value == "Buckland Community Centre")
 }
