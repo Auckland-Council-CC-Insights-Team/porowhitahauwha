@@ -181,22 +181,46 @@ get_file_path <- function(file_name) {
   return(file_path)
 }
 
-#' Find a facility name in the database
+#' Find a Facility Names and Aliases in the Database
 #'
-#' @param names The facility name(s) that you're looking for in the database
-#' @param test_db Retrieve this data from the test database (\code{TRUE}) or not(\code{FALSE}). Defaults to \code{FALSE}.
+#' Call this function without passing any arguments to return the entire content
+#' of the names table, otherwise filter the table by any of its variables for a
+#' more specific response.
+#'
+#' @param ... Optional arguments passed to the \code{get_names} to filter the
+#'   names returned.
+#' @param test_db Retrieve this data from the test database (\code{TRUE}) or
+#'   not(\code{FALSE}). Defaults to \code{FALSE}.
 #'
 #' @return A tibble.
-get_names <- function(names, test_db = FALSE) {
+#'
+#' @export
+#'
+#' @examples
+#' # Search for a facility and return any aliases
+#' get_names(value == "Buckland Community Centre)
+get_names <- function(..., test_db = FALSE) {
   conn <- connect_to_database(test_db)
 
-  names <- DBI::dbGetQuery(conn, "SELECT * FROM names") |>
-    filter(.data$value == names) |>
+  all_names <- DBI::dbGetQuery(conn, "SELECT * FROM names") |>
+    as_tibble() |>
     collect()
 
   disconnect_from_database(conn, test_db, confirm = FALSE)
 
-  return(names)
+  filtered_names <- all_names |>
+    filter(...)
+
+  if(nrow(all_names) == nrow(filtered_names)) {
+    return(all_names)
+  } else {
+    names <- all_names |>
+      filter(
+        .data$facilities_attributes_id %in% (filtered_names |> pull(.data$facilities_attributes_id))
+      )
+
+    return(names)
+  }
 }
 
 #' Return the record that was just added to a database table

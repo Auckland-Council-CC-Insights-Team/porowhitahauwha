@@ -9,7 +9,7 @@ test_that("we can retrieve a list of assets from the test database", {
 })
 
 test_that("we can retrieve a name from the names table", {
-  retrieved_names <- get_names(names = 'Buckland Hall', test_db = TRUE)
+  retrieved_names <- get_names(value == 'Buckland Hall', test_db = TRUE)
 
-  expect_equal(retrieved_names |> pull(value), 'Buckland Hall')
+  expect_equal(retrieved_names |> pull(value), c('Buckland Hall', 'Buckland Community Centre'))
 })

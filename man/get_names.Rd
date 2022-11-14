@@ -2,18 +2,22 @@
 % Please edit documentation in R/read.R
 \name{get_names}
 \alias{get_names}
-\title{Find a facility name in the database}
+\title{Find a Facility Names and Aliases in the Database}
 \usage{
-get_names(names, test_db = FALSE)
+get_names(..., test_db = FALSE)
 }
 \arguments{
-\item{names}{The facility name(s) that you're looking for in the database}
+\item{...}{Optional arguments passed to the \code{get_names} to filter the
+names returned.}
 
-\item{test_db}{Retrieve this data from the test database (\code{TRUE}) or not(\code{FALSE}). Defaults to \code{FALSE}.}
+\item{test_db}{Retrieve this data from the test database (\code{TRUE}) or
+not(\code{FALSE}). Defaults to \code{FALSE}.}
 }
 \value{
 A tibble.
 }
 \description{
-Find a facility name in the database
+Call this function without passing any arguments to return the entire content
+of the names table, otherwise filter the table by any of its variables for a
+more specific response.
 }
