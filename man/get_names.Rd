@@ -11,7 +11,7 @@ get_names(..., test_db = FALSE)
 names returned.}
 
 \item{test_db}{Retrieve this data from the test database (\code{TRUE}) or
-not(\code{FALSE}). Defaults to \code{FALSE}.}
+not (\code{FALSE}). Defaults to \code{FALSE}.}
 }
 \value{
 A tibble.
@@ -23,5 +23,5 @@ more specific response.
 }
 \examples{
 # Search for a facility and return any aliases
-get_names(value == "Buckland Community Centre")
+get_names(value == "Buckland Community Centre", test_db = TRUE)
 }

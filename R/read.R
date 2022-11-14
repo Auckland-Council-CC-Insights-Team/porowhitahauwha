@@ -190,7 +190,7 @@ get_file_path <- function(file_name) {
 #' @param ... Optional arguments passed to the \code{get_names} to filter the
 #'   names returned.
 #' @param test_db Retrieve this data from the test database (\code{TRUE}) or
-#'   not(\code{FALSE}). Defaults to \code{FALSE}.
+#'   not (\code{FALSE}). Defaults to \code{FALSE}.
 #'
 #' @return A tibble.
 #'
@@ -198,7 +198,7 @@ get_file_path <- function(file_name) {
 #'
 #' @examples
 #' # Search for a facility and return any aliases
-#' get_names(value == "Buckland Community Centre")
+#' get_names(value == "Buckland Community Centre", test_db = TRUE)
 get_names <- function(..., test_db = FALSE) {
   conn <- connect_to_database(test_db)
 
