@@ -186,3 +186,26 @@
 #'    \item{legal_status_number}{The Legal Status Number for this partner, if available.}
 #'  }
 "test_partners"
+
+#' Porowhita Hauwhā test data: facilities_attributes_bridge_table
+#'
+#' @description
+#' A subset of the data stored in the Porowhitā Hauwha table called \code{facilities_attributes_bridge_table}.
+#'
+#' When information about a facility is updated, an entry is created in this table to note what changed,
+#' when the change occurred, and why it changed.
+#'
+#' @format ## 'test_facilities_attributes_bridge_table'
+#' A data frame with 2 rows and 9 columns:
+#'  \describe{
+#'    \item{id}{Unique identifier. This is the primary key for the table.}
+#'    \item{facility_attribute_id}{Foreign key to join on the facilities_attributes table.}
+#'    \item{facility_type}{Is the facility an asset, a space, or an entity?}
+#'    \item{facility_id}{Foreign key for joining on the assets, spaces, or entities table.}
+#'    \item{attribute}{Which field has changed its value?}
+#'    \item{value}{What is the changed value?}
+#'    \item{valid_from}{On which date did this change take effect?}
+#'    \item{valid_to}{Until when is this change valid?}
+#'    \item{notes}{What is the reason for this change?}
+#'  }
+"test_facilities_attributes_bridge_table"

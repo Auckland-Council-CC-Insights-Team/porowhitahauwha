@@ -39,7 +39,8 @@ test_facilities_attributes <- tibble::tribble(
   "FA251", "Asset",           "A58",            "Hybrid",       "Council-led facility",     NA,                     NA,           NA,         NA,
   "FA601", "Space",           "S374",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
   "FA602", "Space",           "S375",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
-  "FA603", "Space",           "S376",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA
+  "FA603", "Space",           "S376",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
+  "FA604", "Space",           "S1",             "Room",          "Community-led facility",  "privately-owned",      FALSE,        FALSE,      FALSE
 )
 
 # primary and alternate names for facilities
@@ -60,6 +61,12 @@ test_partners <- tibble::tribble(
   "P1",    "Birkdale Beach Haven Community Project Inc",  "Incorporated Society",  NA,                  NA,                   NA
 )
 
+test_facilities_attributes_bridge_table <- tibble::tribble(
+    ~id,    ~facility_attribute_id,  ~facility_type,  ~facility_id,  ~attribute,  ~value,  ~valid_from,  ~valid_to,    ~notes,
+    "1",    "FA604",                   "Space",         "S1",         "bookable",  "N",      NA,          "2022-11-14", "Room can now be booked",
+    "1",    "FA604",                   "Space",         "S1",         "bookable",  "Y",      NA,          "2022-11-15", "Room can now be booked"
+)
+
 usethis::use_data(
   test_assets,
   test_spaces,
@@ -68,5 +75,6 @@ usethis::use_data(
   test_facilities_attributes,
   test_names,
   test_partners,
+  test_facilities_attributes_bridge_table,
   overwrite = TRUE
   )
