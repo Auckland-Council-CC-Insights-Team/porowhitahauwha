@@ -20,6 +20,7 @@ insert_asset <- function(name, local_board, postal_address, test_db = FALSE) {
     longitude = NA,
     land_ownership = NA,
     image = NA,
+    new_id_prefix = "A",
     tbl_name = "assets",
     test_db = test_db
   )
@@ -82,6 +83,57 @@ insert_change_log <- function(facility_attribute_id, facility_type, facility_id,
   return(change_item)
 }
 
+insert_facility <- function(
+    facility_type,
+    name,
+    local_board,
+    postal_address,
+    designation = c(
+      "Venue for Hire",
+      "Community Centre",
+      "Rural Hall",
+      "Arts & Culture",
+      "Community Library",
+      "Rural Library",
+      "Multipurpose facility",
+      "Research Centre",
+      "Community Hub",
+      "Special Collections"
+    ),
+    delivery_model = c("Community-led facility", "Council-led facility"),
+    facility_ownership = c("Council-owned", "Privately-owned"),
+    staffed = FALSE,
+    leased = FALSE,
+    test_db = TRUE
+    ) {
+
+  if(facility_type == "Asset") {
+    new_facility <- insert_asset(
+      name = name,
+      local_board = local_board,
+      postal_address = postal_address,
+      test_db = test_db
+      )
+  }
+
+  new_attributes <- insert_facility_attributes(
+    facility_id = new_facility |> pull(.data$id),
+    facility_type = "Asset",
+    designation = designation,
+    delivery_model = delivery_model,
+    facility_ownership = facility_ownership,
+    staffed = staffed,
+    leased = leased,
+    test_db = test_db
+    )
+
+  facility_with_attributes <- new_facility |>
+    dplyr::left_join(new_attributes, by = c("id" = "facility_id")) |>
+    dplyr::rename(facilities_attributes_id = .data$id.y)
+
+  return(facility_with_attributes)
+}
+
 #' Add a New Entry to the facilities_attributes Table
 #'
 #' @param facility_id The id of the facility for these attributes, whether it's
@@ -137,6 +189,7 @@ insert_facility_attributes <- function(
     staffed = staffed,
     closed = FALSE,
     leased = leased,
+    new_id_prefix = "FA",
     tbl_name = "facilities_attributes",
     test_db = test_db
   )

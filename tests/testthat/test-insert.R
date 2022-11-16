@@ -108,3 +108,28 @@ test_that("we can add a new entry to the facilities_attributes table", {
 
   expect_equal(new_attributes |> pull(designation), "Rural Library")
 })
+
+test_that("we can add a new facility to the database", {
+  name  <-  "Barad-dur"
+  local_board  <-  "Mordor"
+  postal_address  <-  "1 Dark Fortress Avenue, Mordor, 666"
+  facility_ownership  <-"Council-owned"
+  designation <-  "Rural Library"
+  delivery_model  <-  "Community-led facility"
+  staffed <- TRUE
+  leased <- FALSE
+
+  new_facility <- insert_facility(
+    facility_type = "Asset",
+    name = name,
+    local_board = local_board,
+    postal_address = postal_address,
+    designation = designation,
+    delivery_model = delivery_model,
+    facility_ownership = facility_ownership,
+    leased = leased,
+    test_db = TRUE
+  )
+
+  expect_equal(new_facility |> pull(designation), "Rural Library")
+})
