@@ -1,3 +1,58 @@
+#' Add An Item to the Facilities Change Log
+#'
+#' Inserts a new row into the facilities_attributes_bridge_table, where changes
+#' to the various facilities tables are recorded.
+#'
+#' @param facility_attribute_id The value of the facility_attribute_id for the
+#'   facility whose change you're recording.
+#' @param facility_type Is the facility an asset, a space, or an entity?
+#' @param facility_id The value of the facility_id field for the facility whose
+#'   change you're recording
+#' @param attribute The attribute, or field name, that is affected by the
+#'   change.
+#' @param value The new value that is being supplied for this facility.
+#' @param valid_from From when did this change take effect?
+#' @param valid_to Until when is this change valid?
+#' @param notes Explanatory notes for the change, such as the justification for
+#'   the change, the meaning of the change, and/or the person who authorised
+#'   this change.
+#' @param test_db Is this change being applied to a facility in the test
+#'   database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
+#'
+#' @return A tibble with 1 row and 9 columns showing the log entry you supplied
+#'   as recorded in the database.
+#' @export
+#'
+#' @examples
+#' change <- insert_change_log(
+#' facility_attribute_id = "FA601",
+#' facility_type = "Space",
+#' facility_id = "S374",
+#' attribute = "bookable",
+#' value = "Y",
+#' valid_from = Sys.Date(),
+#' notes = "This room can now be booked by members of the public.",
+#' test_db = TRUE
+#' )
+#'
+#' change
+insert_change_log <- function(facility_attribute_id, facility_type, facility_id, attribute, value, valid_from = NA, valid_to = NA, notes = NULL, test_db = FALSE) {
+  change_item <- insert_record(
+    facility_attribute_id = facility_attribute_id,
+    facility_type = facility_type,
+    facility_id = facility_id,
+    attribute = attribute,
+    value = value,
+    valid_from = valid_from,
+    valid_to = valid_to,
+    notes = notes,
+    test_db = test_db,
+    tbl_name = "facilities_attributes_bridge_table"
+    )
+
+  return(change_item)
+}
+
 #' Add a new partner into the database
 #'
 #' If supplied with at least a name, create a new record for a partner in
@@ -99,7 +154,7 @@ insert_record <- function(..., test_db = FALSE, new_id_prefix = NULL, tbl_name =
     )
 
   new_entry <- get_new_entry(conn, tbl_name = tbl_name, new_id = new_id) |>
-  collect()
+    collect()
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 

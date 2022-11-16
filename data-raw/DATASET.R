@@ -62,9 +62,9 @@ test_partners <- tibble::tribble(
 )
 
 test_facilities_attributes_bridge_table <- tibble::tribble(
-    ~id,    ~facility_attribute_id,  ~facility_type,  ~facility_id,  ~attribute,  ~value,  ~valid_from,  ~valid_to,    ~notes,
-    "1",    "FA604",                   "Space",         "S1",         "bookable",  "N",      NA,          "2022-11-14", "Room can now be booked",
-    "1",    "FA604",                   "Space",         "S1",         "bookable",  "Y",      NA,          "2022-11-15", "Room can now be booked"
+    ~id,    ~facility_attribute_id,  ~facility_type,  ~facility_id,  ~attribute,  ~value,  ~valid_from,               ~valid_to,    ~notes,
+    "1",    "FA604",                   "Space",         "S1",         "bookable",  "N",      NA_character_,          "2022-11-14", "Room can now be booked",
+    "1",    "FA604",                   "Space",         "S1",         "bookable",  "Y",      NA_character_,          "2022-11-15", "Room can now be booked"
 )
 
 usethis::use_data(

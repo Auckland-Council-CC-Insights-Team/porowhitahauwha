@@ -51,3 +51,27 @@ test_that("we can add a new name to the names table", {
 
   expect_equal(new_record |> pull(value), "Hobbiton Hall")
 })
+
+test_that("we can insert an entry into the facilities_attributes_bridge_table", {
+  facility_name <- "Buckland Community Centre"
+  field <- list("physical_address", "designation")
+  value <- list("Corner Logan and Buckville Road", "Community Centre")
+
+  updated_facility <- update_facility(facility_name, field, value, test_db = TRUE)
+
+  note <- "Corrected the postal address, and converted the designation to Community Cetnre because of blah blah"
+
+  change_log_entry <- insert_change_log(
+    facility_attribute_id = updated_facility$facility_attribute_id,
+    facility_type = "Asset",
+    facility_id = updated_facility$facility_id,
+    attribute = field[[1]],
+    value = value[[1]],
+    valid_from = as.Date("2022-11-14"),
+    valid_to = as.Date("2022-11-15"),
+    notes = note,
+    test_db = TRUE
+    )
+
+  expect_equal(change_log_entry |> pull(notes), note)
+})
