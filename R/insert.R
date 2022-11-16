@@ -83,6 +83,35 @@ insert_change_log <- function(facility_attribute_id, facility_type, facility_id,
   return(change_item)
 }
 
+#' Add a New Facility to the Database
+#'
+#' Create a new record in the database for a facility, which could be either an
+#' asset, a space, or an entity.
+#'
+#' @param facility_type Is the facility you're adding an asset, a space, or an
+#'   entity?
+#' @param name What is the name of the facility you're adding to the database?
+#' @param local_board If the facility is an asset, in which Local Board is it
+#'   located?
+#' @param postal_address If the facility is an asset, what is its full postal
+#'   address?
+#' @param designation What is the purpose of this facility? How do we classify
+#'   it?
+#' @param delivery_model s this a Council-led facility or a community-led
+#'   facility?
+#' @param facility_ownership Is this facility owned by Council or is it
+#'   privately owned?
+#' @param staffed Is this facility staffed during opening hours? Defaults to
+#'   \code{FALSE}.
+#' @param leased Is this a community lease facility? Defaults to \code{FALSE}.
+#' @param test_db Is this facility being added to the test database
+#'   (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
+#'
+#' @return A tibble with 1 row containing the newly-added facility. Column
+#'   numbers vary depending on whether you've added an asset, a space, or an
+#'   entity.
+#' @export
+#'
 insert_facility <- function(
     facility_type,
     name,
@@ -129,7 +158,8 @@ insert_facility <- function(
 
   facility_with_attributes <- new_facility |>
     dplyr::left_join(new_attributes, by = c("id" = "facility_id")) |>
-    dplyr::rename(facilities_attributes_id = .data$id.y)
+    dplyr::rename(facilities_attributes_id = .data$id.y) |>
+    tibble::as_tibble()
 
   return(facility_with_attributes)
 }
