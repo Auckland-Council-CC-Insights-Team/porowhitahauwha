@@ -28,9 +28,6 @@
     <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/connect_to_writable_database.html</loc>
   </url>
   <url>
-    <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/create_test_database.html</loc>
-  </url>
-  <url>
     <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/disconnect_from_database.html</loc>
   </url>
   <url>
@@ -49,16 +46,13 @@
     <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/get_names.html</loc>
   </url>
   <url>
-    <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/get_new_entry.html</loc>
-  </url>
-  <url>
-    <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/get_new_id.html</loc>
-  </url>
-  <url>
     <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/get_spaces.html</loc>
   </url>
   <url>
     <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/insert_change_log.html</loc>
   </url>
   <url>
     <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/insert_name.html</loc>
@@ -83,6 +77,9 @@
   </url>
   <url>
     <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/test_facilities_attributes.html</loc>
+  </url>
+  <url>
+    <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/test_facilities_attributes_bridge_table.html</loc>
   </url>
   <url>
     <loc>https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference/test_names.html</loc>
