@@ -10,6 +10,9 @@
 A data frame with 5 rows and 9 columns:
 \describe{
 \item{id}{Unique identifier. This is the primary key for the table.}
+\item{property_code}{}
+\item{provider_legal_status_number}{}
+\item{entry_access_type}{}
 \item{facility_type}{Describes whether this facility is an asset, a space, or an entity.}
 \item{facility_id}{A foreign key for joining to the relevant facilities table, as defined by \code{facility_type}.}
 \item{designation}{Describes the function of this facility, for example "Rural Hall", "Community Library", "Room" etc.}
