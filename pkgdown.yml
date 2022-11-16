@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-11-16T02:25Z
+last_built: 2022-11-16T05:20Z
 urls:
   reference: https://auckland-council-cc-insights-team.github.io/porowhitahauwha/reference
   article: https://auckland-council-cc-insights-team.github.io/porowhitahauwha/articles
