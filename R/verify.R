@@ -34,6 +34,20 @@ record_count_check <- function(facility_to_update) {
   return(TRUE)
 }
 
+# verify_facility_change_log_entry <- function(facility_id, field, test_db = FALSE) {
+#   facility_change_log_entries <- get_change_log_entries(
+#     facility_id == {{facility_id}},
+#     test_db = test_db
+#   ) |>
+#     filter(attribute == {{field}})
+#
+#   if(facility_change_log_entries == FALSE) {
+#     return(FALSE)
+#   }
+#
+#   return(TRUE)
+# }
+
 #' Check That a Facility Exists in the Database
 #'
 #' @param facility_name The name of the facility. Must be the primary name.

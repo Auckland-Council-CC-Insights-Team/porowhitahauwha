@@ -111,6 +111,13 @@ update_facility <- function(facility_name = NULL, field, value, test_db = FALSE)
 
   updated_facility <- get_facilities(.data$name == facility_name, test_db = test_db)
 
+  # facility_change_log_entries <- verify_facility_change_log_entry(
+  #   facility_id == {{facility_id}},
+  #   test_db = test_db
+  #   )
+  #
+  # prepare_change_log_items()
+
   return(updated_facility)
 }
 

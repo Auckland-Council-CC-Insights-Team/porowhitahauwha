@@ -31,7 +31,7 @@ get_assets <- function(..., test_db = FALSE) {
 #' @return A data frame with same number of rows as the table declared in \code{facility_type}.
 #'
 #' @noRd
-get_attributes <- function(facility_type = c("assets", "spaces", "entities"), test_db) {
+get_attributes <- function(facility_type = c("assets", "spaces", "entities"), test_db = FALSE) {
   conn <- connect_to_database(test_db = test_db)
 
   table_with_attributes <- DBI::dbGetQuery(
@@ -47,6 +47,21 @@ get_attributes <- function(facility_type = c("assets", "spaces", "entities"), te
 
   return(table_with_attributes)
 }
+
+# get_change_log_entries <- function(..., test_db = FALSE) {
+#   conn <- connect_to_database(test_db = test_db)
+#
+#   change_log_items <- DBI::dbGetQuery(
+#     conn,
+#     "SELECT * FROM facilities_attributes_bridge_table"
+#   ) |>
+#     filter(...) |>
+#     collect()
+#
+#   disconnect_from_database(conn, confirm = FALSE)
+#
+#   return(change_log_items)
+# }
 
 #' Retrieve a list of all entities
 #'
@@ -230,6 +245,8 @@ get_names <- function(..., test_db = FALSE) {
 #' @param new_id The ID of the record that was just added to the table.
 #'
 #' @return A data frame with one row.
+#'
+#' @noRd
 get_new_entry <- function(conn, tbl_name, new_id) {
   new_entry <- DBI::dbGetQuery(conn, paste0("SELECT * FROM ", tbl_name)) |>
     filter(.data$id == new_id)
@@ -246,6 +263,8 @@ get_new_entry <- function(conn, tbl_name, new_id) {
 #' @param tbl_name The name of the database table.
 #'
 #' @return A character string
+#'
+#' @noRd
 get_new_id <- function(conn, tbl_name) {
   max_id <- DBI::dbGetQuery(conn, paste0("SELECT * FROM ", tbl_name)) |>
     mutate(
@@ -308,7 +327,7 @@ get_spaces <- function(..., test_db = FALSE) {
 prepare_facilities_data <- function(df, ...) {
   facilities_data <- df |>
     filter(...) |>
-    select(facility_id = "id", "name", "physical_address", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
+    select(facility_id = "id", facility_attribute_id = "id.y", "name", "physical_address", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
     tibble::as_tibble() |>
     collect()
 

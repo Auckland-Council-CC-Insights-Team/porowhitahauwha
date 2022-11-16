@@ -7,6 +7,8 @@
 #'
 #' @return An S4 object. This object is used to communicate with the
 #' test database engine.
+#'
+#' @noRd
 create_test_database <- function(test_conn) {
   DBI::dbWriteTable(test_conn, 'assets', porowhitahauwha::test_assets, overwrite = TRUE)
   DBI::dbWriteTable(test_conn, 'spaces', porowhitahauwha::test_spaces, overwrite = TRUE)
@@ -15,6 +17,7 @@ create_test_database <- function(test_conn) {
   DBI::dbWriteTable(test_conn, 'entity_bridge_table', porowhitahauwha::test_entity_bridge_table, overwrite = TRUE)
   DBI::dbWriteTable(test_conn, 'names', porowhitahauwha::test_names, overwrite = TRUE)
   DBI::dbWriteTable(test_conn, 'partners', porowhitahauwha::test_partners, overwrite = TRUE)
+  DBI::dbWriteTable(test_conn, 'facilities_attributes_bridge_table', porowhitahauwha::test_facilities_attributes_bridge_table, overwrite = TRUE)
 
   return(test_conn)
 }
@@ -40,3 +43,35 @@ find_field <- function(to_match, field_list) {
 
   return(matching_field)
 }
+
+# prepare_change_log_items <- function(field, value, updated_facility, test_db = FALSE) {
+#   facility_id <- updated_facility |> pull(id)
+#
+#   change_log_entries <- purrr::map_dfr(
+#     .x = field,
+#     ~verify_facility_change_log_entry(
+#       facility_id,
+#       field = .x,
+#       test_db = test_db
+#       )
+#   )
+#
+#   purrr::pmap_dfr(
+#     .l = list(
+#       fields = field,
+#       values = value,
+#       valid_from = c(NULL, valid_to = Sys.Date()),
+#       valid_to = c()
+#     ),
+#     .f = ~insert_change_log(
+#       facility_attribute_id = updated_facility$facility_attribute_id,
+#       facility_type = updated_facility$facility_type,
+#       facility_id = updated_facility$facility_id,
+#       attribute = .x,
+#       value = .y,
+#       valid_from = Sys.Date(),
+#       valid_to = NULL,
+#       test_db = test_db
+#     )
+#   )
+# }
