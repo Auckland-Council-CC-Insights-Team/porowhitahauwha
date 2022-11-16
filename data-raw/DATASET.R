@@ -34,13 +34,13 @@ test_entity_bridge_table <- tibble::tribble(
 
 # attributes describe facilities
 test_facilities_attributes <- tibble::tribble(
-  ~id,    ~facility_type,    ~facility_id,    ~designation,    ~delivery_model,            ~facility_ownership,    ~staffed,    ~closed,    ~leased,
-  "FA174", "Asset",           "A26",            "Rural Hall",   "Community-led facility",   "Privately-owned",      FALSE,        FALSE,      FALSE,
-  "FA251", "Asset",           "A58",            "Hybrid",       "Council-led facility",     NA,                     NA,           NA,         NA,
-  "FA601", "Space",           "S374",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
-  "FA602", "Space",           "S375",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
-  "FA603", "Space",           "S376",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
-  "FA604", "Space",           "S1",             "Room",          "Community-led facility",  "privately-owned",      FALSE,        FALSE,      FALSE
+  ~id,    ~property_code,  ~provider_legal_status_number, ~entry_access_type, ~facility_type,    ~facility_id,    ~designation,    ~delivery_model,            ~facility_ownership,    ~staffed,    ~closed,    ~leased,
+  "FA174", NA_character_,   NA_character_,                 NA_character_,     "Asset",           "A26",            "Rural Hall",   "Community-led facility",   "Privately-owned",      FALSE,        FALSE,      FALSE,
+  "FA251", NA_character_,   NA_character_,                 NA_character_,     "Asset",           "A58",            "Hybrid",       "Council-led facility",     NA,                     NA,           NA,         NA,
+  "FA601", NA_character_,   NA_character_,                 NA_character_,     "Space",           "S374",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
+  "FA602", NA_character_,   NA_character_,                 NA_character_,     "Space",           "S375",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
+  "FA603", NA_character_,   NA_character_,                 NA_character_,     "Space",           "S376",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
+  "FA604", NA_character_,   NA_character_,                 NA_character_,     "Space",           "S1",             "Room",          "Community-led facility",  "privately-owned",      FALSE,        FALSE,      FALSE
 )
 
 # primary and alternate names for facilities
