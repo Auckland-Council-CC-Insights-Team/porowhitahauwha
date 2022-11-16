@@ -75,3 +75,36 @@ test_that("we can insert an entry into the facilities_attributes_bridge_table", 
 
   expect_equal(change_log_entry |> pull(notes), note)
 })
+
+test_that("we can add a new entry to the assets table", {
+  name  <-  "Barad-dur"
+  local_board  <-  "Mordor"
+  postal_address  <-  "1 Dark Fortress Avenue, Mordor, 666"
+
+  new_asset <- insert_asset(name, local_board, postal_address, test_db = TRUE)
+
+  expect_equal(new_asset |> pull(name), "Barad-dur")
+})
+
+test_that("we can add a new entry to the facilities_attributes table", {
+  facility_id <- "A1000"
+  facility_type <-  "Asset"
+  facility_ownership  <-"Council-owned"
+  designation <-  "Rural Library"
+  delivery_model  <-  "Community-led facility"
+  staffed <- TRUE
+  leased <- FALSE
+
+  new_attributes <- insert_facility_attributes(
+    facility_id,
+    facility_type,
+    designation,
+    delivery_model,
+    facility_ownership,
+    staffed = staffed,
+    leased = leased,
+    test_db = TRUE
+    )
+
+  expect_equal(new_attributes |> pull(designation), "Rural Library")
+})

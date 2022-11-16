@@ -1,3 +1,32 @@
+#' Add a New Entry to the \code{assets} Table
+#'
+#' @param name The name of the asset-type facility.
+#' @param local_board The Local Board where the asset-type facility is located.
+#' @param postal_address The postal address of the asset-type facility.
+#' @param test_db Is this change being applied to a facility in the test
+#'   database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
+#'
+#' @return A tibble with 1 row and 9 columns showing the newly-added asset-type
+#'   facility.
+#'
+#' @noRd
+insert_asset <- function(name, local_board, postal_address, test_db = FALSE) {
+  new_asset <- insert_record(
+    name = name,
+    local_board = local_board,
+    physical_address = postal_address,
+    asset_type = "Standalone Building",
+    latitude = NA,
+    longitude = NA,
+    land_ownership = NA,
+    image = NA,
+    tbl_name = "assets",
+    test_db = test_db
+  )
+
+  return(new_asset)
+}
+
 #' Add An Item to the Facilities Change Log
 #'
 #' Inserts a new row into the facilities_attributes_bridge_table, where changes
@@ -53,40 +82,66 @@ insert_change_log <- function(facility_attribute_id, facility_type, facility_id,
   return(change_item)
 }
 
-#' Add a new partner into the database
+#' Add a New Entry to the facilities_attributes Table
 #'
-#' If supplied with at least a name, create a new record for a partner in
-#' the database.
+#' @param facility_id The id of the facility for these attributes, whether it's
+#'   an asset, a space, or an entity.
+#' @param facility_type Is this an asset, a space, or an entity?
+#' @param designation What is the purpose of this facility? How do we classify
+#'   it?
+#' @param delivery_model Is this a Council-led facility or a community-led
+#'   facility?
+#' @param facility_ownership Is this facility owned by Council or is it
+#'   privately owned?
+#' @param staffed Is this facility staffed during opening hours? Defaults to
+#'   \code{FALSE}.
+#' @param leased  Is this a community lease facility? Defaults to \code{FALSE}.
+#' @param test_db Is this facility being added to the test database
+#'   (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
 #'
-#' @param name The name of the partner that is being added to the database. This is the minimum information that should be supplied.
-#' @param type Is this partner a Charitable Trust, an Incorporated Society, or Other? Default to Charitable Trust.
-#' @param facility_owner Does this partner own the facility in which they operate (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.
-#' @param service_provider Does this partner provide services (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.
-#' @param legal_status_number The Legal Status Number for this partner, if available.
-#' @param test_db Is this connection to the test database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
+#' @return A tibble with 1 row and 12 columns containing the newly-added entry
+#'   to the facilities_attributes table.
 #'
-#' @return A data frame with one row containing the newly-added entry.
-#' @export
-#'
-#' @examples
-#' insert_partner(name = "Hobbiton Charitable Trust", facility_owner = FALSE, test_db = TRUE)
-insert_partner <- function(name = NA, type = c("Charitable Trust", "Incorporated Society", "Other"), facility_owner = TRUE, service_provider = TRUE, legal_status_number = NA, test_db = FALSE) {
-  if(!is.na(name)) {
-    new_entry <- insert_record(
-      name = name,
-      type = match.arg(type),
-      facility_owner = facility_owner,
-      service_provider = service_provider,
-      legal_status_number = legal_status_number,
-      test_db = test_db,
-      new_id_prefix = "P",
-      tbl_name = 'partners'
-      )
+#' @noRd
+insert_facility_attributes <- function(
+    facility_id,
+    facility_type,
+    designation = c(
+      "Venue for Hire",
+      "Community Centre",
+      "Rural Hall",
+      "Arts & Culture",
+      "Community Library",
+      "Rural Library",
+      "Multipurpose facility",
+      "Research Centre",
+      "Community Hub",
+      "Special Collections"
+    ),
+    delivery_model = c("Community-led facility", "Council-led facility"),
+    facility_ownership = c("Council-owned", "Privately-owned"),
+    staffed = FALSE,
+    leased = FALSE,
+    test_db = FALSE
+    ) {
 
-    return(new_entry)
-  } else {
-    print("You need to supply a name for this partner before adding it to the database.")
-  }
+  new_facility_attributes <- insert_record(
+    property_code = NA,
+    provider_legal_status_number = NA,
+    entry_access_type = NA,
+    facility_type = facility_type,
+    facility_id = facility_id,
+    designation = match.arg(designation),
+    delivery_model = match.arg(delivery_model),
+    facility_ownership = match.arg(facility_ownership),
+    staffed = staffed,
+    closed = FALSE,
+    leased = leased,
+    tbl_name = "facilities_attributes",
+    test_db = test_db
+  )
+
+  return(new_facility_attributes)
 }
 
 #' Add a new facility name to the database
@@ -125,6 +180,42 @@ insert_name <- function(new_name = NULL, role = c("alternate", "primary"), facil
 
       return(new_entry)
     }
+  }
+}
+
+#' Add a new partner into the database
+#'
+#' If supplied with at least a name, create a new record for a partner in
+#' the database.
+#'
+#' @param name The name of the partner that is being added to the database. This is the minimum information that should be supplied.
+#' @param type Is this partner a Charitable Trust, an Incorporated Society, or Other? Default to Charitable Trust.
+#' @param facility_owner Does this partner own the facility in which they operate (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.
+#' @param service_provider Does this partner provide services (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.
+#' @param legal_status_number The Legal Status Number for this partner, if available.
+#' @param test_db Is this connection to the test database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
+#'
+#' @return A data frame with one row containing the newly-added entry.
+#' @export
+#'
+#' @examples
+#' insert_partner(name = "Hobbiton Charitable Trust", facility_owner = FALSE, test_db = TRUE)
+insert_partner <- function(name = NA, type = c("Charitable Trust", "Incorporated Society", "Other"), facility_owner = TRUE, service_provider = TRUE, legal_status_number = NA, test_db = FALSE) {
+  if(!is.na(name)) {
+    new_entry <- insert_record(
+      name = name,
+      type = match.arg(type),
+      facility_owner = facility_owner,
+      service_provider = service_provider,
+      legal_status_number = legal_status_number,
+      test_db = test_db,
+      new_id_prefix = "P",
+      tbl_name = 'partners'
+    )
+
+    return(new_entry)
+  } else {
+    print("You need to supply a name for this partner before adding it to the database.")
   }
 }
 
