@@ -67,6 +67,11 @@ test_facilities_attributes_bridge_table <- tibble::tribble(
     "1",    "FA604",                   "Space",         "S1",         "bookable",  "Y",      NA_character_,          "2022-11-15", "Room can now be booked"
 )
 
+test_partners_bridge_table <- tibble::tribble(
+  ~id,    ~partner_id,    ~facility_type,    ~facility_id,
+  "PB1",   "P1",           "Asset",           "A26"
+)
+
 usethis::use_data(
   test_assets,
   test_spaces,
@@ -76,5 +81,6 @@ usethis::use_data(
   test_names,
   test_partners,
   test_facilities_attributes_bridge_table,
+  test_partners_bridge_table,
   overwrite = TRUE
   )

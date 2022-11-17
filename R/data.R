@@ -212,3 +212,28 @@
 #'    \item{notes}{What is the reason for this change?}
 #'  }
 "test_facilities_attributes_bridge_table"
+
+#' Porowhita Hauwhā test data: partners_bridge_table
+#'
+#' @description A subset of the data stored in the Porowhitā Hauwha table called
+#'   \code{partners_bridge_table}.
+#'
+#'   This table records the relationship between partners and facilities. Not
+#'   every partner is associated with a facility, but the majority who are will
+#'   be included here. Full details on partners are found in the \code{partners}
+#'   table, and full details on facilities can be found either in \code{assets},
+#'   \code{spaces}, or \code{entities}, together with their common attributes
+#'   recorded in the \code{facilities_attributes} table.
+#'
+#' @format ## 'test_partners_bridge_table'
+#' A data frame with 1 row and 4 columns:
+#'   \describe{
+#'   \item{id}{Unique identifier. This is the primary
+#'   key for the table.}
+#'   \item{partner_id}{Foreign key for joining to the \code{partners} table.}
+#'   \item{facility_type}{Is the facility an
+#'   asset, a space, or an entity?}
+#'   \item{facility_id}{Foreign key for joining
+#'   on the assets, spaces, or entities table.}
+#'   }
+"test_partners_bridge_table"
