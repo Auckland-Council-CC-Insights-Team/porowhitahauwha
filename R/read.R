@@ -279,6 +279,22 @@ get_new_id <- function(conn, tbl_name) {
   return(new_id)
 }
 
+#' Retrieve a List of All Partners
+#'
+#' Returns a list of partners from the database, plus the names and IDs of any
+#' facilities they're associated with.
+#'
+#' @param ... List of attribute-value pairs with which to filter the list of
+#'   returned partners.
+#' @param test_db Retrieve this data from the test database? Defaults to
+#'   \code{FALSE}.
+#'
+#' @return A tibble containing 9 columns, where each row is a partner.
+#' @export
+#'
+#' @examples
+#' charitable_trusts <- get_partners(type = "Charitable Trust", test_db = TRUE)
+#' charitable_trusts
 get_partners <- function(..., test_db = FALSE) {
   conn <- connect_to_database(test_db = test_db)
 
