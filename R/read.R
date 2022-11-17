@@ -279,6 +279,28 @@ get_new_id <- function(conn, tbl_name) {
   return(new_id)
 }
 
+get_partners <- function(..., test_db = FALSE) {
+  conn <- connect_to_database(test_db = test_db)
+
+  partners_table <- DBI::dbGetQuery(conn, "SELECT * FROM partners") |>
+    left_join(
+      DBI::dbGetQuery(conn, "SELECT partner_id, facility_type, facility_id FROM partners_bridge_table"),
+      by = c("id" = "partner_id")
+    )
+  facilities_minimal <- get_facilities(test_db = test_db) |>
+    select(facility_name = .data$name, .data$facility_type, .data$facility_id, .data$facility_attribute_id)
+
+  partners <- partners_table |>
+    left_join(facilities_minimal, by = c("facility_id", "facility_type")) |>
+    collect() |>
+    tibble::as_tibble() |>
+    select(-.data$facility_type)
+
+  disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
+
+  return(partners)
+}
+
 #' Retrieve a list of all spaces
 #'
 #' Retrieve a list of spaces from Porowhita Hauwhā. A space is an area in which
@@ -327,7 +349,7 @@ get_spaces <- function(..., test_db = FALSE) {
 prepare_facilities_data <- function(df, ...) {
   facilities_data <- df |>
     filter(...) |>
-    select(facility_id = "id", facility_attribute_id = "id.y", "name", "physical_address", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
+    select(.data$facility_type, facility_id = "id", facility_attribute_id = "id.y", "name", "physical_address", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
     tibble::as_tibble() |>
     collect()
 

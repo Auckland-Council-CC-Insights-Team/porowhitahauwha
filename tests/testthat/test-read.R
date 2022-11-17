@@ -13,3 +13,9 @@ test_that("we can retrieve a name from the names table", {
 
   expect_equal(retrieved_names |> pull(value), c('Buckland Hall', 'Buckland Community Centre'))
 })
+
+test_that("we can retrieve a list of partners", {
+  partners <- get_partners(id == "P1", test_db = TRUE)
+
+  expect_equal(partners |> pull(name), "Birkdale Beach Haven Community Project Inc")
+})
