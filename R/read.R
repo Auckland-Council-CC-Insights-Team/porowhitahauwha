@@ -309,8 +309,7 @@ get_partners <- function(..., test_db = FALSE) {
   partners <- partners_table |>
     left_join(facilities_minimal, by = c("facility_id", "facility_type")) |>
     collect() |>
-    tibble::as_tibble() |>
-    select(-.data$facility_type)
+    tibble::as_tibble()
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
