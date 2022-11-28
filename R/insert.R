@@ -198,7 +198,8 @@ insert_facility_attributes <- function(
       "Multipurpose facility",
       "Research Centre",
       "Community Hub",
-      "Special Collections"
+      "Special Collections",
+      "Room"
     ),
     delivery_model = c("Community-led facility", "Council-led facility"),
     facility_ownership = c("Council-owned", "Privately-owned"),
