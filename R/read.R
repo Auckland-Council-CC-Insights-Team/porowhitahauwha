@@ -364,7 +364,7 @@ get_spaces <- function(..., test_db = FALSE) {
 prepare_facilities_data <- function(df, ...) {
   facilities_data <- df |>
     filter(...) |>
-    select(.data$facility_type, facility_id = "id", facility_attribute_id = "id.y", "name", "physical_address", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased") |>
+    select(.data$facility_type, facility_id = "id", facility_attribute_id = "id.y", "name", "physical_address", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "leased", "entry_access_type") |>
     tibble::as_tibble() |>
     collect()
 
