@@ -105,7 +105,7 @@ get_entities_location <- function(test_db) {
     select("facility_type", "facility_id", "entity_id")
 
   assets_minimal <- DBI::dbGetQuery(conn, "SELECT * FROM assets") |>
-    select(asset_id = "id", "physical_address", "local_board")
+    select(asset_id = "id", "physical_address", "local_board", "latitude", "longitude")
 
   asset_entities <- bridge_table |>
     filter(.data$facility_type == "asset") |>
@@ -113,7 +113,7 @@ get_entities_location <- function(test_db) {
 
   spaces_with_location <- DBI::dbGetQuery(conn, "SELECT * FROM spaces") |>
     left_join(assets_minimal, by = "asset_id") |>
-    select(space_id = "id", "local_board", "physical_address")
+    select(space_id = "id", "local_board", "physical_address", "latitude", "longitude")
 
   space_entities <- bridge_table |>
     filter(.data$facility_type == "space") |>
@@ -122,7 +122,7 @@ get_entities_location <- function(test_db) {
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
   entities_with_local_board <- dplyr::bind_rows(asset_entities, space_entities) |>
-    dplyr::distinct(.data$entity_id, .data$physical_address, .data$local_board)
+    dplyr::distinct(.data$entity_id, .data$physical_address, .data$local_board, .data$latitude, .data$longitude)
 
   return(entities_with_local_board)
 }
@@ -166,7 +166,7 @@ get_facilities <- function(..., test_db = FALSE) {
 #'   a table of entities.
 #'
 #' @noRd
-get_facility_tables <- function(test_db) {
+get_facility_tables <- function(test_db = FALSE) {
   assets <- get_assets(test_db = test_db)
   spaces <- get_spaces(test_db = test_db)
   entities <- get_entities(test_db = test_db)
@@ -304,7 +304,7 @@ get_partners <- function(..., test_db = FALSE) {
       by = c("id" = "partner_id")
     )
   facilities_minimal <- get_facilities(test_db = test_db) |>
-    select(facility_name = .data$name, .data$facility_type, .data$facility_id, .data$facility_attribute_id)
+    select(facility_name = "name", "facility_type", "facility_id", "facility_attribute_id")
 
   partners <- partners_table |>
     left_join(facilities_minimal, by = c("facility_id", "facility_type")) |>
@@ -335,7 +335,7 @@ get_spaces <- function(..., test_db = FALSE) {
   conn <- connect_to_database(test_db = test_db)
 
   assets_minimal <- DBI::dbGetQuery(conn, "SELECT * FROM assets") |>
-    select(asset_id = "id", "physical_address", "local_board")
+    select(asset_id = "id", "physical_address", "local_board", "latitude", "longitude")
 
   disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
 
@@ -364,7 +364,7 @@ get_spaces <- function(..., test_db = FALSE) {
 prepare_facilities_data <- function(df, ...) {
   facilities_data <- df |>
     filter(...) |>
-    select(.data$facility_type, facility_id = "id", facility_attribute_id = "id.y", "name", "physical_address", "local_board", "designation", "delivery_model", "facility_ownership", "closed", "staffed", "leased", "entry_access_type") |>
+    select("facility_type", facility_id = "id", facility_attribute_id = "id.y", "name", "physical_address", "local_board", "latitude", "longitude", "designation", "delivery_model", "facility_ownership", "closed", "staffed", "leased", "entry_access_type") |>
     tibble::as_tibble() |>
     collect()
 

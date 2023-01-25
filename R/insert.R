@@ -158,7 +158,7 @@ insert_facility <- function(
 
   facility_with_attributes <- new_facility |>
     dplyr::left_join(new_attributes, by = c("id" = "facility_id")) |>
-    dplyr::rename(facilities_attributes_id = .data$id.y) |>
+    dplyr::rename(facilities_attributes_id = "id.y") |>
     tibble::as_tibble()
 
   return(facility_with_attributes)
