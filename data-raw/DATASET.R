@@ -5,7 +5,8 @@ dt_fmt <- "%Y-%m-%d"
 test_assets <- tibble::tribble(
   ~id,      ~name,                        ~local_board,    ~asset_type,            ~physical_address,                ~latitude, ~longitude, ~land_ownership, ~image,
   "A26",    "Buckland Community Centre",  "Franklin",     "Standalone Building",  "Cnr Logan and Buckville Road",     NA,        NA,         NA,              NA,
-  "A58",    "Franklin The Centre",        "Franklin",     "Standalone Building",  "12 Massey Avenue",                 NA,        NA,         NA,              NA
+  "A58",    "Franklin The Centre",        "Franklin",     "Standalone Building",  "12 Massey Avenue",                 NA,        NA,         NA,              NA,
+  "A208",   "Puni Hall",                  "Franklin",     "Standalone Building",  "329 Waiuku Road",                  NA,        NA,         NA,              NA
 )
 
 # a space is an area that fulfills a public need, houses within an asset; typically these are rooms
@@ -40,7 +41,8 @@ test_facilities_attributes <- tibble::tribble(
   "FA601", NA_character_,   NA_character_,                 NA_character_,     "Space",           "S374",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
   "FA602", NA_character_,   NA_character_,                 NA_character_,     "Space",           "S375",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
   "FA603", NA_character_,   NA_character_,                 NA_character_,     "Space",           "S376",           "Room",         "Council-led facility",     NA,                     NA,           FALSE,      NA,
-  "FA604", NA_character_,   NA_character_,                 NA_character_,     "Space",           "S1",             "Room",          "Community-led facility",  "privately-owned",      FALSE,        FALSE,      FALSE
+  "FA604", NA_character_,   NA_character_,                 NA_character_,     "Space",           "S1",             "Room",         "Community-led facility",  "Privately-owned",      FALSE,        FALSE,      FALSE,
+  "FA118", NA_character_,   NA_character_,                 NA_character_,     "Asset",           "A208",           "Rural Hall",   "Community-led facility",  "Privately-owned",      FALSE,        FALSE,      FALSE
 )
 
 # primary and alternate names for facilities
