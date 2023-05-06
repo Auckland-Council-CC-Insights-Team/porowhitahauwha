@@ -21,7 +21,7 @@ test_spaces <- tibble::tribble(
 # an entity is a construct, assigned by Auckland Council, that groups together assets, spaces, or services
 test_entities <- tibble::tribble(
   ~id,    ~name,
-  "E01",   "Franklin Arts Centre"
+  "E01",   "Franklin The Centre"
 )
 
 # entity_bridge_table connects assets, spaces, and/or services to an entity
