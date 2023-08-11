@@ -206,3 +206,43 @@ update_record <- function(updates, record_to_update, test_db = FALSE, tbl_name =
 
   return(updated_record)
 }
+
+
+
+
+
+
+
+
+
+
+update_contact <- function(site_contact_name = NULL, email_address = NULL,
+                        telephone_number = NULL, partner_id, test_db = FALSE) {
+
+
+  updates_content <- c()
+  if(!is.null(site_contact_name)){
+    updates_content <- c(updates_content, paste0("site_contact_name = '",
+                                                 site_contact_name, "'"))
+  }
+
+  if(!is.null(email_address)){
+    updates_content <- c(updates_content, paste0("email_address = '",
+                                                 email_address, "'"))
+  }
+
+  if(!is.null(telephone_number)){
+    updates_content <- c(updates_content, paste0("telephone_number = '",
+                                                  telephone_number, "'"))
+  }
+
+
+  updates <- paste(updates_content, collapse = ", ")
+
+  record_to_update <- paste0("partner_id =  '", partner_id, "'")
+
+
+
+
+
+  }

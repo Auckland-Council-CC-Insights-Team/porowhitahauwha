@@ -295,6 +295,7 @@ get_new_id <- function(conn, tbl_name) {
 #' @examples
 #' charitable_trusts <- get_partners(type = "Charitable Trust", test_db = TRUE)
 #' charitable_trusts
+#'
 get_partners <- function(..., test_db = FALSE) {
   conn <- connect_to_database(test_db = test_db)
 
