@@ -212,13 +212,19 @@ update_record <- function(updates, record_to_update, test_db = FALSE, tbl_name =
 
 
 
-
-
-
-
+#' Title
+#'
+#' @param site_contact_name The name of the site contact.
+#' @param email_address The email address of the site contact.
+#' @param phone_number The phone number of the site contact.
+#' @param partner_id The partner id.
+#' @param test_db Is this a connection to the test database? Defaults to
+#'   \code{TRUE}.
+#'
+#' @return A tibble with one row showing the updated contact details.
+#'
 update_contact <- function(site_contact_name = NULL, email_address = NULL,
-                        telephone_number = NULL, partner_id, test_db = FALSE) {
-
+                        phone_number = NULL, partner_id, test_db = TRUE) {
 
   updates_content <- c()
   if(!is.null(site_contact_name)){
@@ -231,18 +237,20 @@ update_contact <- function(site_contact_name = NULL, email_address = NULL,
                                                  email_address, "'"))
   }
 
-  if(!is.null(telephone_number)){
-    updates_content <- c(updates_content, paste0("telephone_number = '",
-                                                  telephone_number, "'"))
+  if(!is.null(phone_number)){
+    updates_content <- c(updates_content, paste0("phone_number = '",
+                                                  phone_number, "'"))
   }
 
 
   updates <- paste(updates_content, collapse = ", ")
-
   record_to_update <- paste0("partner_id =  '", partner_id, "'")
 
+  updated_contact <- update_record(updates,
+                                   record_to_update,
+                                   test_db = TRUE,
+                                   tbl_name = "contacts")
 
-
-
+  return(updated_contact)
 
   }
