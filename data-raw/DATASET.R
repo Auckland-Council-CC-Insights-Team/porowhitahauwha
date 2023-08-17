@@ -77,8 +77,8 @@ test_partners_bridge_table <- tibble::tribble(
 
 
 test_contact <- tibble::tribble(
-  ~id,      ~partner_id,                        ~name,             ~email_address,            ~phone_number,                ~role,
-  "1",      "P1",                              "Taylor Bell",    "taylor.bell@ac.govt.nz",      "0226677889",             "site contact"
+  ~id,      ~partner_id,      ~site_contact_name,                  ~name,             ~email_address,            ~phone_number,                ~role,
+  "1",      "P1",               "Jay Chou",                    "Taylor Bell",     "taylor.bell@ac.govt.nz",      "0226677889",             "site contact"
 )
 
 

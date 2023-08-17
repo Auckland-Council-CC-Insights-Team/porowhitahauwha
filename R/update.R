@@ -228,23 +228,23 @@ update_contact <- function(site_contact_name = NULL, email_address = NULL,
 
   updates_content <- c()
   if(!is.null(site_contact_name)){
-    updates_content <- c(updates_content, paste0("site_contact_name = '",
+    updates_content <- c(updates_content, paste0("site_contact_name='",
                                                  site_contact_name, "'"))
   }
 
   if(!is.null(email_address)){
-    updates_content <- c(updates_content, paste0("email_address = '",
+    updates_content <- c(updates_content, paste0("email_address='",
                                                  email_address, "'"))
   }
 
   if(!is.null(phone_number)){
-    updates_content <- c(updates_content, paste0("phone_number = '",
+    updates_content <- c(updates_content, paste0("phone_number='",
                                                   phone_number, "'"))
   }
 
 
   updates <- paste(updates_content, collapse = ", ")
-  record_to_update <- paste0("partner_id =  '", partner_id, "'")
+  record_to_update <- paste0("partner_id='", partner_id, "'")
 
   updated_contact <- update_record(updates,
                                    record_to_update,

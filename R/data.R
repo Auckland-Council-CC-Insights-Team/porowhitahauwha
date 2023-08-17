@@ -240,9 +240,6 @@
 
 
 
-# ~id,      ~partner_id,                        ~name,             ~email_address,            ~phone_number,                ~role,
-# "1",      "P1",                              "Taylor Bell",    "taylor.bell@ac.govt.nz",      "0226677889",             "site contact"
-
 
 #' Porowhita Hauwhā test data: test_contact
 #'
