@@ -237,3 +237,25 @@
 #'   on the assets, spaces, or entities table.}
 #'   }
 "test_partners_bridge_table"
+
+
+
+
+#' Porowhita Hauwhā test data: test_contact
+#'
+#' @description A subset of the data stored in the Porowhitā Hauwha table called
+#'   \code{contact}.
+#'
+#'
+#' @format ## 'test_contact'
+#' A data frame with 1 row and 6 columns:
+#'   \describe{
+#'   \item{id}{Unique identifier. This is the primary
+#'   key for the table.}
+#'   \item{partner_id}{Foreign key for joining to the \code{partners} table.}
+#'   \item{name}{The name of the contacts for partners}
+#'   \item{email_address}{The email_address of the contacts for partners}
+#'   \item{phone_number}{The phone_number of the contacts for partners}
+#'   \item{role}{The role of the contacts for partners}
+#'   }
+"test_contact"

@@ -75,6 +75,14 @@ test_partners_bridge_table <- tibble::tribble(
   "PB1",   "P1",           "Asset",           "A26"
 )
 
+
+test_contact <- tibble::tribble(
+  ~id,      ~partner_id,      ~site_contact_name,                  ~name,             ~email_address,            ~phone_number,                ~role,
+  "1",      "P1",               "Jay Chou",                    "Taylor Bell",     "taylor.bell@ac.govt.nz",      "0226677889",             "site contact"
+)
+
+
+
 usethis::use_data(
   test_assets,
   test_spaces,
@@ -85,5 +93,6 @@ usethis::use_data(
   test_partners,
   test_facilities_attributes_bridge_table,
   test_partners_bridge_table,
+  test_contact,
   overwrite = TRUE
   )

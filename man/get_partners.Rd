@@ -23,4 +23,5 @@ facilities they're associated with.
 \examples{
 charitable_trusts <- get_partners(type = "Charitable Trust", test_db = TRUE)
 charitable_trusts
+
 }

@@ -18,7 +18,7 @@ test_that("we're only able to update one record at a time", {
 
 test_that("we can verify that the facility exists in the database", {
   fake_facility <- "Narnia Library"
-  real_facility <- "Franklin Arts Centre"
+  real_facility <- "Franklin The Centre"
 
   expect_error(verify_facility_name(fake_facility, test_db = TRUE))
   expect_true(verify_facility_name(real_facility, test_db = TRUE))
