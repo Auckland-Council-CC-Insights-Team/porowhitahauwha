@@ -76,12 +76,12 @@ test_partners_bridge_table <- tibble::tribble(
 )
 
 
-test_contact <- tibble::tribble(
+test_contacts <- tibble::tribble(
   ~id,      ~partner_id,      ~site_contact_name,                  ~name,             ~email_address,            ~phone_number,                ~role,
   "1",      "P1",               "Jay Chou",                    "Taylor Bell",     "taylor.bell@ac.govt.nz",      "0226677889",             "site contact"
 )
 
-
+# add any new test tables to create_test_database()
 
 usethis::use_data(
   test_assets,
@@ -93,6 +93,6 @@ usethis::use_data(
   test_partners,
   test_facilities_attributes_bridge_table,
   test_partners_bridge_table,
-  test_contact,
+  test_contacts,
   overwrite = TRUE
   )

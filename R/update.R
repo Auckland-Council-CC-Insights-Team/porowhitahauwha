@@ -250,7 +250,7 @@ update_contact <- function(contact_name = NULL, email_address = NULL,
   updated_contact <- update_record(updates,
                                    record_to_update,
                                    test_db = test_db,
-                                   tbl_name = "contact")
+                                   tbl_name = "contacts")
 
   return(updated_contact)
 

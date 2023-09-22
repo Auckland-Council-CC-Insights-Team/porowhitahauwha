@@ -241,13 +241,13 @@
 
 
 
-#' Porowhita Hauwhā test data: test_contact
+#' Porowhita Hauwhā test data: test_contacts
 #'
 #' @description A subset of the data stored in the Porowhitā Hauwha table called
-#'   \code{contact}.
+#'   \code{contacts}.
 #'
 #'
-#' @format ## 'test_contact'
+#' @format ## 'test_contacts'
 #' A data frame with 1 row and 6 columns:
 #'   \describe{
 #'   \item{id}{Unique identifier. This is the primary
@@ -258,4 +258,4 @@
 #'   \item{phone_number}{The phone_number of the contacts for partners}
 #'   \item{role}{The role of the contacts for partners}
 #'   }
-"test_contact"
+"test_contacts"
