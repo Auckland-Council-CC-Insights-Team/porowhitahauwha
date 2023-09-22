@@ -229,7 +229,7 @@ update_contact <- function(contact_name = NULL, email_address = NULL,
 
   updates_content <- c()
   if(!is.null(contact_name)){
-    updates_content <- c(updates_content, paste0("contact_name='",
+    updates_content <- c(updates_content, paste0("name='",
                                                  contact_name, "'"))
   }
 

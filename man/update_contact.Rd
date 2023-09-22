@@ -2,31 +2,31 @@
 % Please edit documentation in R/update.R
 \name{update_contact}
 \alias{update_contact}
-\title{Title}
+\title{Update Partner Contact Details}
 \usage{
 update_contact(
-  site_contact_name = NULL,
+  contact_name = NULL,
   email_address = NULL,
   phone_number = NULL,
   partner_id,
-  test_db = TRUE
+  test_db = FALSE
 )
 }
 \arguments{
-\item{site_contact_name}{The name of the site contact.}
+\item{contact_name}{The name of the partner's contact.}
 
-\item{email_address}{The email address of the site contact.}
+\item{email_address}{The email address of the partner's contact.}
 
-\item{phone_number}{The phone number of the site contact.}
+\item{phone_number}{The phone number of the partner's contact.}
 
 \item{partner_id}{The partner id.}
 
 \item{test_db}{Is this a connection to the test database? Defaults to
-\code{TRUE}.}
+\code{FALSE}.}
 }
 \value{
 A tibble with one row showing the updated contact details.
 }
 \description{
-Title
+Update Partner Contact Details
 }
