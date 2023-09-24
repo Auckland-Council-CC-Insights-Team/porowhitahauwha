@@ -358,8 +358,8 @@ insert_partner <- function(name = NA, type = c("Charitable Trust",
       tbl_name = 'partners'
     )
 
-    if(!is.null(facility_id) & !is.null(facility_type)) {
-      insert_record(
+    if(!is.na(facility_id) & !is.na(facility_type)) {
+      new_bridge_entry <- insert_record(
         partner_id = new_entry$id,
         facility_type = facility_type,
         facility_id = facility_id,
@@ -367,6 +367,9 @@ insert_partner <- function(name = NA, type = c("Charitable Trust",
         new_id_prefix = "PB",
         tbl_name = 'partners_bridge_table'
       )
+
+      new_entry <- get_facilities(facility_id == {{facility_id}}, test_db = test_db) |>
+        dplyr::left_join(new_bridge_entry, by = c("facility_id", "facility_type"))
     }
 
     return(new_entry)

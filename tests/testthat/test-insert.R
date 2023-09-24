@@ -39,7 +39,16 @@ test_that("we can add a new partner to the test database", {
     test_db = TRUE
     )
 
+  new_partner_with_facility <- insert_partner(
+    name = 'Hobbiton Ltd.',
+    facility_owner = TRUE,
+    facility_id = "A26",
+    facility_type = "Asset",
+    test_db = TRUE
+  )
+
   expect_equal(new_partner |> pull(name), "Hobbiton Charitable Trust")
+  expect_equal(new_partner_with_facility$partner_id, "P2")
 })
 
 test_that("we can add a new name to the names table", {

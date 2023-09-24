@@ -10,28 +10,42 @@ insert_partner(
   facility_owner = TRUE,
   service_provider = TRUE,
   legal_status_number = NA,
+  facility_id = NA,
+  facility_type = NA,
   test_db = FALSE
 )
 }
 \arguments{
-\item{name}{The name of the partner that is being added to the database. This is the minimum information that should be supplied.}
+\item{name}{The name of the partner that is being added to the database. This
+is the minimum information that should be supplied.}
 
-\item{type}{Is this partner a Charitable Trust, an Incorporated Society, or Other? Default to Charitable Trust.}
+\item{type}{Is this partner a Charitable Trust, an Incorporated Society, or
+Other? Default to Charitable Trust.}
 
-\item{facility_owner}{Does this partner own the facility in which they operate (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.}
+\item{facility_owner}{Does this partner own the facility in which they
+operate (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.}
 
-\item{service_provider}{Does this partner provide services (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.}
+\item{service_provider}{Does this partner provide services (\code{TRUE}) or
+not (\code{FALSE})? Defaults to \code{TRUE}.}
 
-\item{legal_status_number}{The Legal Status Number for this partner, if available.}
+\item{legal_status_number}{The Legal Status Number for this partner, if
+available.}
 
-\item{test_db}{Is this connection to the test database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.}
+\item{facility_id}{If this partner is associated with a facility, this is the
+ID for that facility in the database.}
+
+\item{facility_type}{If this partner is associated with a facility, this is the
+type ("Asset", "Space", or "Entity") for that facility in the database.}
+
+\item{test_db}{Is this connection to the test database (\code{TRUE}) or not
+(\code{FALSE})? Defaults to \code{FALSE}.}
 }
 \value{
 A data frame with one row containing the newly-added entry.
 }
 \description{
-If supplied with at least a name, create a new record for a partner in
-the database.
+If supplied with at least a name, create a new record for a partner in the
+database.
 }
 \examples{
 insert_partner(name = "Hobbiton Charitable Trust", facility_owner = FALSE, test_db = TRUE)
