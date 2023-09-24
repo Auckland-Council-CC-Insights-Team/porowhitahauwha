@@ -8,6 +8,7 @@ update_contact(
   contact_name = NULL,
   email_address = NULL,
   phone_number = NULL,
+  role = NULL,
   partner_id,
   test_db = FALSE
 )
@@ -18,6 +19,9 @@ update_contact(
 \item{email_address}{The email address of the partner's contact.}
 
 \item{phone_number}{The phone number of the partner's contact.}
+
+\item{role}{The role of this contact: \code{Chairperson}, \verb{Reporting provider}, or
+\verb{Site contact}.}
 
 \item{partner_id}{The partner id.}
 

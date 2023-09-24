@@ -218,6 +218,8 @@ update_record <- function(updates, record_to_update, test_db = FALSE, tbl_name =
 #' @param email_address The email address of the partner's contact.
 #' @param phone_number The phone number of the partner's contact.
 #' @param partner_id The partner id.
+#' @param role The role of this contact: `Chairperson`, `Reporting provider`, or
+#'   `Site contact`.
 #' @param test_db Is this a connection to the test database? Defaults to
 #'   \code{FALSE}.
 #'
@@ -225,7 +227,8 @@ update_record <- function(updates, record_to_update, test_db = FALSE, tbl_name =
 #'
 #' @export
 update_contact <- function(contact_name = NULL, email_address = NULL,
-                        phone_number = NULL, partner_id, test_db = FALSE) {
+                        phone_number = NULL, role = NULL, partner_id,
+                        test_db = FALSE) {
 
   updates_content <- c()
   if(!is.null(contact_name)){
@@ -245,7 +248,7 @@ update_contact <- function(contact_name = NULL, email_address = NULL,
 
 
   updates <- paste(updates_content, collapse = ", ")
-  record_to_update <- paste0("partner_id='", partner_id, "'")
+  record_to_update <- paste0("partner_id='", partner_id, "' AND role='", role, "'")
 
   updated_contact <- update_record(updates,
                                    record_to_update,
