@@ -316,22 +316,36 @@ insert_name <- function(new_name = NULL, role = c("alternate", "primary"), facil
 
 #' Add a new partner into the database
 #'
-#' If supplied with at least a name, create a new record for a partner in
-#' the database.
+#' If supplied with at least a name, create a new record for a partner in the
+#' database.
 #'
-#' @param name The name of the partner that is being added to the database. This is the minimum information that should be supplied.
-#' @param type Is this partner a Charitable Trust, an Incorporated Society, or Other? Default to Charitable Trust.
-#' @param facility_owner Does this partner own the facility in which they operate (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.
-#' @param service_provider Does this partner provide services (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.
-#' @param legal_status_number The Legal Status Number for this partner, if available.
-#' @param test_db Is this connection to the test database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
+#' @param name The name of the partner that is being added to the database. This
+#'   is the minimum information that should be supplied.
+#' @param type Is this partner a Charitable Trust, an Incorporated Society, or
+#'   Other? Default to Charitable Trust.
+#' @param facility_owner Does this partner own the facility in which they
+#'   operate (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{TRUE}.
+#' @param service_provider Does this partner provide services (\code{TRUE}) or
+#'   not (\code{FALSE})? Defaults to \code{TRUE}.
+#' @param legal_status_number The Legal Status Number for this partner, if
+#'   available.
+#' @param facility_id If this partner is associated with a facility, this is the
+#'   ID for that facility in the database.
+#' @param facility_type If this partner is associated with a facility, this is the
+#'   type ("Asset", "Space", or "Entity") for that facility in the database.
+#' @param test_db Is this connection to the test database (\code{TRUE}) or not
+#'   (\code{FALSE})? Defaults to \code{FALSE}.
 #'
 #' @return A data frame with one row containing the newly-added entry.
 #' @export
 #'
 #' @examples
 #' insert_partner(name = "Hobbiton Charitable Trust", facility_owner = FALSE, test_db = TRUE)
-insert_partner <- function(name = NA, type = c("Charitable Trust", "Incorporated Society", "Other"), facility_owner = TRUE, service_provider = TRUE, legal_status_number = NA, test_db = FALSE) {
+insert_partner <- function(name = NA, type = c("Charitable Trust",
+                                               "Incorporated Society", "Other"),
+                           facility_owner = TRUE, service_provider = TRUE,
+                           legal_status_number = NA, facility_id = NA,
+                           facility_type = NA, test_db = FALSE) {
   if(!is.na(name)) {
     new_entry <- insert_record(
       name = name,
@@ -343,6 +357,17 @@ insert_partner <- function(name = NA, type = c("Charitable Trust", "Incorporated
       new_id_prefix = "P",
       tbl_name = 'partners'
     )
+
+    if(!is.null(facility_id) & !is.null(facility_type)) {
+      insert_record(
+        partner_id = new_entry$id,
+        facility_type = facility_type,
+        facility_id = facility_id,
+        test_db = test_db,
+        new_id_prefix = "PB",
+        tbl_name = 'partners_bridge_table'
+      )
+    }
 
     return(new_entry)
   } else {
