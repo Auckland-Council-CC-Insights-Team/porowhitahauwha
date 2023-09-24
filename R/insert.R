@@ -83,6 +83,53 @@ insert_change_log <- function(facility_attribute_id, facility_type, facility_id,
   return(change_item)
 }
 
+
+#' Add a new partner contact into the database
+#'
+#' If supplied with at least a partner_id and name of the contact, create a new
+#' record for a partner contact in the database.
+#'
+#' @param name The name of the partner contact that is being added to the
+#'   database. The first name and surname of the contact should be provided.
+#' @param partner_id The record ID of the partner for whom this individual a
+#'   contact. The joins the contact to the `partners` table appropriately.
+#' @param role The role of this contact, either `Site contact`, `Chairperson`,
+#'   or `Reporting provider`. Note that multiple roles might be assigned to one
+#'   individual, with a separate record in `contacts` for each of these roles.
+#' @param email_address An optional email address for the contact. Ideally,
+#'   either an email address or a telephone number should be provided (or both).
+#' @param phone_number An optional phone number for the contact. Ideally, either
+#'   an email address or a telephone number should be provided (or both).
+#' @param test_db Is this connection to the test database (\code{TRUE}) or not
+#'   (\code{FALSE})? Defaults to \code{FALSE}.
+#'
+#' @return A data frame with one row containing the newly-added entry.
+#' @export
+#'
+#' @examples
+#' insert_contact(name = "Bilbo Baggins", partner_id = "P1", role = "Chairperson", test_db = TRUE)
+insert_contact <- function(name = NA, partner_id = NA, role =
+                             c("Site contact", "Chairperson", "Reporting person"),
+                           email_address = NA, phone_number = NA,
+                           test_db = FALSE) {
+  if(!any(is.na(c(name, partner_id, role)))) {
+    new_entry <- insert_record(
+      partner_id = partner_id,
+      name = name,
+      email_address = email_address,
+      phone_number = phone_number,
+      role = match.arg(role),
+      test_db = test_db,
+      new_id_prefix = "PO",
+      tbl_name = 'contacts'
+    )
+
+    return(new_entry)
+  } else {
+    print("You need to supply a name, partner_id, and role for this contact before adding it to the database.")
+  }
+}
+
 #' Add a New Facility to the Database
 #'
 #' Create a new record in the database for a facility, which could be either an

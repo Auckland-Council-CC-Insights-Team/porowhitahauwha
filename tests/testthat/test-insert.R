@@ -133,3 +133,11 @@ test_that("we can add a new facility to the database", {
 
   expect_equal(new_facility |> pull(designation), "Rural Library")
 })
+
+
+test_that("we can add a new partner contact into the database", {
+  insertion <- insert_contact(name = "Bilbo Baggins", partner_id = "P1",
+                              role = "Chairperson", test_db = TRUE)
+
+  expect_equal(pull(insertion, name), "Bilbo Baggins")
+})

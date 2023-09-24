@@ -41,9 +41,12 @@ test_that("we can update information about a facility", {
   expect_equal(updated_facility |> nrow(), 1)
 })
 
-# TEST UPDATE_LOCATION
+
 test_that("we can successfully update the contact details", {
-  updated_contact <- update_contact(contact_name = 'test123', email_address = 'test789@ac.govt.nz', partner_id = 'P1', role = 'site contact', test_db = TRUE)
+  updated_contact <- update_contact(contact_name = 'test123',
+                                    email_address = 'test789@ac.govt.nz',
+                                    partner_id = 'P1', role = 'Site contact',
+                                    test_db = TRUE)
 
   expect_equal(updated_contact |> pull(email_address), 'test789@ac.govt.nz')
 })
