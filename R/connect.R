@@ -34,7 +34,7 @@ connect_to_database <- function(test_db = FALSE) {
 #' @return An S4 object. This object is used to communicate with the
 #' database engine.
 connect_to_production_database <- function(read_only = TRUE) {
-  dbdir <- get_file_path("porowhita_hauwha.duckdb")
+  dbdir <- get_file_path("porowhita_hauwha2.duckdb")
 
   conn <- DBI::dbConnect(
     duckdb::duckdb(),
