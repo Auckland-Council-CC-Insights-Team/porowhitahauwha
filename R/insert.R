@@ -378,6 +378,53 @@ insert_partner <- function(name = NA, type = c("Charitable Trust",
   }
 }
 
+
+#' Add a New Entry to the \code{spaces} Table
+#'
+#' @param name The name of the asset-type facility.
+#' @param local_board The Local Board where the asset-type facility is located.
+#' @param postal_address The postal address of the asset-type facility.
+#' @param test_db Is this change being applied to a facility in the test
+#'   database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
+#'
+#' @return A tibble with 1 row and 9 columns showing the newly-added asset-type
+#'   facility.
+#'
+#' @noRd
+insert_space <- function(name, asset_id,designation,delivery_model,
+                         facility_ownership, closed = FALSE, leased = FALSE,
+                         bookable = NULL,
+                         booking_method = NULL,
+                         property_code = NULL,
+                         provider_legal_status_number = NULL,
+                         entry_access_type = NULL,
+                         staffed = NULL,
+                         test_db = FALSE) {
+  new_asset <- insert_record(
+    name = name,
+    local_board = local_board,
+    physical_address = postal_address,
+    asset_type = "Standalone Building",
+    latitude = NA,
+    longitude = NA,
+    land_ownership = NA,
+    image = NA,
+    new_id_prefix = "A",
+    tbl_name = "assets",
+    test_db = test_db
+  )
+
+  return(new_asset)
+}
+
+
+
+
+
+
+
+
+
 #' Add a new record into a database table
 #'
 #' This is a generic function for inserting a new record into one of the tables
