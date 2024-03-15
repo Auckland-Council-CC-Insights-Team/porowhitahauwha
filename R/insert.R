@@ -400,21 +400,34 @@ insert_space <- function(name, asset_id,designation,delivery_model,
                          entry_access_type = NULL,
                          staffed = NULL,
                          test_db = FALSE) {
-  new_asset <- insert_record(
+  new_space <- insert_record(
+
     name = name,
-    local_board = local_board,
-    physical_address = postal_address,
-    asset_type = "Standalone Building",
-    latitude = NA,
-    longitude = NA,
-    land_ownership = NA,
-    image = NA,
-    new_id_prefix = "A",
-    tbl_name = "assets",
+    asset_id = asset_id,
+    bookable = bookable,
+    booking_method = booking_method,
+    new_id_prefix = "S",
+    tbl_name = "spaces",
     test_db = test_db
   )
 
-  return(new_asset)
+  new_attributes <- insert_facility_attributes(
+    facility_id = new_space |> pull(.data$id),
+    facility_type = "Space",
+    designation = designation,
+    delivery_model = delivery_model,
+    facility_ownership = facility_ownership,
+    staffed = staffed,
+    leased = leased,
+    test_db = test_db
+  )
+
+  space_with_attributes <- new_space |>
+    dplyr::left_join(new_attributes, by = c("id" = "facility_id")) |>
+    dplyr::rename(facilities_attributes_id = "id.y") |>
+    tibble::as_tibble()
+
+  return(space_with_attributes)
 }
 
 
