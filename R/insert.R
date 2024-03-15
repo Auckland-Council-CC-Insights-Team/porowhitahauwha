@@ -390,7 +390,7 @@ insert_partner <- function(name = NA, type = c("Charitable Trust",
 #' @return A tibble with 1 row and 9 columns showing the newly-added asset-type
 #'   facility.
 #'
-#' @noRd
+#' @export
 insert_space <- function(name, asset_id,designation,delivery_model,
                          facility_ownership, closed = FALSE, leased = FALSE,
                          bookable = NA,
