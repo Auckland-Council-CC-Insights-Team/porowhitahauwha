@@ -393,20 +393,17 @@ insert_partner <- function(name = NA, type = c("Charitable Trust",
 #' @noRd
 insert_space <- function(name, asset_id,designation,delivery_model,
                          facility_ownership, closed = FALSE, leased = FALSE,
-                         bookable = NULL,
-                         booking_method = NULL,
-                         property_code = NULL,
-                         provider_legal_status_number = NULL,
-                         entry_access_type = NULL,
-                         staffed = NULL,
-                         image = NULL,
+                         bookable = NA,
+                         booking_method = NA,
+                         staffed = NA,
                          test_db = FALSE) {
+
   new_space <- insert_record(
     name = name,
     asset_id = asset_id,
     bookable = bookable,
     booking_method = booking_method,
-    image = image,
+    image = NA,
     new_id_prefix = "S",
     tbl_name = "spaces",
     test_db = test_db
