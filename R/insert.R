@@ -399,13 +399,14 @@ insert_space <- function(name, asset_id,designation,delivery_model,
                          provider_legal_status_number = NULL,
                          entry_access_type = NULL,
                          staffed = NULL,
+                         image = NULL,
                          test_db = FALSE) {
   new_space <- insert_record(
-
     name = name,
     asset_id = asset_id,
     bookable = bookable,
     booking_method = booking_method,
+    image = image,
     new_id_prefix = "S",
     tbl_name = "spaces",
     test_db = test_db
