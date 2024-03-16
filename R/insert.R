@@ -381,16 +381,27 @@ insert_partner <- function(name = NA, type = c("Charitable Trust",
 
 #' Add a New Entry to the \code{spaces} Table
 #'
-#' @param name The name of the asset-type facility.
-#' @param local_board The Local Board where the asset-type facility is located.
-#' @param postal_address The postal address of the asset-type facility.
+#' @param name The name of the space. Space is an area that fulfills public
+#'   needs, housed within an asset
+#' @param asset_id The id of the asset-type facility.
+#' @param designation The way that facility described by the business.
+#'  For example: community library, community centre, arts centre,
+#'  rural hall, venue hire etc
+#' @param delivery_model Council-led or a Community-led facility.
+#' @param facility_ownership Community lease or Community-owned or Council-owned
+#'   or Kainga Ora or Private trust or Privately-owned .
+#' @param closed Is the facility currently closed.
+#' @param leased Has this facility been leased to the community.
+#' @param bookable Can this space be booked.
+#' @param booking_method If this space is bookable, is it booked through Sphere
+#'   or something else
+#' @param staffed Is the facility staffed during opening hours or not.
 #' @param test_db Is this change being applied to a facility in the test
 #'   database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
 #'
-#' @return A tibble with 1 row and 9 columns showing the newly-added asset-type
-#'   facility.
+#' @return A tibble with 1 row and 10 columns showing the newly-added space.
 #'
-#' @noRd
+#' @export
 insert_space <- function(name, asset_id,designation,delivery_model,
                          facility_ownership, closed = FALSE, leased = FALSE,
                          bookable = NA,
