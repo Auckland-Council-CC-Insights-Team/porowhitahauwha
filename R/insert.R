@@ -378,6 +378,75 @@ insert_partner <- function(name = NA, type = c("Charitable Trust",
   }
 }
 
+
+#' Add a New Entry to the \code{spaces} Table
+#'
+#' @param name The name of the space. Space is an area that fulfills public
+#'   needs, housed within an asset
+#' @param asset_id The id of the asset-type facility.
+#' @param designation The way that facility described by the business.
+#'  For example: community library, community centre, arts centre,
+#'  rural hall, venue hire etc
+#' @param delivery_model Council-led or a Community-led facility.
+#' @param facility_ownership Community lease or Community-owned or Council-owned
+#'   or Kainga Ora or Private trust or Privately-owned .
+#' @param closed Is the facility currently closed.
+#' @param leased Has this facility been leased to the community.
+#' @param bookable Can this space be booked.
+#' @param booking_method If this space is bookable, is it booked through Sphere
+#'   or something else
+#' @param staffed Is the facility staffed during opening hours or not.
+#' @param test_db Is this change being applied to a facility in the test
+#'   database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.
+#'
+#' @return A tibble with 1 row and 10 columns showing the newly-added space.
+#'
+#' @export
+insert_space <- function(name, asset_id,designation,delivery_model,
+                         facility_ownership, closed = FALSE, leased = FALSE,
+                         bookable = NA,
+                         booking_method = NA,
+                         staffed = NA,
+                         test_db = FALSE) {
+
+  new_space <- insert_record(
+    name = name,
+    asset_id = asset_id,
+    bookable = bookable,
+    booking_method = booking_method,
+    image = NA,
+    new_id_prefix = "S",
+    tbl_name = "spaces",
+    test_db = test_db
+  )
+
+  new_attributes <- insert_facility_attributes(
+    facility_id = new_space |> pull(.data$id),
+    facility_type = "Space",
+    designation = designation,
+    delivery_model = delivery_model,
+    facility_ownership = facility_ownership,
+    staffed = staffed,
+    leased = leased,
+    test_db = test_db
+  )
+
+  space_with_attributes <- new_space |>
+    dplyr::left_join(new_attributes, by = c("id" = "facility_id")) |>
+    dplyr::rename(facilities_attributes_id = "id.y") |>
+    tibble::as_tibble()
+
+  return(space_with_attributes)
+}
+
+
+
+
+
+
+
+
+
 #' Add a new record into a database table
 #'
 #' This is a generic function for inserting a new record into one of the tables
