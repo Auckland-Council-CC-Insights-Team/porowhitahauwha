@@ -19,18 +19,36 @@ insert_space(
 )
 }
 \arguments{
-\item{name}{The name of the asset-type facility.}
+\item{name}{The name of the space. Space is an area that fulfills public
+needs, housed within an asset}
+
+\item{asset_id}{The id of the asset-type facility.}
+
+\item{designation}{The way that facility described by the business.
+For example: community library, community centre, arts centre,
+rural hall, venue hire etc}
+
+\item{delivery_model}{Council-led or a Community-led facility.}
+
+\item{facility_ownership}{Community lease or Community-owned or Council-owned
+or Kainga Ora or Private trust or Privately-owned .}
+
+\item{closed}{Is the facility currently closed.}
+
+\item{leased}{Has this facility been leased to the community.}
+
+\item{bookable}{Can this space be booked.}
+
+\item{booking_method}{If this space is bookable, is it booked through Sphere
+or something else}
+
+\item{staffed}{Is the facility staffed during opening hours or not.}
 
 \item{test_db}{Is this change being applied to a facility in the test
 database (\code{TRUE}) or not (\code{FALSE})? Defaults to \code{FALSE}.}
-
-\item{local_board}{The Local Board where the asset-type facility is located.}
-
-\item{postal_address}{The postal address of the asset-type facility.}
 }
 \value{
-A tibble with 1 row and 9 columns showing the newly-added asset-type
-facility.
+A tibble with 1 row and 10 columns showing the newly-added space.
 }
 \description{
 Add a New Entry to the \code{spaces} Table
