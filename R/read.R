@@ -219,7 +219,8 @@ get_libraries <- function(test_db = FALSE) {
 
   libraries_and_hubs <- dplyr::left_join(libraries, entity_bridge_tbl, by = "facility_id") |>
     dplyr::left_join(entities, by = c("entity_id" = "id")) |>
-    select(facility_name = name.x, community_hub_name = name.y, everything(), -entity_id)
+    select(local_board, facility_name = name.x, physical_address, designation,
+           community_hub_name = name.y)
 
   return(libraries_and_hubs)
 }
