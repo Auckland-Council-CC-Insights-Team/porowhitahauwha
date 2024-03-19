@@ -196,6 +196,34 @@ get_file_path <- function(file_name) {
   return(file_path)
 }
 
+
+#' Return a dataframe of community libraries
+#'
+#' @param test_db Retrieve this data from the test database? Defaults to
+#'   \code{FALSE}.
+#'
+#' @return A tibble with one library per row, and one column per attribute for
+#'   each library.
+#'
+#' @export
+get_libraries <- function(test_db = FALSE) {
+  libraries <- get_facilities(designation == "Community Library")
+
+  conn <- connect_to_database(test_db = test_db)
+
+  entity_bridge_tbl <- DBI::dbGetQuery(conn, paste0("SELECT entity_id, facility_id FROM entity_bridge_table"))
+  entities <- DBI::dbGetQuery(conn, paste0("SELECT * FROM entities"))
+  facilities_attributes <- DBI::dbGetQuery(conn, paste0("SELECT * FROM facilities_attributes"))
+
+  disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
+
+  libraries_and_hubs <- dplyr::left_join(libraries, entity_bridge_tbl, by = "facility_id") |>
+    dplyr::left_join(entities, by = c("entity_id" = "id")) |>
+    select(facility_name = name.x, community_hub_name = name.y, everything(), -entity_id)
+
+  return(libraries_and_hubs)
+}
+
 #' Find Facility Names and Aliases in the Database
 #'
 #' Call this function without passing any arguments to return the entire content
