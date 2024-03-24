@@ -48,6 +48,37 @@ get_attributes <- function(facility_type = c("assets", "spaces", "entities"), te
   return(table_with_attributes)
 }
 
+
+#' Return a dataframe of community spaces
+#'
+#' @param test_db Retrieve this data from the test database? Defaults to
+#'   \code{FALSE}.
+#'
+#' @return A tibble with one community space per row, and one column per
+#'   attribute for each community space.
+#'
+#' @export
+get_community_spaces <- function(test_db = FALSE) {
+  comm_spaces <- get_facilities(designation == "Community Space")
+
+  conn <- connect_to_database(test_db = test_db)
+
+  entity_bridge_tbl <- DBI::dbGetQuery(conn, paste0("SELECT entity_id, facility_id FROM entity_bridge_table"))
+  entities <- DBI::dbGetQuery(conn, paste0("SELECT * FROM entities"))
+  facilities_attributes <- DBI::dbGetQuery(conn, paste0("SELECT * FROM facilities_attributes"))
+
+  disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
+
+  comm_spaces_with_hub <- dplyr::left_join(
+    comm_spaces, entity_bridge_tbl, by = "facility_id"
+  ) |>
+    dplyr::left_join(entities, by = c("entity_id" = "id")) |>
+    select(local_board, facility_name = name.x, physical_address, designation,
+           community_hub_name = name.y)
+
+  return(comm_spaces_with_hub)
+}
+
 # get_change_log_entries <- function(..., test_db = FALSE) {
 #   conn <- connect_to_database(test_db = test_db)
 #
@@ -224,6 +255,7 @@ get_libraries <- function(test_db = FALSE) {
 
   return(libraries_and_hubs)
 }
+
 
 #' Find Facility Names and Aliases in the Database
 #'
