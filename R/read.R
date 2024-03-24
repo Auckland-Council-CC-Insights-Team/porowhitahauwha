@@ -59,6 +59,8 @@ get_attributes <- function(facility_type = c("assets", "spaces", "entities"), te
 #'
 #' @export
 get_community_spaces <- function(test_db = FALSE) {
+  designation <- local_board <- name.x <- physical_address <- name.y <- NULL
+
   comm_spaces <- get_facilities(designation == "Community Space")
 
   conn <- connect_to_database(test_db = test_db)
@@ -238,6 +240,8 @@ get_file_path <- function(file_name) {
 #'
 #' @export
 get_libraries <- function(test_db = FALSE) {
+  designation <- local_board <- name.x <- physical_address <- name.y <- NULL
+
   libraries <- get_facilities(designation == "Community Library")
 
   conn <- connect_to_database(test_db = test_db)
