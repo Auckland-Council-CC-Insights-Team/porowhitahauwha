@@ -44,9 +44,12 @@ get_entities_hubs <- get_entities() |>
                 facility_name = name,
                 physical_address,
                 designation) |>
-  dplyr::mutate(community_hub_name = dplyr::if_else(local_board == "Franklin" & facility_name == "Franklin Arts Centre", "Franklin Community Hub", NA),
+  dplyr::mutate(community_hub_name = dplyr::if_else(local_board == "Franklin" & facility_name == "Franklin Arts Centre", "Franklin Community Hub",
+                                                    dplyr::if_else(local_board == "Henderson-Massey" & facility_name == "Te Manawa Hub",  "Te Manawa Hub", NA)),
                 source = "entities"
                 )
 
 result <- dplyr::bind_rows(get_libraries_hubs, get_spaces_hubs, get_entities_hubs) |>
-  dplyr::filter(designation == "Community Library" | stringr::str_detect(community_hub_name, stringr::regex("hub", ignore_case = TRUE)))
+  dplyr::filter(designation == "Community Library" | stringr::str_detect(community_hub_name, stringr::regex("hub", ignore_case = TRUE))) |>
+  dplyr::filter(!(facility_name == "Central City Library" & is.na(source))) |>
+  dplyr::select(!source)
