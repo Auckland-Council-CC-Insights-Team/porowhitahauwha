@@ -1,6 +1,20 @@
 library(dplyr)
 
-get_libraries_df <- get_libraries()
+get_libraries_hubs <- get_libraries() |>
+  dplyr::mutate(community_hub_name = dplyr::if_else(
+    local_board == "Franklin" & facility_name %in% c("Pukekohe Library", "Waiuku Library"),
+    "Franklin Community Hub",
+    dplyr::if_else(
+      local_board == "Whau" & facility_name == "New Lynn War Memorial Library",
+      "New Lynn Hub",
+      dplyr::if_else(
+        local_board == "Henderson-Massey" & facility_name == "Te Manawa Library",
+        "Te Manawa Hub",
+        dplyr::if_else(local_board == "Maungakiekie-Tamaki" & facility_name == "Onehunga Library", "Onehunga and Oranga Hub", NA)
+      )
+    )
+  )
+  )
 
 get_community_spaces_df <- get_community_spaces()
 
@@ -16,19 +30,13 @@ get_spaces_hubs <- get_spaces() |>
   dplyr::filter(!designation == "Community Library") |>
   dplyr::mutate(
     community_hub_name = dplyr::if_else(
-      local_board == "Franklin",
+      local_board == "Franklin" & facility_name == "Weta Workshop",
       "Franklin Community Hub",
       dplyr::if_else(
-        local_board == "Whau",
-        "New Lynn Hub",
-        dplyr::if_else(
-          local_board == "Henderson-Massey",
-          "Te Manawa Hub",
-          dplyr::if_else(local_board = "Maungakiekie-Tamaki", "Onehunga and Oranga Hub", NA)
-        )
+        local_board == "Whau" & facility_name == "Community Centre Service desk/office",
+        "New Lynn Hub", NA)
       )
-    )
-  ) |>
+    ) |>
   dplyr::mutate(source = "spaces")
 
 get_entities_hubs <- get_entities() |>
@@ -36,8 +44,9 @@ get_entities_hubs <- get_entities() |>
                 facility_name = name,
                 physical_address,
                 designation) |>
-  dplyr::mutate(community_hub_name = dplyr::if_else(local_board == "Franklin", "Franklin Community Hub", NA),
+  dplyr::mutate(community_hub_name = dplyr::if_else(local_board == "Franklin" & facility_name == "Franklin Arts Centre", "Franklin Community Hub", NA),
                 source = "entities"
                 )
 
-result <- dplyr::bind_rows(get_libraries(), get_spaces_hubs, get_entities_hubs)
+result <- dplyr::bind_rows(get_libraries_hubs, get_spaces_hubs, get_entities_hubs) |>
+  dplyr::filter(designation == "Community Library" | stringr::str_detect(community_hub_name, stringr::regex("hub", ignore_case = TRUE)))
