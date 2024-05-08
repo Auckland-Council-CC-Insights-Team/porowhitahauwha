@@ -1,4 +1,5 @@
 library(dplyr)
+library(writexl)
 
 get_libraries_hubs <- get_libraries() |>
   dplyr::mutate(community_hub_name = dplyr::if_else(
@@ -66,3 +67,6 @@ result <- dplyr::bind_rows(get_libraries_hubs, get_spaces_hubs, get_entities_hub
   dplyr::filter(designation == "Community Library" | stringr::str_detect(community_hub_name, stringr::regex("hub", ignore_case = TRUE))) |>
   dplyr::filter(!(facility_name == "Central City Library" & source == "get_libraries")) |>
   dplyr::select(!source)
+
+result_filepath <- 'C:/Users/faatuij/Downloads/hub_list.xlsx'
+write_xlsx(result, result_filepath)
