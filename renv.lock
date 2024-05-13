@@ -1274,6 +1274,13 @@
       ],
       "Hash": "c0e49a9760983e81e55cdd9be92e7182"
     },
+    "writexl": {
+      "Package": "writexl",
+      "Version": "1.5.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "856a075aec895ea1bea3055fa54e356c"
+    },
     "xfun": {
       "Package": "xfun",
       "Version": "0.40",
