@@ -240,7 +240,7 @@ get_file_path <- function(file_name) {
 #'
 #' @export
 get_libraries <- function(test_db = FALSE) {
-  designation <- delivery_model <- local_board <- name.x <- physical_address <- name.y <- NULL
+  designation <- delivery_model <- staffed <- local_board <- name.x <- physical_address <- name.y <- NULL
 
   libraries <- get_facilities(designation == "Community Library")
 
@@ -254,7 +254,7 @@ get_libraries <- function(test_db = FALSE) {
 
   libraries_and_hubs <- dplyr::left_join(libraries, entity_bridge_tbl, by = "facility_id") |>
     dplyr::left_join(entities, by = c("entity_id" = "id")) |>
-    select(local_board, facility_name = name.x, physical_address, designation, delivery_model,
+    select(local_board, facility_name = name.x, physical_address, designation, delivery_model, staffed,
            community_hub_name = name.y)
 
   return(libraries_and_hubs)
