@@ -415,6 +415,34 @@ get_spaces <- function(..., test_db = FALSE) {
   return(spaces)
 }
 
+
+#' Retrieve a list of facilities audit entries
+#'
+#' Retrieve a list of audit entries from Porowhita Hauwhā. The facilities_attributes_audit_table
+#' is used for tracking changes (inserts, updates, deletes) to the attributes of facilities over time.
+#'
+#' @param ... Optional expressions to filter the audit list, defined in terms of
+#'   the variables in the returned tibble.
+#' @param test_db Retrieve this data from the test database? Defaults to FALSE.
+#'
+#' @return A tibble with eight columns.
+#' @export
+#'
+#' @examples
+#' # Retrieve a list of audit entries that describe a changed attribute for a facility in
+#' the facilities_attributes table.
+#' get_facilities_attributes_audit()
+get_facilities_attributes_audit <- function(..., test_db = FALSE) {
+  conn <- connect_to_database(test_db = test_db)
+
+  facilities_audit <- DBI::dbGetQuery(conn, "SELECT * FROM facilities_attributes_audit_table")
+
+  disconnect_from_database(conn, test_db = test_db, confirm = FALSE)
+
+  return(facilities_audit)
+}
+
+
 #' Prepare the facilities data for binding
 #'
 #' Given a facilities-with-attributes dataset, choose the user-specified rows
